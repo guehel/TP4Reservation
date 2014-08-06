@@ -5,26 +5,16 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity"
-	minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0"
-	prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
-	fx:controller="controllers.GeneralVueController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.GeneralVueController">
 	<!-- TODO Add Nodes -->
 	<children>
-		<SplitPane dividerPositions="0.5" focusTraversable="true"
-			prefHeight="285.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0"
-			AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
-			AnchorPane.topAnchor="0.0">
+		<SplitPane dividerPositions="0.5" focusTraversable="true" prefHeight="285.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
 			<items>
-				<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0"
-					prefWidth="100.0">
+				<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
 					<children>
-						<HBox prefHeight="50.0" prefWidth="376.0"
-							AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0"
-							AnchorPane.topAnchor="10.0">
+						<HBox prefHeight="50.0" prefWidth="376.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
 							<children>
-								<Label layoutX="31.0048828125" layoutY="14.0" text="Chambres"
-									AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="20.0">
+								<Label layoutX="31.0048828125" layoutY="14.0" text="Chambres" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="20.0">
 									<styleClass>
 										<String fx:value="fieldset" />
 										<String fx:value="text" />
@@ -38,26 +28,16 @@
 								<Insets top="15.0" />
 							</padding>
 						</HBox>
-						<ListView fx:id="roomList" layoutX="10.0" layoutY="144.0"
-							prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0"
-							AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
-							AnchorPane.topAnchor="60.0" />
+						<ListView fx:id="roomList" layoutX="10.0" layoutY="144.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="60.0" />
 					</children>
 				</AnchorPane>
-				<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="750.0"
-					prefWidth="402.0">
+				<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="750.0" prefWidth="402.0">
 					<children>
-						<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="371.0"
-							prefWidth="396.0" AnchorPane.bottomAnchor="427.0"
-							AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0"
-							AnchorPane.topAnchor="10.0">
+						<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="371.0" prefWidth="396.0" AnchorPane.bottomAnchor="427.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
 							<children>
-								<VBox prefHeight="305.0" prefWidth="370.0" spacing="60.0"
-									AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
-									AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+								<VBox prefHeight="305.0" prefWidth="370.0" spacing="60.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
 									<children>
-										<Label text="Détails" xmlns="http://javafx.com/javafx/8"
-											xmlns:fx="http://javafx.com/fxml/1">
+										<Label text="Détails" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
 											<styleClass>
 												<String fx:value="fieldset" />
 												<String fx:value="text" />
@@ -68,11 +48,9 @@
 										</Label>
 										<VBox spacing="10.0">
 											<children>
-												<VBox spacing="10.0" xmlns="http://javafx.com/javafx/8"
-													xmlns:fx="http://javafx.com/fxml/1">
+												<VBox spacing="10.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
 													<children>
-														<Label text="Numéro de la chambre" xmlns="http://javafx.com/javafx/8"
-															xmlns:fx="http://javafx.com/fxml/1">
+														<Label text="Numéro de la chambre" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
 															<styleClass>
 																<String fx:value="texte" />
 																<String fx:value="etiquette" />
@@ -80,8 +58,7 @@
 														</Label>
 													</children>
 												</VBox>
-												<Label fx:id="localMachineName" text="Label"
-													GridPane.columnIndex="1" GridPane.rowIndex="0">
+												<Label fx:id="localMachineName" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="0">
 													<styleClass>
 														<String fx:value="texte" />
 														<String fx:value="champs" />
@@ -90,18 +67,15 @@
 														<Insets top="-10.0" />
 													</VBox.margin>
 												</Label>
-												<VBox spacing="10.0" xmlns="http://javafx.com/javafx/8"
-													xmlns:fx="http://javafx.com/fxml/1">
+												<VBox spacing="10.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
 													<children>
-														<Label text="Adresse IP" GridPane.columnIndex="0"
-															GridPane.rowIndex="0">
+														<Label text="Adresse IP" GridPane.columnIndex="0" GridPane.rowIndex="0">
 															<styleClass>
 																<String fx:value="texte" />
 																<String fx:value="etiquette" />
 															</styleClass>
 														</Label>
-														<Label fx:id="localMachineIP" text="Label"
-															GridPane.columnIndex="1" GridPane.rowIndex="0">
+														<Label fx:id="localMachineIP" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="0">
 															<styleClass>
 																<String fx:value="texte" />
 																<String fx:value="champs" />
@@ -118,32 +92,18 @@
 								</VBox>
 							</children>
 						</AnchorPane>
-						<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="428.0"
-							prefWidth="396.0" AnchorPane.bottomAnchor="10.0"
-							AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0"
-							AnchorPane.topAnchor="370.0">
+						<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="428.0" prefWidth="396.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="370.0">
 							<children>
-								<TableView layoutY="256.0" prefHeight="427.0"
-									prefWidth="402.0" tableMenuButtonVisible="false"
-									AnchorPane.bottomAnchor="33.0" AnchorPane.leftAnchor="0.0"
-									AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0"
-									xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+								<TableView layoutY="256.0" prefHeight="427.0" prefWidth="402.0" tableMenuButtonVisible="false" AnchorPane.bottomAnchor="33.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
 									<columns>
-										<TableColumn maxWidth="5000.0" minWidth="10.0"
-											prefWidth="120.0" text="Date" />
-										<TableColumn editable="false" maxWidth="5000.0"
-											minWidth="10.0" prefWidth="120.0" text="Client" />
+										<TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="120.0" text="Date" />
+										<TableColumn editable="false" maxWidth="5000.0" minWidth="10.0" prefWidth="120.0" text="Client" />
 									</columns>
 								</TableView>
-								<HBox id="HBox" alignment="CENTER" layoutX="71.0" layoutY="348.5"
-									spacing="5.0" AnchorPane.bottomAnchor="0.0"
-									AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+								<HBox id="HBox" alignment="CENTER" layoutX="71.0" layoutY="348.5" spacing="5.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
 									<children>
-										<Button mnemonicParsing="false" prefHeight="15.0"
-											prefWidth="200.0" text="Annuler Réservation" />
-										<Button fx:id="sendFileButton" layoutX="180.0" layoutY="356.0"
-											mnemonicParsing="false" prefHeight="25.0" prefWidth="200.0"
-											text="Ajouter Réservation">
+										<Button mnemonicParsing="false" onAction="#submitForm" prefHeight="15.0" prefWidth="200.0" text="Annuler Réservation" />
+										<Button fx:id="sendFileButton" layoutX="180.0" layoutY="356.0" mnemonicParsing="false" onAction="#ajoutReserve" prefHeight="25.0" prefWidth="200.0" text="Ajouter Réservation">
 											<HBox.margin>
 												<Insets />
 											</HBox.margin>

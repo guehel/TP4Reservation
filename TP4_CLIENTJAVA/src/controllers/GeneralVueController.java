@@ -22,16 +22,15 @@ public class GeneralVueController
 	@FXML
 	private void initialize()
 	{		
-		ObservableList<String> items = FXCollections.observableArrayList();
+	
 		
-		List<QuerableEntity> list = roomService.query();
-		for(QuerableEntity entity : list)
-		{
-			Room room = (Room) entity;
-			items.add(String.valueOf(room.getId()));
-		}
-
+		
+		
+		ObservableList<String> items =FXCollections.observableArrayList (
+		    "Single", "Double", "Suite", "Family App");
 		roomList.setItems(items);
+
+		//roomList.setItems(items);
 	}
 
 	public void setPrimaryStage(Stage primaryStage)
@@ -42,6 +41,18 @@ public class GeneralVueController
 	public void setRoomService(ServiceInterface roomService)
 	{
 		this.roomService = roomService;
+	}
+	
+	@FXML
+	public void submitForm()
+	{
+		System.out.println("Soumission formulaire");
+	}
+	
+	@FXML
+	public void ajoutReserve()
+	{
+		System.out.println("Ajout réservation");
 	}
 	
 }
