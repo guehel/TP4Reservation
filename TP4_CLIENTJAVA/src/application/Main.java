@@ -10,7 +10,7 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage)
 	{
-		RootController rootController = new RootController(primaryStage);
+		RootController rootController = new RootController(primaryStage);		
 	}
 	
 	public static void main(String[] args) {

@@ -1,5 +1,3 @@
-/application/
-/vue/
-/controller/
+/Entities/
 /controllers/
-/services/
+/vue/

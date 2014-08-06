@@ -7,6 +7,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import services.RoomService;
 import application.Main;
 
 public class RootController
@@ -17,6 +18,7 @@ public class RootController
 
 	public RootController(Stage primaryStage)
 	{
+		
 		// Configuration de la fenêtre racine de l'application
 		primaryStage.setTitle("Hotel Réservation");
 		FXMLLoader loader = this.getLoader(this.rootFXML);
@@ -28,6 +30,7 @@ public class RootController
 
 		} catch (IOException e)
 		{
+			System.out.println(e.getStackTrace());
 			System.err
 					.println("Le fichier " + rootFXML + " n'a pas été trouvé");
 		}
@@ -51,6 +54,10 @@ public class RootController
 		}
 		GeneralVueController generalVueController = loader.getController();
 		generalVueController.setPrimaryStage(primaryStage);
+		
+		
+		// Injection des services
+		generalVueController.setRoomService(new RoomService());
 
 		root.setCenter(generalViewPane);
 	}
