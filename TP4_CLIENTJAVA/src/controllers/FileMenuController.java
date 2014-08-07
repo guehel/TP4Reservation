@@ -1,13 +1,11 @@
 package controllers;
 
-import services.ConnectionService;
 import javafx.fxml.FXML;
 import javafx.scene.control.Dialogs;
 import javafx.stage.Stage;
 
-public class RootController
+public class FileMenuController
 {
-	private ConnectionService connectionService;
 	@FXML
 	private void connect()
 	{
@@ -18,12 +16,7 @@ public class RootController
 
 		if (input != null)
 		{
-			connectionService.connect(Long.parseLong(input));
+				
 		}
-	}
-
-	public void setConnectionService(ConnectionService connectionService)
-	{
-		this.connectionService = connectionService;
 	}
 }

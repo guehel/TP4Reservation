@@ -1,8 +1,8 @@
-package Entities;
+package entities;
 
-import services.QuerableEntity;
+import services.entityService.ServiceableEntityInterface;
 
-public class RoomForm implements QuerableEntity
+public class RoomForm implements ServiceableEntityInterface
 {
 	private long id;
 	private Reservation reservation;

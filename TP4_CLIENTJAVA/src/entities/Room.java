@@ -1,10 +1,10 @@
-package Entities;
+package entities;
 
 import java.util.List;
 
-import services.QuerableEntity;
+import services.entityService.ServiceableEntityInterface;
 
-public class Room implements QuerableEntity
+public class Room implements ServiceableEntityInterface
 {
 	private long id;
 	private List<Reservation> reservations;

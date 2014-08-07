@@ -1,20 +1,16 @@
 package controllers;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
 import javafx.stage.Stage;
-import services.QuerableEntity;
-import services.ServiceInterface;
-import Entities.Room;
+import services.entityService.EntityService;
 
-public class GeneralVueController
+public class GeneralVueController implements Observer
 {
-	private ServiceInterface roomService;
+	private EntityService roomService;
 	
 	@FXML
 	private ListView<String> roomList;
@@ -22,15 +18,7 @@ public class GeneralVueController
 	@FXML
 	private void initialize()
 	{		
-	
 		
-		
-		
-		ObservableList<String> items =FXCollections.observableArrayList (
-		    "Single", "Double", "Suite", "Family App");
-		roomList.setItems(items);
-
-		//roomList.setItems(items);
 	}
 
 	public void setPrimaryStage(Stage primaryStage)
@@ -38,7 +26,7 @@ public class GeneralVueController
 		
 	}
 	
-	public void setRoomService(ServiceInterface roomService)
+	public void setRoomService(EntityService roomService)
 	{
 		this.roomService = roomService;
 	}
@@ -53,6 +41,13 @@ public class GeneralVueController
 	public void ajoutReserve()
 	{
 		System.out.println("Ajout réservation");
+	}
+
+	@Override
+	public void update(Observable arg0, Object arg1)
+	{
+		System.out.println(arg1);
+		
 	}
 	
 }

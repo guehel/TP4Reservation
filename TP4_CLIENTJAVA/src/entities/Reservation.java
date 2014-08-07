@@ -1,11 +1,11 @@
-package Entities;
+package entities;
 
 import org.joda.time.DateTime;
 import org.joda.time.Interval;
 
-import services.QuerableEntity;
+import services.entityService.ServiceableEntityInterface;
 
-public class Reservation implements QuerableEntity
+public class Reservation implements ServiceableEntityInterface
 {
 	private long id;
 	private Room room;
