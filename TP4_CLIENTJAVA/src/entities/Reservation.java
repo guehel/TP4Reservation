@@ -1,11 +1,14 @@
 package entities;
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+
 import org.joda.time.DateTime;
 import org.joda.time.Interval;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 
-import services.entityService.ServiceableEntityInterface;
-
-public class Reservation implements ServiceableEntityInterface
+public class Reservation
 {
 	private long id;
 	private Room room;
@@ -13,13 +16,11 @@ public class Reservation implements ServiceableEntityInterface
 	private Interval reservationTime;
 	private DateTime creation;
 
-	@Override
 	public long getId()
 	{
 		return id;
 	}
 
-	@Override
 	public void setId(long id)
 	{
 		this.id = id;
@@ -58,6 +59,13 @@ public class Reservation implements ServiceableEntityInterface
 	public DateTime getCreation()
 	{
 		return creation;
+	}
+	
+	public StringProperty getReservationTimeProperty()
+	{
+		DateTimeFormatter fmt = DateTimeFormat.forPattern("yyyy-MM-dd");
+		String string = reservationTime.getStart().toString(fmt) + " - " + reservationTime.getEnd().toString(fmt);
+		return new SimpleStringProperty(string);
 	}
 	
 }

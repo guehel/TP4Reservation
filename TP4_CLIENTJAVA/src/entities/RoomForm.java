@@ -1,21 +1,18 @@
 package entities;
 
-import services.entityService.ServiceableEntityInterface;
 
-public class RoomForm implements ServiceableEntityInterface
+public class RoomForm
 {
 	private long id;
 	private Reservation reservation;
 	private int type;
 	private int idUser;
 
-	@Override
 	public long getId()
 	{
 		return id;
 	}
 
-	@Override
 	public void setId(long id)
 	{
 		this.id = id;

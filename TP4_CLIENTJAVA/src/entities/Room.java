@@ -1,35 +1,37 @@
 package entities;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import services.entityService.ServiceableEntityInterface;
-
-public class Room implements ServiceableEntityInterface
+public class Room
 {
 	private long id;
 	private List<Reservation> reservations;
 	private RoomForm formulaire;
 
-	@Override
+	public Room()
+	{
+		reservations = new ArrayList<Reservation>();
+	}
+
 	public long getId()
 	{
 		return id;
 	}
 
-	@Override
 	public void setId(long id)
 	{
 		this.id = id;
 	}
-	
+
 	public List<Reservation> getReservations()
 	{
 		return reservations;
 	}
 
-	public void setReservations(List<Reservation> reservations)
+	public void addReservations(Reservation reservation)
 	{
-		this.reservations = reservations;
+		this.reservations.add(reservation);
 	}
 
 	public RoomForm getFormulaire()

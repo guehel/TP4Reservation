@@ -8,9 +8,9 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import services.ClientService;
 import services.ConnectionService;
-import services.entityService.EntityService;
-import services.entityService.ServiceableEntityTypes;
+import services.RoomService;
 import controllers.GeneralVueController;
 import controllers.RootController;
 
@@ -20,6 +20,9 @@ public class Main extends Application
 	// Localisation des fichier fxml.
 	private String rootFXML = "/vue/Root.fxml";
 	private String generalViewFXML = "/vue/GeneralVue.fxml";
+	
+	private BorderPane root;
+	private AnchorPane generalViewPane;
 
 	@Override
 	public void start(Stage primaryStage)
@@ -27,7 +30,7 @@ public class Main extends Application
 		// Configuration de la fenêtre racine de l'application
 		primaryStage.setTitle("Hotel Réservation");
 		FXMLLoader loader = this.getLoader(this.rootFXML);
-		BorderPane root = null;
+		root = null;
 
 		try
 		{
@@ -49,7 +52,7 @@ public class Main extends Application
 
 		// Configuration de la vue générale de l'application
 		loader = getLoader(this.generalViewFXML);
-		AnchorPane generalViewPane = null;
+		generalViewPane = null;
 
 		try
 		{
@@ -62,17 +65,26 @@ public class Main extends Application
 		}
 		GeneralVueController generalVueController = loader.getController();
 		generalVueController.setPrimaryStage(primaryStage);
+		generalVueController.setMain(this);
 
+		
+		
 		// Injection des services
-		generalVueController.setRoomService(EntityService
-				.getService(ServiceableEntityTypes.ROOM));
+		generalVueController.setRoomService(RoomService
+				.getInstance());
+		generalVueController.setClientService(ClientService.getInstance());
 		
 		rootController.setConnectionService(ConnectionService.getInstance());
 
-		root.setCenter(generalViewPane);
+	
 		
 		// Enregistre observateurs au service de connection
 		ConnectionService.getInstance().addObserver(generalVueController);
+	}
+	
+	public void showGeneralVue()
+	{
+		root.setCenter(generalViewPane);
 	}
 
 	/**
