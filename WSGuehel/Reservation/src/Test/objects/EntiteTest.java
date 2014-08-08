@@ -22,6 +22,7 @@ public class EntiteTest {
 		
 		Reservation res1 = new Reservation();
 		int idChambre1= 1;
+		//changer en client
 		res1.setIdChambre(idChambre1);
 		res1.setInterval(refInterval1);
 		
