@@ -31,8 +31,10 @@ public class Reservation {
 			return interval;
 		}
 
-		public void setInterval(Interval depart) {
-			this.interval = depart;
+		public void setInterval(Interval interval) throws Exception {
+			if (interval.getStart().isAfterNow())
+			this.interval = interval;
+			else throw new Exception("la reservation commence avant aujoud'hui ");
 		}
 
 		public Client getClient() {
@@ -73,6 +75,14 @@ public class Reservation {
 		public int hashCode() {
 			// TODO Auto-generated method stub
 			return super.hashCode();
+		}
+		
+		public boolean validerDates(DateTime avant, DateTime apres){
+			boolean valide = false;
+			if(avant!=null && apres!=null ){
+				valide = avant.isBefore(apres) || avant.isEqual(apres);
+			}
+				return valide;
 		}
 	    
 		

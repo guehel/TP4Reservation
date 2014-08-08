@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import org.joda.time.Interval;
 import org.junit.Test;
 
+import reservation.objects.Chambre;
 import reservation.objects.Reservation;
 
 public class ReservationTest {
@@ -16,7 +17,7 @@ public class ReservationTest {
 	}
 
 	@Test
-	public void testEqualsObject() {
+	public void testEqualsObject() throws Exception {
 		Long now = System.currentTimeMillis();
 
 		Interval refInterval1 = new Interval(now-10000, now+10000);
@@ -27,11 +28,11 @@ public class ReservationTest {
 		Interval interval6 = new Interval(now+11000, now+20000);
 		Reservation res1 = new Reservation();
 		int idChambre1= 1;
-		res1.setIdChambre(idChambre1);
+		res1.setChambre(new Chambre());
 		Reservation res2 = new Reservation();
 		int idChambre2= 2;
 		
-		res2.setIdChambre(idChambre1);
+		res2.setChambre(new Chambre());
 				
 		assertFalse(res1.equals(res2));
 		
@@ -39,10 +40,10 @@ public class ReservationTest {
 		res2.setInterval(refInterval1);
 		assertTrue(res1.equals(res2));
 		
-		res2.setIdChambre(idChambre2);
+		res2.setChambre(new Chambre());
 		assertFalse(res1.equals(res2));
 		
-		res2.setIdChambre(idChambre1);
+		res2.setChambre(new Chambre());
 		
 		res2.setInterval(interval2);
 		assertTrue(res1.equals(res2));

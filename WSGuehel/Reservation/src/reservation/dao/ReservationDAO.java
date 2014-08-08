@@ -8,6 +8,7 @@ import com.mysql.jdbc.Connection;
 
 
 
+
 import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -19,6 +20,7 @@ import org.joda.time.Interval;
 
 import com.mysql.jdbc.PreparedStatement;
 //import com.mysql.jdbc.ResultSet;
+
 
 
 
@@ -102,14 +104,14 @@ public class ReservationDAO extends DAO<Reservation>{
 
 	@Override
 	public Reservation find(Reservation object) {
-		Reservation commande = null;
-		try {
+		Reservation reservation = null;
+		try {	
 			this.rechercher.setInt(1, object.getIdReservation());
 			this.rechercher.setInt(2, object.getChambre().getNumeroChambre());
 			 ResultSet resultat = this.rechercher.executeQuery();
 			if(resultat.next()){
 				
-				commande = resultSetToReservation(resultat);
+				reservation = resultSetToReservation(resultat);
 
 
 			}
@@ -118,7 +120,27 @@ public class ReservationDAO extends DAO<Reservation>{
 
 			e.printStackTrace();
 		}
-		return commande;
+		return findByIds(object.getIdReservation(),  object.getChambre().getNumeroChambre());
+	}
+
+	public Reservation findByIds(int idReservation, int numeroChambre) {
+		Reservation reservation = null;
+		try {	
+			this.rechercher.setInt(1, idReservation);
+			this.rechercher.setInt(2, numeroChambre);
+			 ResultSet resultat = this.rechercher.executeQuery();
+			if(resultat.next()){
+				
+				reservation = resultSetToReservation(resultat);
+
+
+			}
+
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 	private Reservation resultSetToReservation(java.sql.ResultSet resultat) {
@@ -148,6 +170,9 @@ public class ReservationDAO extends DAO<Reservation>{
 
 	} catch (SQLException e) {
 
+		e.printStackTrace();
+	} catch (Exception e) {
+		// TODO Auto-generated catch block
 		e.printStackTrace();
 	}
 		return reservation;
