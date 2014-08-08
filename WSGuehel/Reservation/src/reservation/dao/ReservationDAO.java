@@ -92,6 +92,9 @@ public class ReservationDAO extends DAO<Reservation>{
 		
 			this.suppression.setInt(1,object.getIdReservation());
 			this.suppression.setInt(2,object.getClient().getIdClient());
+			
+		
+			
 			int resultat = this.suppression.executeUpdate();
 			return resultat == 1;
 			
