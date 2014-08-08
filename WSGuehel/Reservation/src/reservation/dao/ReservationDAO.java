@@ -104,22 +104,7 @@ public class ReservationDAO extends DAO<Reservation>{
 
 	@Override
 	public Reservation find(Reservation object) {
-		Reservation reservation = null;
-		try {	
-			this.rechercher.setInt(1, object.getIdReservation());
-			this.rechercher.setInt(2, object.getChambre().getNumeroChambre());
-			 ResultSet resultat = this.rechercher.executeQuery();
-			if(resultat.next()){
-				
-				reservation = resultSetToReservation(resultat);
-
-
-			}
-
-		} catch (SQLException e) {
-
-			e.printStackTrace();
-		}
+		
 		return findByIds(object.getIdReservation(),  object.getChambre().getNumeroChambre());
 	}
 
@@ -140,7 +125,7 @@ public class ReservationDAO extends DAO<Reservation>{
 
 			e.printStackTrace();
 		}
-		return null;
+		return reservation;
 	}
 
 	private Reservation resultSetToReservation(java.sql.ResultSet resultat) {
