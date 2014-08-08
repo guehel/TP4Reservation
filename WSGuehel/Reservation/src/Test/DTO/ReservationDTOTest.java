@@ -7,6 +7,7 @@ import org.joda.time.Interval;
 import org.junit.Test;
 
 import reservation.dto.ReservationDTO;
+import reservation.objects.Chambre;
 import reservation.objects.Client;
 import reservation.objects.Reservation;
 
@@ -14,21 +15,33 @@ public class ReservationDTOTest {
 
 	@Test
 	public void testReservationDTO() {
-		Long now = System.currentTimeMillis();
+		Client client =  new Client();
+		client.setIdClient(1);
+		client.setNom("PAUPOL");
+		client.setPrenom("Prenomo");
+		DateTime now = new DateTime();
 
-		Interval refInterval1 = new Interval(now-10000, now+10000);
+		Interval refInterval1 = new Interval(now.minusDays(2), now.plusDays(3));
 		
 		Reservation res1 = new Reservation();
+		res1.setIdReservation(1);
 		int idChambre1= 1;
-		res1.setIdChambre(idChambre1);
+		Chambre  chambre = new Chambre();
+		chambre.setNumeroChambre(idChambre1);
+		res1.setChambre(chambre);
 		res1.setInterval(refInterval1);
-		//TODO: modif param Client
-		res1.setClient(new Client());
+		
+		res1.setClient(client);
 		res1.setCreation(new DateTime());
 		ReservationDTO dto = new ReservationDTO(res1);
+		
 		System.out.println(dto.getArrivee());
 		System.out.println(dto.getDepart());
 		System.out.println(dto.getCreation());
+		System.out.println(dto.getChambreDTO().getNumeroChambre());
+		System.out.println(dto.getClientDTO().getId());
+		System.out.println(dto.getClientDTO().getNom());
+		System.out.println(dto.getClientDTO().getPrenom());
 //		assertTrue(dto.getClientDTO()==99);
 	}
 

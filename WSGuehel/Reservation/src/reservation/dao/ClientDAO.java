@@ -30,7 +30,7 @@ public class ClientDAO extends DAO<Client>{
 					"UPDATE `client` SET `nom`=?,`prenom`=? WHERE `id`=?"
 					);
 			this.rechercher =  (PreparedStatement) connection.prepareStatement(
-					"SELECT `id`, `nom`, `prenom` FROM `client` WHERE `id` = 1? "//OR`id_client`=?"
+					"SELECT `id`, `nom`, `prenom` FROM `client` WHERE `id` = ? "
 					);
 			this.suppression =  (PreparedStatement) connection.prepareStatement(
 					"DELETE FROM `client` WHERE `id`=?"
@@ -112,6 +112,7 @@ public class ClientDAO extends DAO<Client>{
 			this.rechercher.setInt( 1 , int1);
 			
 			ResultSet resultat = this.rechercher.executeQuery();
+			resultat.toString();
 			if(resultat.next()){
 			
 				

@@ -6,6 +6,7 @@ import com.mysql.jdbc.Connection;
 
 
 
+
 import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -22,9 +23,11 @@ import com.mysql.jdbc.PreparedStatement;
 
 
 
+
 import reservation.dto.ReservationDTO;
 import reservation.objects.Chambre;
 import reservation.objects.Client;
+import reservation.objects.ComparateurReservation;
 import reservation.objects.Reservation;
 
 public class ReservationDAO extends DAO<Reservation>{
@@ -181,7 +184,8 @@ public class ReservationDAO extends DAO<Reservation>{
 	}
 
 	public TreeSet<Reservation> getAllReservations() {
-		TreeSet<Reservation> toutesReservation = new TreeSet<Reservation>();
+		TreeSet<Reservation> toutesReservation = 
+				new TreeSet<Reservation>(new ComparateurReservation());
 		Reservation reservation = null;
 		try {
 		

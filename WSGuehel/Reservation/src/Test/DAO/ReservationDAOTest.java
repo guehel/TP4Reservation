@@ -8,10 +8,14 @@ import org.joda.time.DateTime;
 import org.joda.time.Interval;
 import org.junit.Test;
 
+import reservation.dao.ClientDAO;
 import reservation.dao.ReservationDAO;
 import reservation.dao.DAOFactory;
 import reservation.dao.DAOFactory.Table;
+import reservation.dto.ChambreDTO;
+import reservation.dto.ClientDTO;
 import reservation.dto.ReservationDTO;
+import reservation.objects.Chambre;
 import reservation.objects.Client;
 import reservation.objects.Reservation;
 
@@ -32,54 +36,95 @@ public class ReservationDAOTest {
 			fail("sql error");
 		}
 	}
+	
 
 	@Test
-	public void testCreateReservation() {
-		Long now = System.currentTimeMillis();
-		Interval refInterval1 = new Interval(now-100000, now+100000);
-		Reservation res1 = new Reservation();
-		int idChambre1= 1;
-		res1.setIdChambre(idChambre1);
-		res1.setCreation(new DateTime());
+	public void testSaveFromDTO() {
+	
+		ReservationDTO res1 = new ReservationDTO();
+		
+		res1.setArrivee("2014-07-01");
+		res1.setCreation("2014-06-01");
 		res1.setIdReservation(99);
-		res1.setInterval(refInterval1);
+		
 			
-		res1.setClient(new Client());
+		ClientDTO clientDTO = new ClientDTO();
+		clientDTO.setId(1);
+		
+		res1.setClientDTO(clientDTO);
+		
+		ChambreDTO chambre =new ChambreDTO();
+		chambre.setNumeroChambre(1);
+		res1.setChambreDTO(chambre);
 		
 		DAOFactory fact = null;
 		try{
 		fact = new DAOFactory();
-		
+		ClientDAO cltdao = (ClientDAO) fact.getDAO(Table.CLIENT);
+		Client client = cltdao.findById(3);
+		res1.setClientDTO(new ClientDTO(client));
 		ReservationDAO resdao = (ReservationDAO) fact.getDAO(Table.RESERVATION);
-		resdao.create(res1);
+		resdao.saveFromDTO(res1);
 		}
 		catch(ClassNotFoundException e ){
 			fail("driver error ");
 		} catch (SQLException e) {
 			fail("sql error");
 		}
-		
 	}
+
+
+//	@Test
+//	public void testCreateReservation() {
+//		DateTime now = new DateTime();
+//		
+//		
+//		Reservation rervation = new Reservation();
+//		rervation.setIdReservation(99);
+//		
+//		Chambre chambre1= new Chambre();	
+//		chambre1.setNumeroChambre(1);
+//		rervation.setChambre(chambre1);
+//		
+//		rervation.setCreation(new DateTime());
+//		
+//		Interval refInterval1 = new Interval(now.minusDays(2), now.plusDays(3));
+//		rervation.setInterval(refInterval1);
+//		
+//		Client client = new Client();
+//		client.setIdClient(1);
+//		rervation.setClient(new Client());
+//		
+//		DAOFactory fact = null;
+//		try{
+//		fact = new DAOFactory();
+//		
+//		ReservationDAO resdao = (ReservationDAO) fact.getDAO(Table.RESERVATION);
+//		assertTrue(resdao.create(rervation));
+//		}
+//		catch(ClassNotFoundException e ){
+//			fail("driver error ");
+//		} catch (SQLException e) {
+//			fail("sql error");
+//		}
+//		
+//	}
 	
 	@Test
 	public void testFindReservation() {
 		Long now = System.currentTimeMillis();
 		Interval refInterval1 = new Interval(now-100000, now+100000);
 		Reservation res1 = new Reservation();
-		int idChambre1= 1;
-		res1.setIdChambre(idChambre1);
-		res1.setCreation(new DateTime());
-		res1.setIdReservation(99);
-		res1.setInterval(refInterval1);
-			//TODO: CLEINT
-		res1.setClient(new Client());
 		
+		res1.setIdReservation(1);
+	
 		DAOFactory fact = null;
 		try{
 		fact = new DAOFactory();
 		
 		ReservationDAO resdao = (ReservationDAO) fact.getDAO(Table.RESERVATION);
 		res1  = resdao.find(res1);
+		assertTrue(res1.getIdReservation()==1);
 		}
 		catch(ClassNotFoundException e ){
 			fail("driver error ");
@@ -90,23 +135,17 @@ public class ReservationDAOTest {
 
 	@Test
 	public void testDeleteReservation() {
-		Long now = System.currentTimeMillis();
-		Interval refInterval1 = new Interval(now-100000, now+100000);
 		Reservation res1 = new Reservation();
-		int idChambre1= 1;
-		res1.setIdChambre(idChambre1);
-		res1.setCreation(new DateTime());
-		res1.setIdReservation(99);
-		res1.setInterval(refInterval1);
-			
-		res1.setClient(new Client());
 		
+		res1.setIdReservation(1);
+	
 		DAOFactory fact = null;
 		try{
 		fact = new DAOFactory();
 		
 		ReservationDAO resdao = (ReservationDAO) fact.getDAO(Table.RESERVATION);
-		resdao.delete(res1);
+		assertTrue(resdao.delete(res1));
+		
 		}
 		catch(ClassNotFoundException e ){
 			fail("driver error ");
@@ -116,32 +155,5 @@ public class ReservationDAOTest {
 	}
 
 	
-
-	@Test
-	public void testSaveFromDTO() {
-		Long now = System.currentTimeMillis();
-		Interval refInterval1 = new Interval(now-100000, now+100000);
-		Reservation res1 = new Reservation();
-		int idChambre1= 1;
-		res1.setIdChambre(idChambre1);
-		res1.setCreation(new DateTime());
-		res1.setIdReservation(99);
-		res1.setInterval(refInterval1);
-			
-		res1.setClient(new Client());
-		
-		DAOFactory fact = null;
-		try{
-		fact = new DAOFactory();
-		
-		ReservationDAO resdao = (ReservationDAO) fact.getDAO(Table.RESERVATION);
-		resdao.saveFromDTO(new ReservationDTO(res1));
-		}
-		catch(ClassNotFoundException e ){
-			fail("driver error ");
-		} catch (SQLException e) {
-			fail("sql error");
-		}
-	}
 
 }

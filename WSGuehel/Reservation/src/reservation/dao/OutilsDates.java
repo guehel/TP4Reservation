@@ -32,22 +32,16 @@ public class OutilsDates {
 	}
 
 	public static Date stringToSqlDate(String arrivee) {
+		if(valideDate(arrivee))
+		return Date.valueOf(arrivee);
+		else return null;
 
-		//TODO: regex
-		//if(arrivee.matches("")){
-
-			if(true){
-			Date dt =jodaToSqlDate(
-					stringToJodaDate(arrivee)
-					);
-			return dt;
-		}
-		return null;
+		
 	}
 
 	public static DateTime stringToJodaDate(String arrivee) {
 
-		if(arrivee.matches("")){
+		if(valideDate(arrivee)){
 
 			DateTimeFormatter formatter = DateTimeFormat.forPattern("yyyy-MM-dd");
 			DateTime dt = formatter.parseDateTime(arrivee);
@@ -60,6 +54,10 @@ public class OutilsDates {
 		DateTimeFormatter formatter = DateTimeFormat.forPattern("yyyy-MM-dd");
 		    String sqlTimeString = formatter.print(start);
 		return sqlTimeString;
+	}
+	
+	public static boolean valideDate(String date){
+		return date.matches("(\\d{4})-(\\d{2})-(\\d{2})");
 	}
 
 }
