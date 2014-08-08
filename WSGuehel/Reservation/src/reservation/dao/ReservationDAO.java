@@ -7,6 +7,7 @@ import com.mysql.jdbc.Connection;
 
 
 
+
 import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -18,6 +19,7 @@ import org.joda.time.Interval;
 
 import com.mysql.jdbc.PreparedStatement;
 //import com.mysql.jdbc.ResultSet;
+
 
 
 
@@ -179,6 +181,8 @@ public class ReservationDAO extends DAO<Reservation>{
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} catch (Exception e) {
+			System.err.println(e.getMessage());
 		}
 		
 	}

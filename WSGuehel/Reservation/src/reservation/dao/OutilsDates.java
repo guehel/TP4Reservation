@@ -7,6 +7,8 @@ import org.joda.time.Interval;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 public class OutilsDates {
+	public static final DateTimeFormatter FORMAT_DATE = DateTimeFormat.forPattern("yyyy-MM-dd");
+	public static final String DATE_REGEX = "(\\d{4})-(\\d{2})-(\\d{2})";
 
 	public static Date jodaToSqlDate(DateTime joda){
 		java.util.Date jDate = joda.toDate();
@@ -31,33 +33,37 @@ public class OutilsDates {
 		return (int) (int1.getStartMillis()- int2.getStartMillis())/6000;
 	}
 
-	public static Date stringToSqlDate(String arrivee) {
-		if(valideDate(arrivee))
+	public static Date stringToSqlDate(String arrivee) throws Exception {
+		if(valideDate(arrivee)){
 		return Date.valueOf(arrivee);
-		else return null;
+		}
+		else throw new Exception("le format de la date n'est pas valide");
 
 		
 	}
 
-	public static DateTime stringToJodaDate(String arrivee) {
+	public static DateTime stringToJodaDate(String arrivee) throws Exception {
 
 		if(valideDate(arrivee)){
 
-			DateTimeFormatter formatter = DateTimeFormat.forPattern("yyyy-MM-dd");
-			DateTime dt = formatter.parseDateTime(arrivee);
+		
+			DateTime dt = FORMAT_DATE.parseDateTime(arrivee);
 			return dt;
-		}
-		return null;
+		}else throw new Exception("le format de la date n'est pas valide");
+	
 	}
 
 	public static String stringFromDateTime(DateTime start) {
-		DateTimeFormatter formatter = DateTimeFormat.forPattern("yyyy-MM-dd");
-		    String sqlTimeString = formatter.print(start);
+		
+		    String sqlTimeString = FORMAT_DATE.print(start);
 		return sqlTimeString;
 	}
 	
 	public static boolean valideDate(String date){
-		return date.matches("(\\d{4})-(\\d{2})-(\\d{2})");
+		boolean valide = false;
+		if(date!=null)
+			valide = date.matches(DATE_REGEX);
+		return valide;
 	}
 
 }
