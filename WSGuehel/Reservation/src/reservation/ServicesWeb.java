@@ -76,8 +76,7 @@ public class ServicesWeb implements Services {
 			listeReservation = EntiteDTO.getReservationsFromSet(
 					grandLivre.getReservations(client)
 					);
-			ClientDTO clientDTO = new ClientDTO(client);
-			return clientDTO.getReservations();
+		
 		}
 		return listeReservation;
 	}

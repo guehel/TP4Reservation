@@ -7,6 +7,7 @@ import reservation.dao.DAOFactory;
 import reservation.dao.DAOFactory.Table;
 import reservation.dao.ReservationDAO;
 import reservation.objects.Client;
+import reservation.objects.ComparateurReservation;
 import reservation.objects.Entite;
 import reservation.objects.Reservation;
 
@@ -31,7 +32,8 @@ public class GrandLivreHotel extends Entite implements GrandLivre {
 	}
 	@Override
 	public TreeSet<Reservation> getReservations(Client client) {
-		TreeSet<Reservation> reservationsClient = new TreeSet<Reservation>();
+		TreeSet<Reservation> reservationsClient = new TreeSet<Reservation>(
+				new ComparateurReservation());
 		for(Reservation reservation: reservations){
 			if(reservation.getClient().equals(client)){
 				reservationsClient.add(reservation);

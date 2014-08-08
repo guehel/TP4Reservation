@@ -16,8 +16,8 @@ public class OutilsDates {
 	}
 
 	public static Interval toJodaInterval(Date sqlDate, int days){
-		//TODO 
-		Interval interval = null;
+		DateTime debut = new DateTime(sqlDate.getTime());
+		Interval interval = new Interval(debut, debut.plus(days));
 		return interval;
 	}
 

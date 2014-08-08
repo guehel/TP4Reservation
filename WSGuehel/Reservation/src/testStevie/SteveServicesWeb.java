@@ -12,7 +12,7 @@ public class SteveServicesWeb implements Services
 	@Override
 	public ChambreDTO[] obtenirListeChambre() 
 	{
-		ChambreDTO[] chambreList = new ChambreDTO[2];
+		ChambreDTO[] chambreList = new ChambreDTO[3];
 		
 		ChambreDTO chambre1 = new ChambreDTO();
 		chambre1.setNumeroChambre(1);
@@ -26,7 +26,13 @@ public class SteveServicesWeb implements Services
 		chambre2.setFormulaire(form2);
 		chambreList[1] = chambre2;
 		
-		return null;
+		ChambreDTO chambre3 = new ChambreDTO();
+		chambre3.setNumeroChambre(2);
+		Formulaire form3 = new Formulaire();
+		chambre3.setFormulaire(form3);
+		chambreList[2] = chambre3;
+		
+		return chambreList;
 	}
 
 	@Override

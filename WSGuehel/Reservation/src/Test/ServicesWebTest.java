@@ -42,7 +42,7 @@ public class ServicesWebTest {
 		int idClient;
 		try {
 			Services services = new ServicesWeb();
-			 idClient = 1;
+			 idClient = 3;
 			ReservationDTO[] liste = services.obtenirReservations(idClient);
 			assertTrue(liste.length != 0);
 		} catch (ClassNotFoundException | SQLException e) {

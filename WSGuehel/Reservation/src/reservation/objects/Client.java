@@ -38,4 +38,13 @@ public class Client  {
 		this.idClient = idClient;
 	}
 
+	@Override
+	public boolean equals(Object arg0) {
+		Client client = (Client) arg0;
+		
+		return idClient == client.getIdClient();
+	}
+	
+	
+
 }
