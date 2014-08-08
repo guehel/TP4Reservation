@@ -14,7 +14,7 @@ import reservation.objects.Reservation;
 public class ReservationDTOTest {
 
 	@Test
-	public void testReservationDTO() {
+	public void testReservationDTO() throws Exception {
 		Client client =  new Client();
 		client.setIdClient(1);
 		client.setNom("PAUPOL");
