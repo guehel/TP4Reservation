@@ -24,6 +24,7 @@ public class Reservation {
 		}
 
 		public void setCreation(DateTime creation) {
+			if (interval==null || validerDates(creation, interval.getStart()))
 			this.creation = creation;
 		}
 
@@ -32,7 +33,7 @@ public class Reservation {
 		}
 
 		public void setInterval(Interval interval) throws Exception {
-			if (interval.getStart().isAfterNow())
+			if (creation==null || validerDates(creation, interval.getStart()))
 			this.interval = interval;
 			else throw new Exception("la reservation commence avant aujoud'hui ");
 		}
