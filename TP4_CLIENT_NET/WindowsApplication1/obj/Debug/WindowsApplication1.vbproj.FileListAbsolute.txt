@@ -1,0 +1,11 @@
+C:\Users\bois02077903\AppData\Local\Temporary Projects\WindowsApplication1\bin\Debug\WindowsApplication1.exe.config
+E:\GitHub\Repos\TP4Reservation\TP4_CLIENT_NET\WindowsApplication1\bin\Debug\WindowsApplication1.exe.config
+E:\GitHub\Repos\TP4Reservation\TP4_CLIENT_NET\WindowsApplication1\bin\Debug\WindowsApplication1.exe
+E:\GitHub\Repos\TP4Reservation\TP4_CLIENT_NET\WindowsApplication1\bin\Debug\WindowsApplication1.pdb
+E:\GitHub\Repos\TP4Reservation\TP4_CLIENT_NET\WindowsApplication1\bin\Debug\WindowsApplication1.xml
+E:\GitHub\Repos\TP4Reservation\TP4_CLIENT_NET\WindowsApplication1\obj\Debug\WindowsApplication1.Form1.resources
+E:\GitHub\Repos\TP4Reservation\TP4_CLIENT_NET\WindowsApplication1\obj\Debug\WindowsApplication1.Resources.resources
+E:\GitHub\Repos\TP4Reservation\TP4_CLIENT_NET\WindowsApplication1\obj\Debug\WindowsApplication1.vbproj.GenerateResource.Cache
+E:\GitHub\Repos\TP4Reservation\TP4_CLIENT_NET\WindowsApplication1\obj\Debug\WindowsApplication1.exe
+E:\GitHub\Repos\TP4Reservation\TP4_CLIENT_NET\WindowsApplication1\obj\Debug\WindowsApplication1.xml
+E:\GitHub\Repos\TP4Reservation\TP4_CLIENT_NET\WindowsApplication1\obj\Debug\WindowsApplication1.pdb
