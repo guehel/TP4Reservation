@@ -46,6 +46,7 @@ public class ServicesWebTest {
 			ReservationDTO[] liste = services.obtenirReservations(idClient);
 			assertTrue(liste.length != 0);
 		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
 			fail(" implemented");
 		}
 	}
