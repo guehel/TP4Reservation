@@ -1,6 +1,9 @@
 package testStevie;
 
+import java.sql.SQLException;
+
 import reservation.Services;
+import reservation.ServicesWeb;
 import reservation.dto.ChambreDTO;
 import reservation.dto.ClientDTO;
 import reservation.dto.Formulaire;
@@ -8,6 +11,12 @@ import reservation.dto.ReservationDTO;
 
 public class SteveServicesWeb implements Services
 {
+	private Services service ;
+	
+	
+	public SteveServicesWeb() throws ClassNotFoundException, SQLException {
+		service	= new ServicesWeb();
+	}
 
 	@Override
 	public ChambreDTO[] obtenirListeChambre() 
@@ -38,7 +47,7 @@ public class SteveServicesWeb implements Services
 	@Override
 	public ReservationDTO[] obtenirReservations(int idClient) {
 		// TODO Auto-generated method stub
-		return null;
+		return service.obtenirReservations(idClient);
 	}
 
 	@Override

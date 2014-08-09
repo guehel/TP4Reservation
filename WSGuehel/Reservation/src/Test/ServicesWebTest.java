@@ -8,6 +8,7 @@ import org.junit.Test;
 
 import reservation.Services;
 import reservation.ServicesWeb;
+import reservation.dto.ChambreDTO;
 import reservation.dto.ReservationDTO;
 
 public class ServicesWebTest {
@@ -24,7 +25,27 @@ public class ServicesWebTest {
 
 	@Test
 	public void testObtenirListeChambre() {
-		fail("Not yet implemented");
+		
+		try {
+			Services services = new ServicesWeb();
+			ChambreDTO[] liste = services.obtenirListeChambre();
+			
+			System.out.println(liste.length);
+			assertTrue(liste.length == 20);
+			for(ChambreDTO dto: liste){
+				System.out.println(dto.getNumeroChambre());
+				System.out.println( "\t taille"+dto.getReservations().length);
+				for(ReservationDTO resdto: dto.getReservations()){
+					System.out.println("\t"+resdto.getCreation());
+					System.out.println("\t"+resdto.getArrivee());
+					System.out.println("\t"+resdto.getDepart());
+					System.out.println("\t"+resdto.getChambreDTO().getNumeroChambre());
+				}
+			}
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+			fail(" implemented");
+		}
 	}
 
 	@Test

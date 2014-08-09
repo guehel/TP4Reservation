@@ -3,6 +3,7 @@ package Test.DAO;
 import static org.junit.Assert.*;
 
 import java.sql.SQLException;
+import java.util.TreeSet;
 
 import org.joda.time.DateTime;
 import org.joda.time.Interval;
@@ -45,7 +46,7 @@ public class ReservationDAOTest {
 		
 		res1.setArrivee("2014-07-01");
 		res1.setCreation("2014-06-01");
-		res1.setDepart("2014-08-01");
+		res1.setDepart("2014-09-01");
 		res1.setIdReservation(99);
 		
 			
@@ -55,14 +56,14 @@ public class ReservationDAOTest {
 		res1.setClientDTO(clientDTO);
 		
 		ChambreDTO chambre =new ChambreDTO();
-		chambre.setNumeroChambre(1);
+		chambre.setNumeroChambre(5);
 		res1.setChambreDTO(chambre);
 		
 		DAOFactory fact = null;
 		try{
 		fact = new DAOFactory();
 		ClientDAO cltdao = (ClientDAO) fact.getDAO(Table.CLIENT);
-		Client client = cltdao.findById(3);
+		Client client = cltdao.findById(2);
 		res1.setClientDTO(new ClientDTO(client));
 		ReservationDAO resdao = (ReservationDAO) fact.getDAO(Table.RESERVATION);
 		resdao.saveFromDTO(res1);
@@ -130,7 +131,15 @@ public class ReservationDAOTest {
 		
 		assertTrue(res1.getIdReservation()==99);
 		
-		assertTrue(resdao.delete(res1));
+//		assertTrue(resdao.delete(res1));
+		TreeSet<Reservation> resss = resdao.getAllReservations();
+		for (Reservation resa :resss){
+			System.out.println(resa.getIdReservation());
+			System.out.println(resa.getChambre().getNumeroChambre());
+			System.out.println(resa.getCreation());
+			System.out.println(resa.getInterval());
+			System.out.println(resa.getClient().getIdClient());
+		}
 		}
 		catch(ClassNotFoundException e ){
 			fail("driver error ");

@@ -2,7 +2,7 @@ package reservation.objects;
 
 
 
-public class Client  {
+public class Client extends Entite  {
 	private int idClient;
 
     private String nom;

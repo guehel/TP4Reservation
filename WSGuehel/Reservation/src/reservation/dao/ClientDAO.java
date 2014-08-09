@@ -4,15 +4,21 @@ import com.mysql.jdbc.Connection;
 
 
 
+
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import com.mysql.jdbc.PreparedStatement;
 
 
 
 
+
+
 import reservation.dto.ClientDTO;
+import reservation.objects.Chambre;
 import reservation.objects.Client;
 
 public class ClientDAO extends DAO<Client>{
@@ -31,6 +37,10 @@ public class ClientDAO extends DAO<Client>{
 					);
 			this.rechercher =  (PreparedStatement) connection.prepareStatement(
 					"SELECT `id`, `nom`, `prenom` FROM `client` WHERE `id` = ? "
+					);
+			this.rechercherTous =  (PreparedStatement) connection.prepareStatement(
+					"SELECT `id`, `nom`, `prenom` FROM `client`"
+				
 					);
 			this.suppression =  (PreparedStatement) connection.prepareStatement(
 					"DELETE FROM `client` WHERE `id`=?"
@@ -114,13 +124,8 @@ public class ClientDAO extends DAO<Client>{
 			ResultSet resultat = this.rechercher.executeQuery();
 			resultat.toString();
 			if(resultat.next()){
-			
-				
-				client = new Client();
-				client.setIdClient(resultat.getInt(1));
-				client.setNom(resultat.getString(2));
-				client.setPrenom(resultat.getString(3));
-				
+				client = getClientFromResultSet(resultat);
+								
 			}
 			
 		} catch (SQLException e) {
@@ -128,6 +133,38 @@ public class ClientDAO extends DAO<Client>{
 			e.printStackTrace();
 		}
 		return client;
+	}
+
+	public ArrayList<Client> getAllClients() {
+		ArrayList<Client> clients = new ArrayList<Client>();
+		
+		Client client = null;
+		try {
+		
+			 ResultSet resultat = this.rechercherTous.executeQuery();
+			while(resultat.next()){
+				
+				client = getClientFromResultSet(resultat);
+				clients.add(client);
+
+			}
+
+		} catch (SQLException e) {	
+
+			e.printStackTrace();
+		}
+		
+		return clients;
+	}
+
+	private Client getClientFromResultSet(ResultSet resultat) throws SQLException {
+		Client client  = new Client();
+		client.setIdClient(resultat.getInt(1));
+		client.setNom(resultat.getString(2));
+		client.setPrenom(resultat.getString(3));
+		
+		return client;
+	
 	}
 
 }

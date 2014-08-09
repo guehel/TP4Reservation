@@ -5,7 +5,7 @@ import org.joda.time.Interval;
 
 import reservation.dao.OutilsDates;
 
-public class Reservation {
+public class Reservation implements Comparable<Reservation> {
 	
 	    private Client client;
 
@@ -84,6 +84,13 @@ public class Reservation {
 				valide = avant.isBefore(apres) || avant.isEqual(apres);
 			}
 				return valide;
+		}
+
+		@Override
+		public int compareTo(Reservation o) {
+			Long debut = interval.getStartMillis()/3600 + client.getIdClient();
+			Long fin = o.getInterval().getStartMillis()/3600 + o.getClient().getIdClient();
+			return (int) (fin - debut);
 		}
 	    
 		

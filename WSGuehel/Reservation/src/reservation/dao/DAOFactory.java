@@ -15,8 +15,8 @@ public class DAOFactory {
 	private  String url="jdbc:mysql://localhost:3306/tp4_reservation";
 
 	private   String user ="root";
-	private   String password ="root";
-
+	private   String password ="Vlvy7410";
+//	password ="";
 	private Connection connection;
 	public DAOFactory() throws ClassNotFoundException, SQLException  {
 //		url="jdbc:mysql://192.168.2.14:3306/commandes";

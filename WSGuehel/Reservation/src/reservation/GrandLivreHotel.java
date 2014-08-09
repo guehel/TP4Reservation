@@ -13,15 +13,19 @@ import reservation.objects.Client;
 import reservation.objects.ComparateurReservation;
 import reservation.objects.Entite;
 import reservation.objects.Reservation;
+import reservation.recherches.RechercheFactory;
+import reservation.recherches.RechercheReservation;
 
 public class GrandLivreHotel extends Entite implements GrandLivre {
 	
 	private ReservationDAO reservationDAO;
+	private RechercheFactory recherchesfactory;
 
 	public GrandLivreHotel(){
 		try {
 			reservationDAO = (ReservationDAO) (new DAOFactory()).getDAO(Table.RESERVATION);
-			this.reservations = reservationDAO.getAllReservations();
+			reservations = reservationDAO.getAllReservations();
+			recherchesfactory = new RechercheFactory(reservations);
 		} catch (ClassNotFoundException | SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -35,32 +39,13 @@ public class GrandLivreHotel extends Entite implements GrandLivre {
 	}
 	
 	@Override
-	public TreeSet<Reservation> getReservations(Client client) {
-		TreeSet<Reservation> reservationsClient = new TreeSet<Reservation>(
-				new ComparateurReservation());
-		for(Reservation reservation: reservations){
-			if(reservation.getClient().equals(client)){
-				reservationsClient.add(reservation);
-			}
-		}
+	public TreeSet<Reservation> getReservations(Entite client) {
+		TreeSet<Reservation> reservationsClient = null;
+		RechercheReservation recherche = recherchesfactory.getRechercheReservation(client);
+		reservationsClient = recherche.rechercher();
 		return reservationsClient;
 	}
-	@Override
-	public TreeSet<Reservation> obtenirReservations(Chambre chambre) {
-		DateTime now = new DateTime();
-		
-		TreeSet<Reservation> reservationsChambre = new TreeSet<Reservation>(
-				new ComparateurReservation());
-		for(Reservation reservation: reservations){
-			if(reservation.getChambre().equals(chambre)
-					
-					){
-				reservationsChambre.add(reservation);
-			}
-		}
-		return reservationsChambre;
-	}
-
+	
 	
 
 

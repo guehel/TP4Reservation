@@ -38,7 +38,7 @@ public class ReservationDAO extends DAO<Reservation>{
 	
 	private ClientDAO daoClient;
 	private ChambreDAO daoChambre;
-	private PreparedStatement rechercherTous;
+	
 
 	public ReservationDAO(Connection connection) {
 		super(connection);
@@ -46,8 +46,8 @@ public class ReservationDAO extends DAO<Reservation>{
 		try {
 			this.ajout = (PreparedStatement) connection.prepareStatement(
 					"INSERT INTO `reservation`"
-					+ "(`idReservation`, `arrivee`, `sejour`, `numero`, `dateCreation`, `id`) "
-					+ "VALUES (?,?,?,?,?,?)"
+					+ "( `arrivee`, `sejour`, `numero`, `dateCreation`, `id`) "
+					+ "VALUES (?,?,?,?,?)"
 					);
 			this.miseAJour =  (PreparedStatement) connection.prepareStatement(
 					"UPDATE `reservation` "
@@ -175,21 +175,21 @@ public class ReservationDAO extends DAO<Reservation>{
 
 	public void saveFromDTO(ReservationDTO reservationDTO) {
 		try {
-			this.ajout.setInt(1, reservationDTO.getIdReservation());
+//			this.ajout.setInt(1, reservationDTO.getIdReservation());
 			Date arriveeSQL = OutilsDates.stringToSqlDate(reservationDTO.getArrivee());
 			DateTime arriveDateTime = OutilsDates.stringToJodaDate(reservationDTO.getArrivee());
 			DateTime depart = OutilsDates.stringToJodaDate(reservationDTO.getDepart());
-			this.ajout.setDate(2, arriveeSQL);
+			this.ajout.setDate(2 - 1, arriveeSQL);
 			int duree = Days.daysBetween(
 					arriveDateTime, 
 					depart)
 					.getDays();
 			
-			this.ajout.setInt(3, duree);
-			this.ajout.setInt(4, reservationDTO.getChambreDTO().getNumeroChambre());
+			this.ajout.setInt(3 - 1, duree);
+			this.ajout.setInt(4- 1, reservationDTO.getChambreDTO().getNumeroChambre());
 			Date dateCreation = OutilsDates.stringToSqlDate(reservationDTO.getCreation());
-			this.ajout.setDate(5, dateCreation);
-			this.ajout.setInt(6, reservationDTO.getClientDTO().getId());
+			this.ajout.setDate(5- 1, dateCreation);
+			this.ajout.setInt(6 - 1, reservationDTO.getClientDTO().getId());
 			int resultat = this.ajout.executeUpdate();
 			
 		} catch (SQLException e) {
@@ -207,7 +207,7 @@ public class ReservationDAO extends DAO<Reservation>{
 		try {
 		
 			 ResultSet resultat = this.rechercherTous.executeQuery();
-			if(resultat.next()){
+			while(resultat.next()){
 				
 				reservation = resultSetToReservation(resultat);
 				toutesReservation.add(reservation);
