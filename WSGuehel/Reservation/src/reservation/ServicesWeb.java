@@ -31,7 +31,14 @@ public class ServicesWeb implements Services {
 		if(n!=0){
 			ChambreDTO[] retour = new ChambreDTO[n];
 			for(int i = 0; i< n; i++ ){
-				retour[i] = new ChambreDTO(listeChambres.get(i));
+				Chambre chambre = listeChambres.get(i);
+				ChambreDTO chambreDTO = new ChambreDTO(chambre);
+				ReservationDTO[] listeResChambre = 
+						EntiteDTO.getReservationsFromSet(
+								grandLivre.getReservations(chambre)
+						);
+				chambreDTO.setReservations(listeResChambre);
+				retour[i] = chambreDTO;
 			}
 			return retour;
 		}
@@ -41,20 +48,24 @@ public class ServicesWeb implements Services {
 
 	@Override
 	public ClientDTO[] obtenirListeClients() {
-		// Test webservice
-		ClientDTO client = new ClientDTO();
-		client.setId(1);
-		client.setNom("Bouanga");
-		client.setPrenom("Guehel");
-		ReservationDTO resa = new ReservationDTO();
-		resa.setArrivee("25 mai");
-		resa.setDepart("23-Juin");
-		resa.setCreation("01 jan");
-		resa.setIdReservation(1);
-		ReservationDTO[] res = {resa};
-		client.setReservations(res);
-		ClientDTO[] tabClients = {client};
-		return tabClients;
+		ClientDAO clientDAO = ((ClientDAO) daoFactory.getDAO(Table.CLIENT));
+		ArrayList<Client> listeClients = clientDAO.getAllClients();
+		int n = listeClients.size();
+		if(n!=0){
+			ClientDTO[] retour = new ClientDTO[n];
+			for(int i = 0; i< n; i++ ){
+				Client client = listeClients.get(i);
+				ClientDTO clientDTO = new ClientDTO(client);
+				ReservationDTO[] listeResclient = 
+						EntiteDTO.getReservationsFromSet(
+								grandLivre.getReservations(client)
+						);
+				clientDTO.setReservations(listeResclient);
+				retour[i] = clientDTO;
+			}
+			return retour;
+		}
+		return null;
 	}
 
 	@Override
