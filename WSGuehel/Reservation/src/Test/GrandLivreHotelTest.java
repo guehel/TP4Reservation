@@ -9,10 +9,10 @@ import org.junit.Test;
 
 import reservation.GrandLivre;
 import reservation.GrandLivreHotel;
-import reservation.dao.ChambreDAO;
+
 import reservation.dao.ClientDAO;
 import reservation.dao.DAOFactory;
-import reservation.dao.ReservationDAO;
+
 import reservation.dao.DAOFactory.Table;
 import reservation.objects.Entite;
 import reservation.objects.Reservation;

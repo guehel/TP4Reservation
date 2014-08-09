@@ -3,9 +3,6 @@ package reservation;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import org.joda.time.DateTime;
-import org.joda.time.Interval;
-
 import reservation.dao.ChambreDAO;
 import reservation.dao.ClientDAO;
 import reservation.dao.DAOFactory;

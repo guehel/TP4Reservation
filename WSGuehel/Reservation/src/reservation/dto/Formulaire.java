@@ -13,8 +13,9 @@ import reservation.objects.Reservation;
 */
 public class Formulaire {
     private String dateModification="";
-    private int idUser=0;
+    private int typeModification=0;
     private ReservationDTO reservation = new ReservationDTO();
+    private int type;
     
     /* 1=consultation
 	0 = annulation
@@ -25,14 +26,14 @@ public class Formulaire {
     }
     
     
-    private int type;
+   
 
     public String getDateModification() {
         return dateModification;
     }
 
     public int getIdUser() {
-        return idUser;
+        return typeModification;
     }
 
     public ReservationDTO getReservation() {
@@ -44,7 +45,7 @@ public class Formulaire {
     }
 
     public void setIdUser(int idUser) {
-        this.idUser = idUser;
+        this.typeModification = idUser;
     }
 
     public void setReservation(ReservationDTO reservation) {
