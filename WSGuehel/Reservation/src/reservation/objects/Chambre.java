@@ -10,6 +10,10 @@ public class Chambre extends Entite {
 	super();	
 
 	}
+	public Chambre(int numeroChambre) {
+		super();
+		this.numeroChambre = numeroChambre;
+	}
 	public int getNumeroChambre() {
 		return numeroChambre;
 	}

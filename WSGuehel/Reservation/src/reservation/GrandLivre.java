@@ -2,6 +2,7 @@ package reservation;
 
 import java.util.TreeSet;
 
+import reservation.dto.Formulaire;
 import reservation.objects.Chambre;
 import reservation.objects.Client;
 import reservation.objects.Entite;
@@ -16,6 +17,9 @@ public interface GrandLivre {
 
 	// Liste des reservations 
 	public TreeSet<Reservation> getReservations();
+
+
+	public boolean modifierChambre(Reservation reservation, int type);
 
 
 

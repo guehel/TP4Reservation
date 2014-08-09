@@ -34,12 +34,14 @@ public class ServicesWebTest {
 			assertTrue(liste.length == 20);
 			for(ChambreDTO dto: liste){
 				System.out.println(dto.getNumeroChambre());
+				System.out.println(dto.getFormulaire().getDateModification());
 				System.out.println( "\t taille"+dto.getReservations().length);
 				for(ReservationDTO resdto: dto.getReservations()){
 					System.out.println("\t"+resdto.getCreation());
 					System.out.println("\t"+resdto.getArrivee());
 					System.out.println("\t"+resdto.getDepart());
 					System.out.println("\t"+resdto.getChambreDTO().getNumeroChambre());
+					System.out.println("\t"+resdto.getClientDTO().getNom());
 				}
 			}
 		} catch (ClassNotFoundException | SQLException e) {

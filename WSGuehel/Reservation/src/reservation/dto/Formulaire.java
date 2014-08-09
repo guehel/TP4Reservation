@@ -1,4 +1,11 @@
 package reservation.dto;
+
+import org.joda.time.DateTime;
+
+import reservation.dao.OutilsDates;
+import reservation.objects.Client;
+import reservation.objects.Reservation;
+
 /*
 **
 *Formulaire charger de receuiller les reservation et les annulations
@@ -10,8 +17,14 @@ public class Formulaire {
     private ReservationDTO reservation = new ReservationDTO();
     
     /* 1=consultation
-0 = annulation
-*/
+	0 = annulation
+     */
+    
+    public  Formulaire(){
+    	dateModification = OutilsDates.stringFromDateTime(new DateTime());
+    }
+    
+    
     private int type;
 
     public String getDateModification() {
@@ -45,6 +58,16 @@ public class Formulaire {
     public void setType(int type) {
         this.type = type;
     }
+
+	public Client getModificateur() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Reservation getReservationFromDTO() throws Exception {
+		Reservation reservat = reservation.getReservation();
+		return reservat;
+	}
     
     
 }

@@ -131,6 +131,27 @@ public class ReservationDAO extends DAO<Reservation>{
 		return reservation;
 	}
 
+	public TreeSet<Reservation> getAllReservations() {
+		TreeSet<Reservation> toutesReservation = 
+				new TreeSet<Reservation>(new ComparateurReservation());
+		Reservation reservation = null;
+		try {
+		
+			 ResultSet resultat = this.rechercherTous.executeQuery();
+			while(resultat.next()){
+				
+				reservation = resultSetToReservation(resultat);
+				toutesReservation.add(reservation);
+
+			}
+
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		}
+		return toutesReservation;
+	}
+
 	private Reservation resultSetToReservation(java.sql.ResultSet resultat) {
 		Reservation reservation = null;
 		try {
@@ -139,7 +160,9 @@ public class ReservationDAO extends DAO<Reservation>{
 			Client client =daoClient.findById( resultat.getInt(6));
 			Chambre chambre = daoChambre.findByNumeroChambre(resultat.getInt(4));
 			DateTime creation = new DateTime(resultat.getDate(5));
-			Interval interval = OutilsDates.toJodaInterval(resultat.getDate(2), resultat.getInt(3));
+			DateTime arrivee = new DateTime(resultat.getDate(2));
+			DateTime depart = arrivee.plusDays(resultat.getInt(3));
+			Interval interval = new Interval(arrivee, depart);
 			
 			reservation = new Reservation();
 			reservation.setIdReservation(resultat.getInt(1));
@@ -164,12 +187,6 @@ public class ReservationDAO extends DAO<Reservation>{
 		e.printStackTrace();
 	}
 		return reservation;
-	}
-
-	@Override
-	public boolean update(Reservation object) {
-		// TODO Auto-generated method stub
-		return false;
 	}
 
 
@@ -200,25 +217,10 @@ public class ReservationDAO extends DAO<Reservation>{
 		
 	}
 
-	public TreeSet<Reservation> getAllReservations() {
-		TreeSet<Reservation> toutesReservation = 
-				new TreeSet<Reservation>(new ComparateurReservation());
-		Reservation reservation = null;
-		try {
-		
-			 ResultSet resultat = this.rechercherTous.executeQuery();
-			while(resultat.next()){
-				
-				reservation = resultSetToReservation(resultat);
-				toutesReservation.add(reservation);
-
-			}
-
-		} catch (SQLException e) {
-
-			e.printStackTrace();
-		}
-		return toutesReservation;
+	@Override
+	public boolean update(Reservation object) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }

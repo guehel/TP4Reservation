@@ -21,8 +21,9 @@ public abstract class EntiteDTO {
 	public static  ReservationDTO[] getReservationsFromSet(
 			TreeSet<Reservation> reservations2) {
 		int n = reservations2.size();
+		ReservationDTO dto  = null;
 		ReservationDTO[] array = new ReservationDTO[n] ;
-		ReservationDTO dto ;
+		
 		int i = 0;
 		for(Reservation res :  reservations2){
 

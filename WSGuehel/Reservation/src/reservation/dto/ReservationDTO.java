@@ -7,6 +7,9 @@
 
 package reservation.dto;
 
+import org.joda.time.DateTime;
+import org.joda.time.Interval;
+
 import reservation.dao.OutilsDates;
 import reservation.objects.Reservation;
 
@@ -156,6 +159,18 @@ public class ReservationDTO  {
     public void setIdReservation(int idReservation) {
         this.idReservation = idReservation;
     }
+
+	public Reservation getReservation() throws Exception {
+	 Reservation reservation = new Reservation();
+	 reservation.setChambre(this.chambreDTO.getChambre());
+	 reservation.setClient(ClientDTO.getClient());
+	 DateTime dateCreation = OutilsDates.stringToJodaDate(creation);
+	 DateTime dateArrivee = OutilsDates.stringToJodaDate(arrivee);
+	 DateTime dateDepart = OutilsDates.stringToJodaDate(depart);
+	 reservation.setCreation(dateCreation);
+	 reservation.setInterval(new Interval(dateArrivee, dateDepart));
+		return reservation;
+	}
 
     
 }

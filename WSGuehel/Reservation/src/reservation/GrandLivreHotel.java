@@ -3,14 +3,12 @@ package reservation;
 import java.sql.SQLException;
 import java.util.TreeSet;
 
-import org.joda.time.DateTime;
-
 import reservation.dao.DAOFactory;
 import reservation.dao.DAOFactory.Table;
 import reservation.dao.ReservationDAO;
-import reservation.objects.Chambre;
-import reservation.objects.Client;
-import reservation.objects.ComparateurReservation;
+import reservation.dto.Formulaire;
+import reservation.modifications.Modification;
+import reservation.modifications.modificationFactory;
 import reservation.objects.Entite;
 import reservation.objects.Reservation;
 import reservation.recherches.RechercheFactory;
@@ -20,6 +18,7 @@ public class GrandLivreHotel extends Entite implements GrandLivre {
 	
 	private ReservationDAO reservationDAO;
 	private RechercheFactory recherchesfactory;
+	private Modification modification;
 
 	public GrandLivreHotel(){
 		try {
@@ -44,6 +43,14 @@ public class GrandLivreHotel extends Entite implements GrandLivre {
 		RechercheReservation recherche = recherchesfactory.getRechercheReservation(client);
 		reservationsClient = recherche.rechercher();
 		return reservationsClient;
+	}
+	
+	@Override
+	public boolean modifierChambre(Reservation reservation, int type) {
+		// TODO Auto-generated method stub
+		this.modification = modificationFactory.getModifications(type);
+		boolean modifie = this.modification.modifier(reservation);
+		return modifie;
 	}
 	
 	

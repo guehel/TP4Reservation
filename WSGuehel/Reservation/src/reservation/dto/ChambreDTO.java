@@ -34,4 +34,10 @@ public class ChambreDTO extends EntiteDTO {
 	    public void setFormulaire(Formulaire formulaire) {
 	        this.formulaire = formulaire;
 	    }
+
+		public Chambre getChambre() {
+			Chambre chambre = new Chambre(numeroChambre);
+			
+			return chambre;
+		}
 }

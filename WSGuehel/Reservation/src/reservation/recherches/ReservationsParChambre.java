@@ -19,11 +19,12 @@ public class ReservationsParChambre extends RechercheReservation {
 
 	@Override
 	public TreeSet<Reservation> rechercher() {
-		DateTime now = new DateTime();
+		//utiliser le code commentet pour limiter la recherche
+//		DateTime now = new DateTime();
 		
 		for(Reservation reservation: reservations){
-			if(reservation.getChambre().equals(chambre)	&&
-					reservation.getInterval().contains(now)
+			if(reservation.getChambre().equals(chambre)	
+//				&&	reservation.getInterval().contains(now)
 					){
 				resultats.add(reservation);
 			}

@@ -3,6 +3,9 @@ package reservation;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import org.joda.time.DateTime;
+import org.joda.time.Interval;
+
 import reservation.dao.ChambreDAO;
 import reservation.dao.ClientDAO;
 import reservation.dao.DAOFactory;
@@ -10,9 +13,11 @@ import reservation.dao.DAOFactory.Table;
 import reservation.dto.ChambreDTO;
 import reservation.dto.ClientDTO;
 import reservation.dto.EntiteDTO;
+import reservation.dto.Formulaire;
 import reservation.dto.ReservationDTO;
 import reservation.objects.Chambre;
 import reservation.objects.Client;
+import reservation.objects.Reservation;
 
 public class ServicesWeb implements Services {
 	private DAOFactory daoFactory = null;
@@ -69,13 +74,21 @@ public class ServicesWeb implements Services {
 	}
 
 	@Override
-	public boolean update(ChambreDTO chambre) {
-		// Test webservice
-		System.out.println("num "+chambre.getNumeroChambre());
-		System.out.println("num date "+chambre.getFormulaire().getDateModification());
-		System.out.println("depart "+chambre.getReservations()[0].getDepart());
+	public boolean update(ChambreDTO chambreDTO) {
+		boolean reussie = false;
+		
+		Formulaire formulaireModif = chambreDTO.getFormulaire();
 
-		return true;
+		try {
+			Reservation reservation = formulaireModif.getReservationFromDTO();
+			reussie = 	grandLivre.modifierChambre(reservation, formulaireModif.getType());
+		} catch (Exception e) {
+			
+		}
+		
+	
+
+		return reussie;
 	}
 
 
@@ -84,9 +97,11 @@ public class ServicesWeb implements Services {
 		ReservationDTO[] listeReservation = null;
 		Client client = ((ClientDAO) daoFactory.getDAO(Table.CLIENT)).findById(idClient);
 		if(client!=null){
+			
 			listeReservation = EntiteDTO.getReservationsFromSet(
 					grandLivre.getReservations(client)
 					);
+			
 		
 		}
 		return listeReservation;

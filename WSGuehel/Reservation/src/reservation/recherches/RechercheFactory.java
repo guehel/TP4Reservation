@@ -20,8 +20,5 @@ public class RechercheFactory extends Entite{
 		else return null;
 	}
 	
-//	public RechercheReservation  getRechercheReservation(Chambre client){
-//		return new ReservationsParChambre(reservations, client);
-//
-//	}
+
 }
