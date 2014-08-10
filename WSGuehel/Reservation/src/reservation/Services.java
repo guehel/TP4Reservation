@@ -15,9 +15,16 @@ public ChambreDTO[] obtenirListeChambre();
  */
 public ReservationDTO[] obtenirReservations(int idClient);
 
-/**obtenir la listes
- * @return
+/**obtenir la listes des client ainsi que leur details 
+ * est allee si on veux modifier une reservation
+ * @return la liste des clients et leurs details de reservation
  */
 public ClientDTO[] obtenirListeClients();
-public boolean update(ChambreDTO chambre);
+
+/**Permet de modifier la reservation de la chambre a travers 
+ * le formulaire de modification compris dans la chambre dto
+ * @param chambreDTO informations sur la chambre et les details sur les reservations
+ * @return
+ */
+public boolean update(ChambreDTO chambreDTO);
 }
