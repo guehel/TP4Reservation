@@ -47,9 +47,10 @@ public class GrandLivreHotel extends Entite implements GrandLivre {
 	
 	@Override
 	public boolean modifierChambre(Reservation reservation, int type) {
-		// TODO Auto-generated method stub
+		
 		this.modification = modificationFactory.getModifications(type);
 		boolean modifie = this.modification.modifier(reservation);
+		if(modifie)reservations = reservationDAO.getAllReservations();
 		return modifie;
 	}
 	
