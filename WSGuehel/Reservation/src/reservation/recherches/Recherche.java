@@ -3,12 +3,18 @@
  */
 package reservation.recherches;
 
-import java.util.TreeSet;
+
+import reservation.dto.ChambreDTO;
+import reservation.dto.ClientDTO;
+import reservation.dto.ReservationDTO;
 
 /**Interface pour les differente rechers
  * @author Guehel
  *
  */
-public interface  Recherche <T> {
-	TreeSet<T> rechercher();
+public interface  Recherche  {
+	 ReservationDTO[] rechercherReservations();
+	 ClientDTO[] rechercherClients();
+	 ChambreDTO[] rechercherChambres();
+	
 }

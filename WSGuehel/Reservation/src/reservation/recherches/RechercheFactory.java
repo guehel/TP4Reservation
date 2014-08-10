@@ -1,24 +1,44 @@
 package reservation.recherches;
 
-import java.util.TreeSet;
 
-import reservation.entites.Entite;
+import reservation.GrandLivreHotel;
+import reservation.SingleGrandLivre;
 import reservation.objects.Chambre;
 import reservation.objects.Client;
-import reservation.objects.Reservation;
 
 
-public class RechercheFactory extends Entite{
-	public  RechercheFactory(TreeSet<Reservation> reservations){
-		this.reservations = reservations;
-	}	
-	public RechercheReservation  getRechercheReservation(Entite client){
-		if(Client.class.equals(client.getClass()))
-		return new ReservationsParClient(reservations, client);
-		else if(Chambre.class.equals(client.getClass()))
-			return new ReservationsParChambre(reservations, client);
-		else return null;
+
+public class RechercheFactory{
+	private static GrandLivreHotel grandLivre  = SingleGrandLivre.getInstance();
+	
+	public static RechercheReservation  getRechercheReservation(Client client){
+		
+		return new ReservationsParClient(grandLivre, client);
+		
 	}
 	
+	public static RechercheReservation  getRechercheReservation(Chambre chambre){
+		
+			return new ReservationsParChambre(grandLivre, chambre);
+	
+	}
+	
+	public static RechercheReservation  getRechercheReservation(int idClient){
+		Client client = grandLivre.getClient(idClient);
+		return new ReservationsParClient(grandLivre, client);
+
+	}
+	
+	public static RechercheClients getRechercheClient() {
+		
+		return new ToutsClients(grandLivre);
+	}
+	
+	public static RechercheChambres getRechercheChambres() {
+		
+		return new ToutesChambres(grandLivre);
+	}
+	
+
 
 }

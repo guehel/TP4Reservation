@@ -11,19 +11,13 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import com.mysql.jdbc.PreparedStatement;
-
-
-
-
-
-
 import reservation.dto.ClientDTO;
-import reservation.objects.Chambre;
+
 import reservation.objects.Client;
 
 public class ClientDAO extends DAO<Client>{
 	
-	private ReservationDAO reservationDAO;
+
 
 	public ClientDAO(Connection connection) {
 		super(connection);
@@ -45,7 +39,7 @@ public class ClientDAO extends DAO<Client>{
 			this.suppression =  (PreparedStatement) connection.prepareStatement(
 					"DELETE FROM `client` WHERE `id`=?"
 					);
-			reservationDAO = new ReservationDAO(connection);
+			
 		} catch (SQLException e) {
 			
 			e.printStackTrace();

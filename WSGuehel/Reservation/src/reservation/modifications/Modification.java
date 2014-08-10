@@ -1,7 +1,8 @@
 package reservation.modifications;
 
-import reservation.objects.Reservation;
+import reservation.dto.ReservationDTO;
+
 
 public interface Modification{
- boolean modifier(Reservation entit);
+ boolean modifier(ReservationDTO reservationDTO);
 }

@@ -1,5 +1,6 @@
 package reservation.entites;
 
+import java.util.Iterator;
 import java.util.TreeSet;
 
 import reservation.dto.ReservationDTO;
@@ -40,7 +41,7 @@ public abstract class Entite {
 		int i = 0;
 		for(Reservation res :  reservations){
 
-			dto = new ReservationDTO(res);
+			dto = new EntiteReservation(res).getReservationDTO();
 
 			array[i] = dto;
 			i++;
@@ -52,11 +53,28 @@ public abstract class Entite {
 		for(ReservationDTO reservationDTO: reservationsDTO){
 			try {
 				entiteReservation.setReservationFromDTO(reservationDTO);
-				reservations.add(entiteReservation.getreservation());
+				reservations.add(entiteReservation.getReservation());
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
+		
+	}
+	public Reservation getReservation(Reservation parametreRecheche) {
+		Reservation foundReservation;
+		if (parametreRecheche!=null) {
+			foundReservation = null;
+			Iterator<Reservation> iterator = reservations.iterator();
+			while (iterator.hasNext() && parametreRecheche == null) {
+				foundReservation = iterator.next();
+				if (parametreRecheche.equals(foundReservation))
+					parametreRecheche = foundReservation;
+				else
+					parametreRecheche = null;
+			}
+		}
+		return parametreRecheche;
+		
 		
 	}
 	 

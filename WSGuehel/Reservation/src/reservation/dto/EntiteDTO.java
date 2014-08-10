@@ -2,6 +2,7 @@ package reservation.dto;
 
 import java.util.TreeSet;
 
+import reservation.entites.EntiteReservation;
 import reservation.objects.Reservation;
 
 public abstract class EntiteDTO {
@@ -27,7 +28,7 @@ public abstract class EntiteDTO {
 		int i = 0;
 		for(Reservation res :  reservations2){
 
-			dto = new ReservationDTO(res);
+			dto = new EntiteReservation(res).getReservationDTO();
 
 			array[i] = dto;
 			i++;

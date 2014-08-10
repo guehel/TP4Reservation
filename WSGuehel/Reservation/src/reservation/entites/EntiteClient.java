@@ -27,13 +27,13 @@ public class EntiteClient extends Entite{
 	public void setClientFromDTO(ClientDTO clientDTO) throws Exception{
 		client.setIdClient(clientDTO.getId());
 		client.setNom(clientDTO.getNom());
-		client.setPrenom(clientDTO.getNom());
+		client.setPrenom(clientDTO.getPrenom());
 	}
 	public ClientDTO getClientDTO() {
 		ClientDTO clientDTO = new ClientDTO();
 		clientDTO.setId(client.getIdClient());
 		clientDTO.setNom(client.getNom());
-		clientDTO.setPrenom(client.getNom());
+		clientDTO.setPrenom(client.getPrenom());
 		return clientDTO;
 	}
 

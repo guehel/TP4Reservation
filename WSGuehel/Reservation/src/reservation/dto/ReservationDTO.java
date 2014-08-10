@@ -45,15 +45,7 @@ public class ReservationDTO  {
     }
 
 
-    public ReservationDTO(Reservation reservation) {
-	   
-    	  this.arrivee = OutilsDates.stringFromDateTime(reservation.getInterval().getStart());
-          this.ClientDTO = new ClientDTO(reservation.getClient());
-          this.creation = OutilsDates.stringFromDateTime(reservation.getCreation());
-          this.depart = OutilsDates.stringFromDateTime(reservation.getInterval().getEnd());
-          this.chambreDTO = new ChambreDTO(reservation.getChambre());
-          this.idReservation = reservation.getIdReservation();
-	}
+ 
 
 	/**
      * Gets the arrivee value for this ReservationDTO.

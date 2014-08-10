@@ -12,7 +12,7 @@ import reservation.dto.ReservationDTO;
 public class EntiteReservation extends Entite{	
 private Reservation reservation;
 
-public Reservation getreservation() {
+public Reservation getReservation() {
 	return reservation;
 }
 

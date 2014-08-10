@@ -9,6 +9,7 @@ import com.mysql.jdbc.Connection;
 
 
 
+
 import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -28,7 +29,9 @@ import com.mysql.jdbc.PreparedStatement;
 
 
 
+
 import reservation.dto.ReservationDTO;
+import reservation.entites.EntiteReservation;
 import reservation.objects.Chambre;
 import reservation.objects.Client;
 import reservation.objects.ComparateurReservation;
@@ -78,9 +81,8 @@ public class ReservationDAO extends DAO<Reservation>{
 	@Override
 	public boolean create(Reservation reservation) {
 		boolean reussite= false;
-		ReservationDTO reservationDTO  = new ReservationDTO(reservation);
+		ReservationDTO reservationDTO  = new EntiteReservation(reservation).getReservationDTO();
 		this.saveFromDTO(reservationDTO);
-		//TODO : gerer les erreur
 		reussite= true;
 		return reussite;
 	}

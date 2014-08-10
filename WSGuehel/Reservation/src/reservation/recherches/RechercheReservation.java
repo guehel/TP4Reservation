@@ -1,26 +1,33 @@
 package reservation.recherches;
 
-import java.util.TreeSet;
 
+
+import reservation.GrandLivreHotel;
+import reservation.dto.ReservationDTO;
 import reservation.entites.Entite;
-import reservation.objects.ComparateurReservation;
-import reservation.objects.Reservation;
 
-public abstract class RechercheReservation extends Entite implements Recherche<Reservation> {
-	 protected TreeSet<Reservation> resultats = new TreeSet<Reservation>(
-			new ComparateurReservation());
 
-	public RechercheReservation(TreeSet<Reservation> reservations) {
-		this.reservations = reservations;
+public abstract class RechercheReservation extends AbsctractRecherche {
+
+	public RechercheReservation(GrandLivreHotel grandLivre) {
+		super(grandLivre);
+		
 	}
+
 	
-	public RechercheReservation() {
+
 	
+	@Override
+	public ReservationDTO[] rechercherReservations() {
+		
+		effectuerRecherche();
+		return super.getReservationsArray();
 	}
 
-	public TreeSet<Reservation> getResultats() {
-		return resultats;
-	}
 
+
+	
+
+	
 
 }
