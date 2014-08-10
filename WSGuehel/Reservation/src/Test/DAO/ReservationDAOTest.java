@@ -131,7 +131,7 @@ public class ReservationDAOTest {
 		
 		assertTrue(res1.getIdReservation()==99);
 		
-//		assertTrue(resdao.delete(res1));
+		assertTrue(resdao.delete(res1));
 		TreeSet<Reservation> resss = resdao.getAllReservations();
 		for (Reservation resa :resss){
 			System.out.println(resa.getIdReservation());
