@@ -47,5 +47,17 @@ public abstract class Entite {
 		}
 		return array;
 	}
+	public void setReservationsFromDTO(ReservationDTO[] reservationsDTO) {
+		EntiteReservation entiteReservation  = new EntiteReservation();
+		for(ReservationDTO reservationDTO: reservationsDTO){
+			try {
+				entiteReservation.setReservationFromDTO(reservationDTO);
+				reservations.add(entiteReservation.getreservation());
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+	}
 	 
 }
