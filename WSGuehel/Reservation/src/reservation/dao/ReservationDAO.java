@@ -66,10 +66,9 @@ public class ReservationDAO extends DAO<Reservation>{
 				
 					);
 			this.suppression =  (PreparedStatement) connection.prepareStatement(
-					"DELETE FROM `reservation` "
-					+ "WHERE `idReservation` =?  AND `numero` =?"
+					"DELETE FROM `reservation` WHERE `idReservation` =? AND `numero` =?"
 					);
-			//daoClient = new ClientDAO(connection);
+		
 		} catch (SQLException e) {
 			
 			e.printStackTrace();
@@ -87,13 +86,12 @@ public class ReservationDAO extends DAO<Reservation>{
 	}
 
 	@Override
-	public boolean delete(Reservation object) {
+	public boolean delete(Reservation reservation) {
 	try {
-		
-			this.suppression.setInt(1,object.getIdReservation());
-			this.suppression.setInt(2,object.getClient().getIdClient());
-			
-		
+			int idReservation  = reservation.getIdReservation();
+			int numeroChambre  = reservation.getChambre().getNumeroChambre();
+			this.suppression.setInt(1,idReservation);
+			this.suppression.setInt(2,numeroChambre);
 			
 			int resultat = this.suppression.executeUpdate();
 			return resultat == 1;
@@ -106,9 +104,9 @@ public class ReservationDAO extends DAO<Reservation>{
 	}
 
 	@Override
-	public Reservation find(Reservation object) {
+	public Reservation find(Reservation reservation) {
 		
-		return findByIds(object.getIdReservation(),  object.getChambre().getNumeroChambre());
+		return findByIds(reservation.getIdReservation(),  reservation.getChambre().getNumeroChambre());
 	}
 
 	public Reservation findByIds(int idReservation, int numeroChambre) {
@@ -218,7 +216,7 @@ public class ReservationDAO extends DAO<Reservation>{
 	}
 
 	@Override
-	public boolean update(Reservation object) {
+	public boolean update(Reservation reservation) {
 		// TODO Auto-generated method stub
 		return false;
 	}

@@ -54,16 +54,22 @@ public class ServicesWebTest {
 
 	@Test
 	public void testObtenirListeClients() {
+		
+	
+	}
+
+	@Test
+	public void testUpdate() {
 		ChambreDTO chambreDTO = new ChambreDTO();
 		int numeroChambre=1;
 			Formulaire formulaire = new Formulaire();
-			int type=1;
+			int type=0;
 			int idUser = 4;
 			String dateModification="2010-05-01";
 			ReservationDTO reservationDTO = new ReservationDTO();
-				int idReservation = 0;	
+				int idReservation = 113;	
 				ClientDTO clientDTO = new ClientDTO();	
-					int idClient = 4;
+					int idClient = 2;
 					String nom = "Martin";
 					String prenom = "Paul";
 					clientDTO.setId(idClient);
@@ -72,12 +78,14 @@ public class ServicesWebTest {
 				String creation = "2010-05-01";
 				String arrivee = "2015-05-01";
 				String depart = "2016-05-01";
+				ChambreDTO chambreAChange = new ChambreDTO();
+					chambreAChange.setNumeroChambre(numeroChambre);
 				reservationDTO.setIdReservation(idReservation);
 				reservationDTO.setClientDTO(clientDTO);
 				reservationDTO.setCreation(creation);
 				reservationDTO.setArrivee(arrivee);
 				reservationDTO.setDepart(depart);
-				
+				reservationDTO.setChambreDTO(chambreAChange);
 			formulaire.setType(type);
 			formulaire.setIdUser(idUser);
 			formulaire.setDateModification(dateModification);
@@ -93,13 +101,7 @@ public class ServicesWebTest {
 			fail("Echecj modification");
 			e.printStackTrace();
 		}
-		
-	
-	}
-
-	@Test
-	public void testUpdate() {
-		fail("Not yet implemented");
+		;
 	}
 
 	@Test

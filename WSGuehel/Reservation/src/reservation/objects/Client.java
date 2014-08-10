@@ -40,9 +40,10 @@ public class Client extends Entite  {
 
 	@Override
 	public boolean equals(Object arg0) {
+		if(arg0!=null){
 		Client client = (Client) arg0;
-		
 		return idClient == client.getIdClient();
+		}else return false;
 	}
 	
 	
