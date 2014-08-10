@@ -2,8 +2,8 @@ package reservation.recherches;
 
 import java.util.TreeSet;
 
+import reservation.entites.Entite;
 import reservation.objects.Client;
-import reservation.objects.Entite;
 import reservation.objects.Reservation;
 
 public class ReservationsParClient extends RechercheReservation {

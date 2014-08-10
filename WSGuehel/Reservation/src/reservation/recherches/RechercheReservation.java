@@ -2,8 +2,8 @@ package reservation.recherches;
 
 import java.util.TreeSet;
 
+import reservation.entites.Entite;
 import reservation.objects.ComparateurReservation;
-import reservation.objects.Entite;
 import reservation.objects.Reservation;
 
 public abstract class RechercheReservation extends Entite implements Recherche<Reservation> {

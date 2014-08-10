@@ -17,7 +17,7 @@ public abstract class EntiteDTO {
 		this.reservations = reservations;
 	}
 
-
+//TODO: a supprimer
 	public static  ReservationDTO[] getReservationsFromSet(
 			TreeSet<Reservation> reservations2) {
 		int n = reservations2.size();

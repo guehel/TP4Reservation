@@ -1,5 +1,7 @@
 package reservation.objects;
 
+import reservation.entites.Entite;
+
 
 
 

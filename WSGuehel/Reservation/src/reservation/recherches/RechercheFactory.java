@@ -2,9 +2,9 @@ package reservation.recherches;
 
 import java.util.TreeSet;
 
+import reservation.entites.Entite;
 import reservation.objects.Chambre;
 import reservation.objects.Client;
-import reservation.objects.Entite;
 import reservation.objects.Reservation;
 
 

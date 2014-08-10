@@ -3,7 +3,8 @@ package reservation;
 import java.util.TreeSet;
 
 
-import reservation.objects.Entite;
+
+import reservation.entites.Entite;
 import reservation.objects.Reservation;
 
 public interface GrandLivre {

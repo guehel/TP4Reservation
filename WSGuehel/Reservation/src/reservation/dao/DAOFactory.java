@@ -5,6 +5,8 @@ import com.mysql.jdbc.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+import reservation.FacadeServiceWeb;
+
 
 
 public class DAOFactory {
@@ -56,8 +58,10 @@ public class DAOFactory {
 	
 	public static void main(String [] args){
 		try {
+			
 			DAOFactory da = new DAOFactory();
 			da.getDAO(Table.RESERVATION);
+			FacadeServiceWeb facade = new FacadeServiceWeb();
 		} catch (ClassNotFoundException | SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

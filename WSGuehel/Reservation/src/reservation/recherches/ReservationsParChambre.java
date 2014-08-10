@@ -4,8 +4,8 @@ import java.util.TreeSet;
 
 import org.joda.time.DateTime;
 
+import reservation.entites.Entite;
 import reservation.objects.Chambre;
-import reservation.objects.Entite;
 import reservation.objects.Reservation;
 
 public class ReservationsParChambre extends RechercheReservation {
