@@ -66,7 +66,7 @@ public class Formulaire {
 	}
 
 	public Reservation getReservationFromDTO() throws Exception {
-		Reservation reservat = reservation.getReservation();
+		Reservation reservat = new Reservation(reservation);
 		return reservat;
 	}
     

@@ -6,7 +6,6 @@ import java.util.TreeSet;
 import reservation.dao.DAOFactory;
 import reservation.dao.DAOFactory.Table;
 import reservation.dao.ReservationDAO;
-import reservation.dto.Formulaire;
 import reservation.modifications.Modification;
 import reservation.modifications.modificationFactory;
 import reservation.objects.Entite;

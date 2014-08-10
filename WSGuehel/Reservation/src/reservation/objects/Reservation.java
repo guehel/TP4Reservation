@@ -31,7 +31,19 @@ public class Reservation implements Comparable<Reservation> {
 		
 		
 
-		
+		public Reservation( ReservationDTO reservationDto) throws Exception {
+
+			 DateTime dateCreation = OutilsDates.stringToJodaDate(reservationDto.getCreation());
+			 DateTime dateArrivee = OutilsDates.stringToJodaDate(reservationDto.getArrivee());
+			 DateTime dateDepart = OutilsDates.stringToJodaDate(reservationDto.getDepart());
+			 
+			
+			 this.setIdReservation(reservationDto.getIdReservation());
+			 this.setChambre(reservationDto.getChambreDTO().getChambre());
+			 this.setClient(reservationDto.getClientDTO().getClient());
+			 this.setCreation(dateCreation);
+			 this.setInterval(new Interval(dateArrivee, dateDepart));
+		}
 
 
 

@@ -2,9 +2,7 @@ package reservation;
 
 import java.util.TreeSet;
 
-import reservation.dto.Formulaire;
-import reservation.objects.Chambre;
-import reservation.objects.Client;
+
 import reservation.objects.Entite;
 import reservation.objects.Reservation;
 
