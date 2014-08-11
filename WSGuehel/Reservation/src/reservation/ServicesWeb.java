@@ -1,85 +1,91 @@
 package reservation;
 
-import java.sql.SQLException;
-import java.util.ArrayList;
-
-import reservation.dao.ChambreDAO;
-import reservation.dao.ClientDAO;
-import reservation.dao.DAOFactory;
-import reservation.dao.DAOFactory.Table;
 import reservation.dto.ChambreDTO;
 import reservation.dto.ClientDTO;
-import reservation.dto.EntiteDTO;
+import reservation.dto.Formulaire;
 import reservation.dto.ReservationDTO;
-import reservation.objects.Chambre;
-import reservation.objects.Client;
+import reservation.modifications.Modification;
+import reservation.modifications.modificationFactory;
+import reservation.recherches.Recherche;
+import reservation.recherches.RechercheFactory;
 
 public class ServicesWeb implements Services {
-	private DAOFactory daoFactory = null;
-	private GrandLivre grandLivre ;
-	public  ServicesWeb () throws ClassNotFoundException, SQLException{
+	public static final int NOMBRE_DE_CHAMBRES=20;
+	
+	public  ServicesWeb () {
 		super();
-		daoFactory = new DAOFactory();
-		grandLivre = new GrandLivreHotel();
+		
 	}
 
 	@Override
 	public ChambreDTO[] obtenirListeChambre() {
-		ChambreDAO chambreDAO = ((ChambreDAO) daoFactory.getDAO(Table.CHAMBRE));
-		ArrayList<Chambre> listeChambres = chambreDAO.getAllChambres();
-		int n = listeChambres.size();
-		if(n!=0){
-			ChambreDTO[] retour = new ChambreDTO[n];
-			for(int i = 0; i< n; i++ ){
-				retour[i] = new ChambreDTO(listeChambres.get(i));
-			}
-			return retour;
-		}
-		return null;
+	Recherche recherche = RechercheFactory.getRechercheChambres();
+		
+		return recherche.rechercherChambres();
 	}
 
 
 	@Override
 	public ClientDTO[] obtenirListeClients() {
-		// Test webservice
-		ClientDTO client = new ClientDTO();
-		client.setId(1);
-		client.setNom("Bouanga");
-		client.setPrenom("Guehel");
-		ReservationDTO resa = new ReservationDTO();
-		resa.setArrivee("25 mai");
-		resa.setDepart("23-Juin");
-		resa.setCreation("01 jan");
-		resa.setIdReservation(1);
-		ReservationDTO[] res = {resa};
-		client.setReservations(res);
-		ClientDTO[] tabClients = {client};
-		return tabClients;
+		Recherche recherche = RechercheFactory.getRechercheClient();
+		
+		return recherche.rechercherClients();
 	}
 
 	@Override
-	public boolean update(ChambreDTO chambre) {
-		// Test webservice
-		System.out.println("num "+chambre.getNumeroChambre());
-		System.out.println("num date "+chambre.getFormulaire().getDateModification());
-		System.out.println("depart "+chambre.getReservations()[0].getDepart());
-
-		return true;
+	public boolean update(ChambreDTO chambreDTO) {
+		boolean reussie = false;
+		
+		Formulaire formulaireModif = chambreDTO.getFormulaire();
+		int type = formulaireModif.getType();
+		if (type==1||type==0) {
+			ReservationDTO reservationDTO = formulaireModif.getReservation();
+			Modification modification = modificationFactory
+					.getModifications(type);
+			reussie = modification.modifier(reservationDTO);
+		}
+		return reussie;
 	}
 
 
 	@Override
 	public ReservationDTO[] obtenirReservations(int idClient) {
-		ReservationDTO[] listeReservation = null;
-		Client client = ((ClientDAO) daoFactory.getDAO(Table.CLIENT)).findById(idClient);
-		if(client!=null){
-			listeReservation = EntiteDTO.getReservationsFromSet(
-					grandLivre.getReservations(client)
-					);
-			ClientDTO clientDTO = new ClientDTO(client);
-			return clientDTO.getReservations();
-		}
-		return listeReservation;
+		Recherche recherche = RechercheFactory.getRechercheReservation(idClient);
+		
+		return recherche.rechercherReservations();
 	}
+	
+	private boolean validerReservationDTO(ReservationDTO reservationDTO) {
+		return reservationDTO!=null 
+				&& reservationDTO.getCreation()!=null
+				&& reservationDTO.getArrivee()!=null
+				&& reservationDTO.getDepart()!=null
+				&& validerClienDTO(reservationDTO.getClientDTO())
+				&& validerChambreDTO(reservationDTO.getChambreDTO());
+	}
+	
+	private boolean validerClienDTO(ClientDTO clientDTO) {
+		return clientDTO!=null 
+				&& clientDTO.getId()>0
+				&& clientDTO.getNom()!=null
+				&& clientDTO.getPrenom()!=null;
+	}
+	
+	private boolean validerChambreDTO(ChambreDTO chambreDTO) {
+		return chambreDTO!=null 
+				&& chambreDTO.getNumeroChambre()>0
+				&& chambreDTO.getNumeroChambre() <= NOMBRE_DE_CHAMBRES
+				&& validerFormulaireDTO(chambreDTO.getFormulaire())
+				;
+	}
+
+	private boolean validerFormulaireDTO(Formulaire formulaire) {
+
+		return formulaire!=null
+				&& (formulaire.getIdUser()==0||formulaire.getIdUser()==1)
+				&& formulaire.getDateModification()!=null
+				&& validerReservationDTO(formulaire.getReservation());
+	}
+	
 
 }

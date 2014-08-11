@@ -1,5 +1,7 @@
 package reservation.objects;
 
+import reservation.entites.Entite;
+
 
 
 
@@ -10,6 +12,10 @@ public class Chambre extends Entite {
 	super();	
 
 	}
+	public Chambre(int numeroChambre) {
+		super();
+		this.numeroChambre = numeroChambre;
+	}
 	public int getNumeroChambre() {
 		return numeroChambre;
 	}
@@ -19,7 +25,9 @@ public class Chambre extends Entite {
 	@Override
 	public boolean equals(Object obj) {
 		Chambre chambre = (Chambre)obj;
-		return numeroChambre == chambre.getNumeroChambre();
+		boolean b =  numeroChambre == chambre.getNumeroChambre();
+		System.out.println(numeroChambre +(b?" egale ":" diff ") + chambre.getNumeroChambre());
+		return b;
 	}
 	
 	

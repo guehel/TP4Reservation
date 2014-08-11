@@ -6,6 +6,9 @@
  */
 
 package reservation.dto;
+//
+//import org.joda.time.DateTime;
+//import org.joda.time.Interval;
 
 import reservation.dao.OutilsDates;
 import reservation.objects.Reservation;
@@ -42,15 +45,7 @@ public class ReservationDTO  {
     }
 
 
-    public ReservationDTO(Reservation reservation) {
-	   
-    	  this.arrivee = OutilsDates.stringFromDateTime(reservation.getInterval().getStart());
-          this.ClientDTO = new ClientDTO(reservation.getClient());
-          this.creation = OutilsDates.stringFromDateTime(reservation.getCreation());
-          this.depart = OutilsDates.stringFromDateTime(reservation.getInterval().getEnd());
-          this.chambreDTO = new ChambreDTO(reservation.getChambre());
-          this.idReservation = reservation.getIdReservation();
-	}
+ 
 
 	/**
      * Gets the arrivee value for this ReservationDTO.
@@ -156,6 +151,22 @@ public class ReservationDTO  {
     public void setIdReservation(int idReservation) {
         this.idReservation = idReservation;
     }
+//
+//	public Reservation getReservation() throws Exception {
+//		 Reservation reservation = new Reservation();
+//		 
+//		 DateTime dateCreation = OutilsDates.stringToJodaDate(creation);
+//		 DateTime dateArrivee = OutilsDates.stringToJodaDate(arrivee);
+//		 DateTime dateDepart = OutilsDates.stringToJodaDate(depart);
+//		 
+//		
+//		 reservation.setIdReservation(idReservation);
+//		 reservation.setChambre(this.chambreDTO.getChambre());
+//		 reservation.setClient(ClientDTO.getClient());
+//		 reservation.setCreation(dateCreation);
+//		 reservation.setInterval(new Interval(dateArrivee, dateDepart));
+//		return reservation;
+//	}
 
     
 }
