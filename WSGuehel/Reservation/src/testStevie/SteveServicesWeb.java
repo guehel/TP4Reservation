@@ -26,7 +26,7 @@ public class SteveServicesWeb implements Services
 		chambre2.setFormulaire(form2);
 		chambreList[1] = chambre2;
 		
-		return null;
+		return chambreList;
 	}
 
 	@Override

@@ -1,79 +1,59 @@
 package services;
 
-import java.util.ArrayList;
+import java.rmi.RemoteException;
 import java.util.List;
 
-import org.joda.time.DateTime;
-import org.joda.time.Interval;
-
-import entities.Client;
-import entities.Reservation;
+import reservation.dto.ChambreDTO;
+import testStevie.SteveServicesWeb;
 import entities.Room;
-import entities.RoomForm;
+import entities.RoomFactory;
 
 public class RoomService
 
 {
 	private static RoomService instance;
+	private SteveServicesWeb webService;
+	private RoomFactory factory = new RoomFactory();
 
-	private RoomService()
-	{
+	private RoomService() {
 	}
 
-	public static RoomService getInstance()
-	{
-		if (instance == null)
-		{
+	public static RoomService getInstance() {
+		if (instance == null) {
 			instance = new RoomService();
 		}
 
 		return instance;
 	}
 
-	public List<Room> query()
-	{
-		List<Room> list = new ArrayList<Room>();
-		Room room1 = new Room();
-		room1.setId(1);
-		list.add(room1);
+	public List<Room> query() {
 
-		Client client = new Client();
-		client.setNom("Steve");
+		List<Room> list = null;
+		try {
 
-		Reservation reservation = new Reservation();
-		reservation.setClient(client);
-		DateTime start = new DateTime(2004, 12, 25, 0, 0, 0, 0);
-		DateTime end = new DateTime(2005, 1, 1, 0, 0, 0, 0);
-		Interval interval = new Interval(start, end);
-		reservation.setReservationTime(interval);
+		//	ChambreDTO[] chambres = webService.obtenirListeChambre();
+		//	System.out.println(chambres[1].getNumeroChambre());
+			list = factory.getList(webService.obtenirListeChambre());
 
-		room1.addReservations(reservation);
-		
-		RoomForm form = new RoomForm();
-		room1.setFormulaire(form);
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
+		for (Room room : list) {
 
-		Room room2 = new Room();
-		room2.setId(2);
-		list.add(room2);
-
-		Room room3 = new Room();
-		room3.setId(3);
-		list.add(room3);
-
-		Room room4 = new Room();
-		room4.setId(4);
-		list.add(room4);
-
+			System.out.println(room.getId());
+		}
 		return list;
 	}
 
-	public Room get(long id)
-	{
+	public Room get(long id) {
 		return null;
 	}
-	
-	public void update(Room room)
-	{
-		
+
+	public void update(Room room) {
+
+	}
+
+	public void setWebService(SteveServicesWeb steveServicesWeb) {
+		webService = steveServicesWeb;
 	}
 }

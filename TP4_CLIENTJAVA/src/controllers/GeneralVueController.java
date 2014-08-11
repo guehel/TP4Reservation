@@ -83,6 +83,7 @@ public class GeneralVueController implements Observer
 
 	private void initGeneralVue()
 	{
+		System.out.println("appel list chambres");
 		roomIndex = roomService.query();
 		List<String> listStringified = new ArrayList<String>();
 
@@ -147,7 +148,6 @@ public class GeneralVueController implements Observer
 
 			if (this.selectedRoom != selectedRoom)
 			{
-
 				this.selectedRoom = selectedRoom;
 				showRoomDetail(selectedRoom);
 			}
@@ -235,8 +235,15 @@ public class GeneralVueController implements Observer
 
 		// / Besoin de valider si resp est bien rempli voir
 		// http://code.makery.ch/blog/javafx-2-dialogs/
+		
+		
 
+		/// SEULEMENT SI LA RÉSERVATION EST VALIDÉ PAR LE SERVEUR....
 		selectedRoom.addReservations(newReservation);
+		
+		
+		
+		
 		RoomForm form = getRoomFrom(selectedRoom);
 		form.setType(1);
 		updateRoom(selectedRoom);

@@ -11,6 +11,7 @@ import javafx.stage.Stage;
 import services.ClientService;
 import services.ConnectionService;
 import services.RoomService;
+import testStevie.SteveServicesWebProxy;
 import controllers.GeneralVueController;
 import controllers.RootController;
 
@@ -76,6 +77,8 @@ public class Main extends Application
 		
 		rootController.setConnectionService(ConnectionService.getInstance());
 
+		SteveServicesWebProxy proxy = new SteveServicesWebProxy();
+		RoomService.getInstance().setWebService( proxy.getSteveServicesWeb());
 	
 		
 		// Enregistre observateurs au service de connection
