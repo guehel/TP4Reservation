@@ -36,8 +36,14 @@ public class EntityAdapter
 			for (ReservationDTO reservationDTO : chambreDTO.getReservations())
 			{
 				Reservation reservation = convertReservationDTO(reservationDTO);
-				reservation.setRoom(newRoom);
 				newRoom.addReservations(reservation);
+
+				// Sauvegarde une genre de copie de la chambre
+
+				ChambreDTO refChambreDTO = new ChambreDTO();
+				refChambreDTO
+						.setNumeroChambre(refChambreDTO.getNumeroChambre());
+				reservationDTO.setChambreDTO(refChambreDTO);
 			}
 		}
 		newRoom.setFormulaire(convertFormulaireDTO(chambreDTO.getFormulaire()));
@@ -88,7 +94,12 @@ public class EntityAdapter
 		ChambreDTO chambreDTO = new ChambreDTO();
 		chambreDTO.setNumeroChambre((int) room.getId());
 		chambreDTO.setFormulaire(convertFormulaireDTO(room.getFormulaire()));
-		chambreDTO.getFormulaire().getReservation().setChambreDTO(chambreDTO);
+
+		// Copie de la chambre en référence dans la réservation.
+		ChambreDTO refChambreDTO = new ChambreDTO();
+		refChambreDTO.setNumeroChambre(chambreDTO.getNumeroChambre());
+		chambreDTO.getFormulaire().getReservation()
+				.setChambreDTO(refChambreDTO);
 		return chambreDTO;
 	}
 
