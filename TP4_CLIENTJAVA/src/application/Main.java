@@ -8,10 +8,10 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import reservation.ServicesWebProxy;
 import services.ClientService;
 import services.ConnectionService;
 import services.RoomService;
-import testStevie.SteveServicesWebProxy;
 import controllers.GeneralVueController;
 import controllers.RootController;
 
@@ -80,7 +80,7 @@ public class Main extends Application
 
 		rootController.setConnectionService(ConnectionService.getInstance());
 
-		SteveServicesWebProxy webServiceProxy = new SteveServicesWebProxy();
+		ServicesWebProxy webServiceProxy = new ServicesWebProxy();
 		RoomService.getInstance().setWebService(webServiceProxy);
 		ClientService.getInstance().setWebService(webServiceProxy);
 

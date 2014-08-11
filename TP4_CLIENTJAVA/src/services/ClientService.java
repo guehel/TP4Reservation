@@ -6,19 +6,24 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+import reservation.ServicesWebProxy;
 import reservation.dto.ClientDTO;
-import testStevie.SteveServicesWeb;
 import entities.Client;
 import entities.EntityAdapter;
 
+/**
+ * Sert de tampon entre le webService et l'application
+ * 
+ * @author Steve Boisvert
+ * 
+ */
 public class ClientService
 
 {
-	private static ClientService			instance;
-	private SteveServicesWeb				webService;
-	private final EntityAdapter				factory			= new EntityAdapter();
-	private final Map<Long, Client>			clientMap		= new ConcurrentHashMap<>();
-	private final Map<Integer, ClientDTO>	clientDTOMap	= new ConcurrentHashMap<>();
+	private static ClientService	instance;
+	private ServicesWebProxy		webService;
+	private final EntityAdapter		factory		= new EntityAdapter();
+	private final Map<Long, Client>	clientMap	= new ConcurrentHashMap<>();
 
 	/**
 	 * Constructeur privé du ClientService.
@@ -54,7 +59,6 @@ public class ClientService
 			ClientDTO[] clientDTOlist = webService.obtenirListeClients();
 			for (ClientDTO clientDTO : clientDTOlist)
 			{
-				clientDTOMap.put(clientDTO.getId(), clientDTO);
 				Client newClient = factory.convertClientDTO(clientDTO);
 				clientMap.put(newClient.getId(), newClient);
 			}
@@ -85,7 +89,7 @@ public class ClientService
 	 * @param webService
 	 *            , le service web.
 	 */
-	public void setWebService(SteveServicesWeb webService)
+	public void setWebService(ServicesWebProxy webService)
 	{
 		this.webService = webService;
 	}

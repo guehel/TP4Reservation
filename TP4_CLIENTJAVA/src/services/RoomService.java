@@ -6,8 +6,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import reservation.ServicesWebProxy;
 import reservation.dto.ChambreDTO;
-import testStevie.SteveServicesWeb;
 import entities.EntityAdapter;
 import entities.Room;
 
@@ -20,11 +20,10 @@ import entities.Room;
 public class RoomService
 
 {
-	private static RoomService				instance;
-	private SteveServicesWeb				webService;
-	private final EntityAdapter				adaptor			= new EntityAdapter();
-	private final Map<Long, Room>			roomMap			= new HashMap<Long, Room>();
-	private final Map<Integer, ChambreDTO>	chambreDTOMap	= new HashMap<Integer, ChambreDTO>();
+	private static RoomService		instance;
+	private ServicesWebProxy		webService;
+	private final EntityAdapter		adaptor	= new EntityAdapter();
+	private final Map<Long, Room>	roomMap	= new HashMap<Long, Room>();
 
 	/**
 	 * Constructeur privé du RoomService.
@@ -61,7 +60,6 @@ public class RoomService
 			ChambreDTO[] chambreDTOlist = webService.obtenirListeChambre();
 			for (ChambreDTO chambreDTO : chambreDTOlist)
 			{
-				chambreDTOMap.put(chambreDTO.getNumeroChambre(), chambreDTO);
 				Room newRoom = adaptor.convertChambreDTO(chambreDTO);
 				roomMap.put(newRoom.getId(), newRoom);
 			}
@@ -117,7 +115,7 @@ public class RoomService
 	 * @param webService
 	 *            , le service web.
 	 */
-	public void setWebService(SteveServicesWeb webService)
+	public void setWebService(ServicesWebProxy webService)
 	{
 		this.webService = webService;
 	}

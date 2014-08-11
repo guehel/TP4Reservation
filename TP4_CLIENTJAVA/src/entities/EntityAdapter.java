@@ -83,12 +83,26 @@ public class EntityAdapter
 		return client;
 	}
 
+	/**
+	 * Converti un formulaire en formulaireDTO.
+	 * 
+	 * @param formulaire
+	 *            , le formulaire à convertir.
+	 * @return le formulaireDTO.
+	 */
 	private RoomForm convertFormulaireDTO(Formulaire formulaire)
 	{
 		RoomForm roomForm = new RoomForm();
 		return roomForm;
 	}
 
+	/**
+	 * Converti une chambre en chambreDTO
+	 * 
+	 * @param room
+	 *            la chambre à convertir.
+	 * @return la chambreDTO
+	 */
 	public ChambreDTO convertRoom(Room room)
 	{
 		ChambreDTO chambreDTO = new ChambreDTO();
@@ -103,6 +117,13 @@ public class EntityAdapter
 		return chambreDTO;
 	}
 
+	/**
+	 * Converti un RoomForm en Formulaire.
+	 * 
+	 * @param formulaire
+	 *            le RoomForm à convertir.
+	 * @return le formulaire converti.
+	 */
 	private Formulaire convertFormulaireDTO(RoomForm formulaire)
 	{
 		Formulaire newFormulaire = new Formulaire();
