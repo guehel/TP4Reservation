@@ -47,9 +47,9 @@ public class OutilsDates {
 		if(valideDate(arrivee)){
 
 		
-			DateTime dt = FORMAT_DATE.parseDateTime(arrivee);
+			DateTime dt = FORMAT_DATE.parseDateTime(arrivee.trim());
 			return dt;
-		}else throw new Exception("le format de la date n'est pas valide");
+		}else throw new Exception("le format de la date "+arrivee+" n'est pas valide");
 	
 	}
 
@@ -60,6 +60,7 @@ public class OutilsDates {
 	}
 	
 	public static boolean valideDate(String date){
+		System.out.println(date);
 		boolean valide = false;
 		if(date!=null)
 			valide = date.matches(DATE_REGEX);

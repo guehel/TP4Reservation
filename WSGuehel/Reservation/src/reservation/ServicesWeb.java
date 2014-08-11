@@ -57,6 +57,7 @@ public class ServicesWeb implements Services {
 	
 	private boolean validerReservationDTO(ReservationDTO reservationDTO) {
 		return reservationDTO!=null 
+				&& reservationDTO.getCreation()!=null
 				&& reservationDTO.getArrivee()!=null
 				&& reservationDTO.getDepart()!=null
 				&& validerClienDTO(reservationDTO.getClientDTO())

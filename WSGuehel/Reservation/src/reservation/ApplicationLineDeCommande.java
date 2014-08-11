@@ -55,29 +55,19 @@ public class ApplicationLineDeCommande {
 							if(confirmerChoix=='O'){
 								do {
 									formulaire.setType(type);
-									System.out
-											.println("Saisir la date d'arrivee sous la forme "
-													+ formulaire
-															.getDateModification());
-									String date = sc.next();
+								
+									String date =choisirMots("Saisir la date de depart sous la forme 2017-01-02", sc);
 									formulaire.getReservation()
 											.setArrivee(date);
-									System.out
-											.println("Saisir la date de depart sous la forme "
-													+ formulaire
-															.getDateModification());
-									date = sc.next();
+								
+									date =choisirMots("Saisir la date de depart sous la forme 2017-01-02", sc);
 									formulaire.getReservation().setDepart(date);
 									ClientDTO clientDTO = new ClientDTO();
-									System.out
-											.println("Saisir le num de client ");
-									int id = sc.nextInt();
+									int id = choisirEntier("Saisir le num de client ", sc);
 									clientDTO.setId(id);
-									System.out.println("saisir le nom");
-									String nom = sc.next();
+									String nom = choisirMots("saisir le nom", sc);
 									clientDTO.setNom(nom);
-									System.out.println("saisir le prenom");
-									String prenom = sc.next();
+									String prenom = choisirMots("saisir le prenom", sc);
 									clientDTO.setPrenom(prenom);
 									formulaire.getReservation().setClientDTO(
 											clientDTO);
@@ -165,7 +155,7 @@ public class ApplicationLineDeCommande {
 		char retour = 'Z';
 	
 			retour = sc.next().charAt(0);
-		
+			System.out.println(retour);
 		return retour;
 	}
 	
@@ -174,7 +164,7 @@ public class ApplicationLineDeCommande {
 		String retour = "";
 	
 			retour = sc.next();
-		
+			System.out.println(retour);
 		return retour;
 	}
 
