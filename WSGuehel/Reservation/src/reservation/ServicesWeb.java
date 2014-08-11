@@ -60,12 +60,13 @@ public class ServicesWeb implements Services {
 	}
 	
 	private boolean validerReservationDTO(ReservationDTO reservationDTO) {
+		
 		return reservationDTO!=null 
 				&& reservationDTO.getCreation()!=null
 				&& reservationDTO.getArrivee()!=null
 				&& reservationDTO.getDepart()!=null
-				&& validerClienDTO(reservationDTO.getClientDTO())
-				&& validerChambreDTO(reservationDTO.getChambreDTO());
+				&& reservationDTO.getClientDTO().getId()>0
+				&& reservationDTO.getChambreDTO().getNumeroChambre()>0;
 	}
 	
 	private boolean validerClienDTO(ClientDTO clientDTO) {
@@ -86,7 +87,7 @@ public class ServicesWeb implements Services {
 	private boolean validerFormulaireDTO(Formulaire formulaire) {
 
 		return formulaire!=null
-				&& (formulaire.getIdUser()==0||formulaire.getIdUser()==1)
+				&& (formulaire.getType()==0||formulaire.getType()==1)
 				&& formulaire.getDateModification()!=null
 				&& validerReservationDTO(formulaire.getReservation());
 	}

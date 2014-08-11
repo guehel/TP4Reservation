@@ -19,7 +19,8 @@ public class ReservationDTO  {
 
     private ChambreDTO chambreDTO;
 
-    private int idReservation;
+    //Evite que ca passe a 0
+    private int idReservation = 0;
 
     public ReservationDTO() {
     }

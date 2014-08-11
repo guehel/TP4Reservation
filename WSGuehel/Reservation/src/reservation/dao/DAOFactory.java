@@ -1,36 +1,45 @@
 package reservation.dao;
 
-import com.mysql.jdbc.Connection;
-
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.Scanner;
 
-
-
+import com.mysql.jdbc.Connection;
 
 public class DAOFactory {
-	public enum Table{
+	public enum Table {
 		RESERVATION, CLIENT, CHAMBRE;
 	}
 
-	private  String url="jdbc:mysql://localhost:3306/tp4_reservation";
-
-	private   String user ="root";
-	private   String password ="Vlvy7410";
-//	password ="";
+	private String url = "jdbc:mysql://localhost:3306/";
+	private String bd = "tp4_reservation";
+	private String user = "root";
+	private String password = "root";
 	private Connection connection;
-	public DAOFactory() throws ClassNotFoundException, SQLException  {
-//		url="jdbc:mysql://192.168.2.14:3306/commandes";
-//		String user ="guehel";
-//		password ="test";
+
+	public DAOFactory() throws ClassNotFoundException, SQLException {
+		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			connection = (Connection) DriverManager.getConnection(url,user,password);
+			connection = (Connection) DriverManager.getConnection(url + bd,
+					user, password);
+		} catch (ClassNotFoundException | SQLException e) {
+			Scanner sc = new Scanner(System.in);
+			System.out
+					.println("Les parametre ne semplent pas marcher\n\tDonner:");
+			System.out.println("nom de la base de donne");
+			bd = sc.next().trim();
+			System.out.println("le compte admin ");
+			user = sc.next().trim();
+			System.out.println("le mot de passe");
+			password = sc.next().trim();
+			connection = (Connection) DriverManager.getConnection(url + bd,
+					user, password);
+		}
 	}
-	
-	
-	public DAO<?> getDAO(Table table ){
+
+	public DAO<?> getDAO(Table table) {
 		DAO<?> dao = null;
-		if (connection!=null) {
+		if (connection != null) {
 			switch (table) {
 			case RESERVATION:
 				dao = new ReservationDAO(connection);
@@ -41,18 +50,18 @@ public class DAOFactory {
 			case CHAMBRE:
 				dao = new ChambreDAO(connection);
 				break;
-			
+
 			default:
 				break;
 			}
 		}
 		return dao;
 	}
-	
+
 	@Override
 	protected void finalize() throws Throwable {
 		this.connection.close();
 		super.finalize();
 	}
-	
+
 }

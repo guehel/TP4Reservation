@@ -4,6 +4,7 @@ import org.joda.time.DateTime;
 import org.joda.time.Interval;
 
 
+
 import reservation.objects.Reservation;
 import reservation.dao.OutilsDates;
 import reservation.dto.ChambreDTO;
@@ -26,6 +27,12 @@ public EntiteReservation(Reservation reservation) {
 	this.reservation = reservation;
 }
 
+public EntiteReservation(ReservationDTO reservationDTO) throws Exception {
+	super();
+	this.setReservationFromDTO(reservationDTO);
+}
+
+
 public EntiteReservation() {
 	super();
 	
@@ -38,7 +45,7 @@ public void setReservationFromDTO(ReservationDTO reservationDto) throws Exceptio
 	 DateTime dateDepart = OutilsDates.stringToJodaDate(reservationDto.getDepart());
 	EntiteChambre entiteChambre = new EntiteChambre(reservationDto.getChambreDTO());
 		
-	 	
+	 this.reservation = new Reservation();
 	 this.reservation.setIdReservation(reservationDto.getIdReservation());
 	 this.reservation.setChambre(entiteChambre.getChambre());
 	 this.reservation.setClient(reservationDto.getClientDTO().getClient());
