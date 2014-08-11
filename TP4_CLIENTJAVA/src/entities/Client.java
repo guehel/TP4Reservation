@@ -60,4 +60,10 @@ public class Client
 	{
 		return nom;
 	}
+
+	public void setId(long id2)
+	{
+		// TODO Auto-generated method stub
+
+	}
 }

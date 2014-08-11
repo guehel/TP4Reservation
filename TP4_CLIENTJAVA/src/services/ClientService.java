@@ -9,14 +9,14 @@ import java.util.concurrent.ConcurrentHashMap;
 import reservation.dto.ClientDTO;
 import testStevie.SteveServicesWeb;
 import entities.Client;
-import entities.EntityFactory;
+import entities.EntityAdapter;
 
 public class ClientService
 
 {
 	private static ClientService			instance;
 	private SteveServicesWeb				webService;
-	private final EntityFactory				factory			= new EntityFactory();
+	private final EntityAdapter				factory			= new EntityAdapter();
 	private final Map<Long, Client>			clientMap		= new ConcurrentHashMap<>();
 	private final Map<Integer, ClientDTO>	clientDTOMap	= new ConcurrentHashMap<>();
 
@@ -77,18 +77,6 @@ public class ClientService
 	public Client get(long id)
 	{
 		return clientMap.get(id);
-	}
-
-	/**
-	 * Retroune un clientDTO selon son id.
-	 * 
-	 * @param id
-	 *            , l'id du clientDTO.
-	 * @return le ClientDTO.
-	 */
-	public ClientDTO getDTO(long id)
-	{
-		return clientDTOMap.get(id);
 	}
 
 	/**

@@ -6,6 +6,6 @@
 	<classpathentry kind="lib" path="lib/joda-time-2.4.jar"/>
 	<classpathentry kind="lib" path="lib/javafx-dialogs-0.0.4.jar"/>
 	<classpathentry kind="lib" path="lib/javafx-datepicker-0.0.2.jar"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/ClientWeb"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/WebServiceProjectClient"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

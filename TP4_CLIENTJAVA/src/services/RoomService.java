@@ -2,13 +2,13 @@ package services;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 import reservation.dto.ChambreDTO;
 import testStevie.SteveServicesWeb;
-import entities.EntityFactory;
+import entities.EntityAdapter;
 import entities.Room;
 
 /**
@@ -22,9 +22,9 @@ public class RoomService
 {
 	private static RoomService				instance;
 	private SteveServicesWeb				webService;
-	private final EntityFactory				factory		= new EntityFactory();
-	private final Map<Long, Room>			roomMap		= new ConcurrentHashMap<>();
-	private final Map<Integer, ChambreDTO>	chambreMap	= new ConcurrentHashMap<>();
+	private final EntityAdapter				adaptor			= new EntityAdapter();
+	private final Map<Long, Room>			roomMap			= new HashMap<Long, Room>();
+	private final Map<Integer, ChambreDTO>	chambreDTOMap	= new HashMap<Integer, ChambreDTO>();
 
 	/**
 	 * Constructeur privé du RoomService.
@@ -55,13 +55,14 @@ public class RoomService
 	 */
 	public List<Room> query()
 	{
+
 		try
 		{
 			ChambreDTO[] chambreDTOlist = webService.obtenirListeChambre();
 			for (ChambreDTO chambreDTO : chambreDTOlist)
 			{
-				chambreMap.put(chambreDTO.getNumeroChambre(), chambreDTO);
-				Room newRoom = factory.convertChambreDTO(chambreDTO);
+				chambreDTOMap.put(chambreDTO.getNumeroChambre(), chambreDTO);
+				Room newRoom = adaptor.convertChambreDTO(chambreDTO);
 				roomMap.put(newRoom.getId(), newRoom);
 			}
 
@@ -100,10 +101,7 @@ public class RoomService
 		boolean success = false;
 		try
 		{
-			ChambreDTO chambreDTO = chambreMap.get(room.getId());
-			chambreDTO.setFormulaire(factory.convertRoomForm(room
-					.getFormulaire()));
-			success = webService.update(chambreDTO);
+			success = webService.update(adaptor.convertRoom(room));
 		} catch (RemoteException e)
 		{
 			success = false;
