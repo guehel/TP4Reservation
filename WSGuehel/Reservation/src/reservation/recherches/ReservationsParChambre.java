@@ -23,6 +23,10 @@ public class ReservationsParChambre extends RechercheReservation {
 	}
 
 	
+	public void setChambre(Chambre chambre) {
+		this.chambre = chambre;
+	}
+
 	@Override
 	protected void effectuerRecherche(){
 	

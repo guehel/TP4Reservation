@@ -22,6 +22,11 @@ public EntiteChambre(Chambre chambre) {
 	this.chambre = chambre;
 }
 
+public EntiteChambre(ChambreDTO chambreDTO) throws Exception {
+	super();
+	this.setFromChambreDTO(chambreDTO);
+}
+
 public EntiteChambre() {
 	super();
 	
@@ -44,7 +49,7 @@ public ChambreDTO getChambreDTO() {
 	return chambreDTO;
 }
 
-public void setFromChambreDTO(ChambreDTO chambreDTO) throws Exception{
+public void setFromChambreDTO(ChambreDTO chambreDTO) {
   formulaire = chambreDTO.getFormulaire();
   ReservationDTO[] reservationsDTO = chambreDTO.getReservations();
   super.setReservationsFromDTO(reservationsDTO);

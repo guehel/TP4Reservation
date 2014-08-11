@@ -5,6 +5,8 @@ import org.joda.time.Interval;
 
 import reservation.dao.OutilsDates;
 import reservation.dto.ReservationDTO;
+import reservation.entites.EntiteChambre;
+import reservation.entites.EntiteClient;
 
 public class Reservation implements Comparable<Reservation> {
 	
@@ -39,8 +41,12 @@ public class Reservation implements Comparable<Reservation> {
 			 
 			
 			 this.setIdReservation(reservationDto.getIdReservation());
-			 this.setChambre(reservationDto.getChambreDTO().getChambre());
-			 this.setClient(reservationDto.getClientDTO().getClient());
+			 EntiteChambre entiteChambre = new EntiteChambre();
+			 entiteChambre.setFromChambreDTO(reservationDto.getChambreDTO());
+			 this.setChambre( entiteChambre.getChambre());
+			 EntiteClient entiteClient = new EntiteClient();
+			 entiteClient.setClientFromDTO(reservationDto.getClientDTO());
+			 this.setClient(entiteClient.getClient());
 			 this.setCreation(dateCreation);
 			 this.setInterval(new Interval(dateArrivee, dateDepart));
 		}

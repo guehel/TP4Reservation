@@ -35,9 +35,5 @@ public class ChambreDTO extends EntiteDTO {
 	        this.formulaire = formulaire;
 	    }
 
-		public Chambre getChambre() {
-			Chambre chambre = new Chambre(numeroChambre);
-			
-			return chambre;
-		}
+	
 }

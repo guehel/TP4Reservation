@@ -3,6 +3,7 @@ package reservation.entites;
 import org.joda.time.DateTime;
 import org.joda.time.Interval;
 
+
 import reservation.objects.Reservation;
 import reservation.dao.OutilsDates;
 import reservation.dto.ChambreDTO;
@@ -35,9 +36,11 @@ public void setReservationFromDTO(ReservationDTO reservationDto) throws Exceptio
 	 DateTime dateCreation = OutilsDates.stringToJodaDate(reservationDto.getCreation());
 	 DateTime dateArrivee = OutilsDates.stringToJodaDate(reservationDto.getArrivee());
 	 DateTime dateDepart = OutilsDates.stringToJodaDate(reservationDto.getDepart());
+	EntiteChambre entiteChambre = new EntiteChambre(reservationDto.getChambreDTO());
+		
 	 	
 	 this.reservation.setIdReservation(reservationDto.getIdReservation());
-	 this.reservation.setChambre(reservationDto.getChambreDTO().getChambre());
+	 this.reservation.setChambre(entiteChambre.getChambre());
 	 this.reservation.setClient(reservationDto.getClientDTO().getClient());
 	 this.reservation.setCreation(dateCreation);
 	 this.reservation.setInterval(new Interval(dateArrivee, dateDepart));
