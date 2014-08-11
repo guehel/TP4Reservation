@@ -7,10 +7,9 @@
 
 package reservation.dto;
 
-import java.util.TreeSet;
 
 import reservation.objects.Client;
-import reservation.objects.Reservation;
+
 
 public class ClientDTO extends EntiteDTO {
     private int id;

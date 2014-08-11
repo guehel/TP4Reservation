@@ -55,8 +55,10 @@ public class ApplicationLineDeCommande {
 							if(confirmerChoix=='O'){
 								do {
 									formulaire.setType(type);
-								
-									String date =choisirMots("Saisir la date de depart sous la forme 2017-01-02", sc);
+									String date =choisirMots("Saisir la date de creation sous la forme 2017-01-02", sc);
+									formulaire.getReservation()
+											.setCreation(date);
+									 date =choisirMots("Saisir la date de depart sous la forme 2017-01-02", sc);
 									formulaire.getReservation()
 											.setArrivee(date);
 								
@@ -150,6 +152,7 @@ public class ApplicationLineDeCommande {
 		return retour;
 	}
 	
+	@SuppressWarnings("unused")
 	private static char choisirLettre(String message, Scanner sc) {
 		System.out.println(message);
 		char retour = 'Z';

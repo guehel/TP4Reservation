@@ -8,9 +8,8 @@ import org.junit.Test;
 
 import reservation.dao.ChambreDAO;
 import reservation.dao.DAOFactory;
-import reservation.dao.ReservationDAO;
 import reservation.dao.DAOFactory.Table;
-import reservation.dto.ChambreDTO;
+
 import reservation.objects.Chambre;
 
 public class ChambreDAOTest {

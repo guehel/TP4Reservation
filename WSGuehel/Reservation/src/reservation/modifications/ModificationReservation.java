@@ -6,7 +6,6 @@ import reservation.GrandLivreHotel;
 import reservation.dao.DAOFactory;
 import reservation.dao.DAOFactory.Table;
 import reservation.dao.ReservationDAO;
-import reservation.dto.ReservationDTO;
 import reservation.objects.Reservation;
 
 public abstract class ModificationReservation implements Modification {

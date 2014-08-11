@@ -1,6 +1,5 @@
 package reservation.dao;
 import java.sql.Date;
-import java.text.DateFormat;
 
 import org.joda.time.DateTime;
 import org.joda.time.Interval;

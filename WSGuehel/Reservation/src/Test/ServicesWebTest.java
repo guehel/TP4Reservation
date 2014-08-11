@@ -2,7 +2,7 @@ package Test;
 
 import static org.junit.Assert.*;
 
-import java.sql.SQLException;
+
 
 import org.junit.Test;
 
@@ -10,8 +10,6 @@ import reservation.ApplicationLineDeCommande;
 import reservation.Services;
 import reservation.ServicesWeb;
 import reservation.dto.ChambreDTO;
-import reservation.dto.ClientDTO;
-import reservation.dto.Formulaire;
 import reservation.dto.ReservationDTO;
 
 public class ServicesWebTest {

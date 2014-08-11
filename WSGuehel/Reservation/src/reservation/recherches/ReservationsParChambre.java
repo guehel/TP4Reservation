@@ -3,8 +3,6 @@ package reservation.recherches;
 
 
 import reservation.GrandLivreHotel;
-import reservation.dto.ChambreDTO;
-import reservation.dto.ClientDTO;
 import reservation.objects.Chambre;
 import reservation.objects.Reservation;
 

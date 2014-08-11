@@ -37,12 +37,16 @@ public class ServicesWeb implements Services {
 		boolean reussie = false;
 		
 		Formulaire formulaireModif = chambreDTO.getFormulaire();
-		int type = formulaireModif.getType();
-		if (type==1||type==0) {
-			ReservationDTO reservationDTO = formulaireModif.getReservation();
-			Modification modification = modificationFactory
-					.getModifications(type);
-			reussie = modification.modifier(reservationDTO);
+		reussie = validerFormulaireDTO(formulaireModif);
+		if (reussie) {
+			int type = formulaireModif.getType();
+			if (type == 1 || type == 0) {
+				ReservationDTO reservationDTO = formulaireModif
+						.getReservation();
+				Modification modification = modificationFactory
+						.getModifications(type);
+				reussie = modification.modifier(reservationDTO);
+			}
 		}
 		return reussie;
 	}

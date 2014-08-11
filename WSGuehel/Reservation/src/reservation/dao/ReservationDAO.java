@@ -192,7 +192,7 @@ public class ReservationDAO extends DAO<Reservation>{
 
 	public void saveFromDTO(ReservationDTO reservationDTO) {
 		try {
-//			this.ajout.setInt(1, reservationDTO.getIdReservation());
+
 			Date arriveeSQL = OutilsDates.stringToSqlDate(reservationDTO.getArrivee());
 			DateTime arriveDateTime = OutilsDates.stringToJodaDate(reservationDTO.getArrivee());
 			DateTime depart = OutilsDates.stringToJodaDate(reservationDTO.getDepart());
@@ -207,7 +207,7 @@ public class ReservationDAO extends DAO<Reservation>{
 			Date dateCreation = OutilsDates.stringToSqlDate(reservationDTO.getCreation());
 			this.ajout.setDate(5- 1, dateCreation);
 			this.ajout.setInt(6 - 1, reservationDTO.getClientDTO().getId());
-			int resultat = this.ajout.executeUpdate();
+			/*int resultat =*/ this.ajout.executeUpdate();
 			
 		} catch (SQLException e) {
 			e.printStackTrace();

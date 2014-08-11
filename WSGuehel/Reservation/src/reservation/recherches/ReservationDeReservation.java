@@ -3,17 +3,16 @@ package reservation.recherches;
 
 
 import reservation.GrandLivreHotel;
-import reservation.dto.ReservationDTO;
 import reservation.objects.Reservation;
 
 
 public class ReservationDeReservation extends RechercheReservation {
 
-	private Reservation reservation;	
+	private Reservation pReservation;	
 
 	public ReservationDeReservation(GrandLivreHotel grandLivre, Reservation reservation) {
 		super(grandLivre);
-		this.reservation = (Reservation) reservation;
+		this.pReservation = (Reservation) reservation;
 	}
 	
 	public ReservationDeReservation(GrandLivreHotel grandLivre) {
@@ -26,7 +25,7 @@ public class ReservationDeReservation extends RechercheReservation {
 	protected void effectuerRecherche(){
 	
 		for(Reservation reservation: grandLivre.getReservations()){
-			if(reservation.equals(reservation)				
+			if(reservation.equals(this.pReservation)				
 					){
 			this.reservations.add(reservation);
 			}

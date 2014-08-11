@@ -2,7 +2,6 @@ package reservation.modifications;
 
 import java.sql.SQLException;
 
-import reservation.GrandLivre;
 import reservation.GrandLivreHotel;
 import reservation.SingleGrandLivre;
 

@@ -1,7 +1,5 @@
 package reservation.dto;
 
-import reservation.objects.Client;
-import reservation.objects.Reservation;
 
 /*
 **

@@ -4,7 +4,7 @@ package reservation.recherches;
 
 import reservation.GrandLivreHotel;
 import reservation.dto.ReservationDTO;
-import reservation.entites.Entite;
+
 
 
 public abstract class RechercheReservation extends AbsctractRecherche {

@@ -5,16 +5,13 @@ import com.mysql.jdbc.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.TreeSet;
 
 import com.mysql.jdbc.PreparedStatement;
 
 import reservation.dto.ChambreDTO;
 import reservation.dto.ReservationDTO;
 import reservation.objects.Chambre;
-import reservation.objects.Client;
-import reservation.objects.ComparateurReservation;
-import reservation.objects.Reservation;
+
 
 public class ChambreDAO extends DAO<Chambre>{
 	private ReservationDAO reservationDAO;
