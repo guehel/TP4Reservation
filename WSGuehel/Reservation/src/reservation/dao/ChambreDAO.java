@@ -5,7 +5,6 @@ import com.mysql.jdbc.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.TreeSet;
 
 import com.mysql.jdbc.PreparedStatement;
 
@@ -13,8 +12,6 @@ import reservation.dto.ChambreDTO;
 import reservation.dto.ReservationDTO;
 import reservation.objects.Chambre;
 import reservation.objects.Client;
-import reservation.objects.ComparateurReservation;
-import reservation.objects.Reservation;
 
 public class ChambreDAO extends DAO<Chambre>{
 	private ReservationDAO reservationDAO;
@@ -31,10 +28,6 @@ public class ChambreDAO extends DAO<Chambre>{
 			this.rechercher =  (PreparedStatement) connection.prepareStatement(
 					"SELECT `numero` FROM `chambre`"
 					+ "WHERE `numero`=? "
-					);
-			this.rechercherTous =  (PreparedStatement) connection.prepareStatement(
-					"SELECT `numero` FROM `chambre`"
-				
 					);
 			this.suppression =  (PreparedStatement) connection.prepareStatement(
 					"DELETE FROM `chambre` WHERE `numero`=?"
@@ -90,31 +83,8 @@ public class ChambreDAO extends DAO<Chambre>{
 	}
 
 	public ArrayList<Chambre> getAllChambres() {
-		ArrayList<Chambre> chambres = new ArrayList<Chambre>();
-			
-		Chambre chambre = null;
-		try {
-		
-			 ResultSet resultat = this.rechercherTous.executeQuery();
-			while(resultat.next()){
-				
-				chambre = getChambres(resultat);
-				chambres.add(chambre);
-
-			}
-
-		} catch (SQLException e) {
-
-			e.printStackTrace();
-		}
-		
-		return chambres;
-	}
-
-	private Chambre getChambres(ResultSet resultat) throws SQLException {
-		Chambre chambre  = new Chambre();
-		chambre.setNumeroChambre(resultat.getInt(1));
-		return chambre;
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	public Chambre findByNumeroChambre(int int1) {

@@ -3,7 +3,6 @@ package Test.DAO;
 import static org.junit.Assert.*;
 
 import java.sql.SQLException;
-import java.util.TreeSet;
 
 import org.joda.time.DateTime;
 import org.joda.time.Interval;
@@ -39,41 +38,41 @@ public class ReservationDAOTest {
 	}
 	
 
-	@Test
-	public void testSaveFromDTO() {
-	
-		ReservationDTO res1 = new ReservationDTO();
-		
-		res1.setArrivee("2014-07-01");
-		res1.setCreation("2014-06-01");
-		res1.setDepart("2014-09-01");
-		res1.setIdReservation(99);
-		
-			
-		ClientDTO clientDTO = new ClientDTO();
-		clientDTO.setId(1);
-		
-		res1.setClientDTO(clientDTO);
-		
-		ChambreDTO chambre =new ChambreDTO();
-		chambre.setNumeroChambre(5);
-		res1.setChambreDTO(chambre);
-		
-		DAOFactory fact = null;
-		try{
-		fact = new DAOFactory();
-		ClientDAO cltdao = (ClientDAO) fact.getDAO(Table.CLIENT);
-		Client client = cltdao.findById(2);
-		res1.setClientDTO(new ClientDTO(client));
-		ReservationDAO resdao = (ReservationDAO) fact.getDAO(Table.RESERVATION);
-		resdao.saveFromDTO(res1);
-		}
-		catch(ClassNotFoundException e ){
-			fail("driver error ");
-		} catch (SQLException e) {
-			fail("sql error");
-		}
-	}
+//	@Test
+//	public void testSaveFromDTO() {
+//	
+//		ReservationDTO res1 = new ReservationDTO();
+//		
+//		res1.setArrivee("2014-07-01");
+//		res1.setCreation("2014-06-01");
+//		res1.setDepart("2014-08-01");
+//		res1.setIdReservation(99);
+//		
+//			
+//		ClientDTO clientDTO = new ClientDTO();
+//		clientDTO.setId(1);
+//		
+//		res1.setClientDTO(clientDTO);
+//		
+//		ChambreDTO chambre =new ChambreDTO();
+//		chambre.setNumeroChambre(1);
+//		res1.setChambreDTO(chambre);
+//		
+//		DAOFactory fact = null;
+//		try{
+//		fact = new DAOFactory();
+//		ClientDAO cltdao = (ClientDAO) fact.getDAO(Table.CLIENT);
+//		Client client = cltdao.findById(3);
+//		res1.setClientDTO(new ClientDTO(client));
+//		ReservationDAO resdao = (ReservationDAO) fact.getDAO(Table.RESERVATION);
+//		resdao.saveFromDTO(res1);
+//		}
+//		catch(ClassNotFoundException e ){
+//			fail("driver error ");
+//		} catch (SQLException e) {
+//			fail("sql error");
+//		}
+//	}
 
 
 //	@Test
@@ -115,7 +114,7 @@ public class ReservationDAOTest {
 	@Test
 	public void testFindReservation() {
 		
-		Reservation res1 = null;
+		Reservation res1 = new Reservation();
 		
 		
 	
@@ -125,21 +124,7 @@ public class ReservationDAOTest {
 		
 		ReservationDAO resdao = (ReservationDAO) fact.getDAO(Table.RESERVATION);
 		res1  = resdao.findByIds(99, 1);
-		
 		assertTrue(res1.getIdReservation()==99);
-		res1  = resdao.find(res1);
-		
-		assertTrue(res1.getIdReservation()==99);
-		
-		assertTrue(resdao.delete(res1));
-		TreeSet<Reservation> resss = resdao.getAllReservations();
-		for (Reservation resa :resss){
-			System.out.println(resa.getIdReservation());
-			System.out.println(resa.getChambre().getNumeroChambre());
-			System.out.println(resa.getCreation());
-			System.out.println(resa.getInterval());
-			System.out.println(resa.getClient().getIdClient());
-		}
 		}
 		catch(ClassNotFoundException e ){
 			fail("driver error ");
@@ -150,29 +135,23 @@ public class ReservationDAOTest {
 
 	@Test
 	public void testDeleteReservation() {
-//		Reservation res1 = null;
-//		
-//	
-//	
-//		DAOFactory fact = null;
-//		try{
-//		fact = new DAOFactory();
-//		
-//		
-//		ReservationDAO resdao = (ReservationDAO) fact.getDAO(Table.RESERVATION);
-//		
-//		res1  = resdao.findByIds(99, 1);
-//		
-//		assertTrue(res1.getIdReservation()==99);
-//		
-//		assertTrue(resdao.delete(res1));
-//		
-//		}
-//		catch(ClassNotFoundException e ){
-//			fail("driver error ");
-//		} catch (SQLException e) {
-//			fail("sql error");
-//		}
+		Reservation res1 = new Reservation();
+		
+		res1.setIdReservation(1);
+	
+		DAOFactory fact = null;
+		try{
+		fact = new DAOFactory();
+		
+		ReservationDAO resdao = (ReservationDAO) fact.getDAO(Table.RESERVATION);
+		assertTrue(resdao.delete(res1));
+		
+		}
+		catch(ClassNotFoundException e ){
+			fail("driver error ");
+		} catch (SQLException e) {
+			fail("sql error");
+		}
 	}
 
 	

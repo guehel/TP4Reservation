@@ -2,7 +2,6 @@ package Test.objects;
 
 import static org.junit.Assert.*;
 
-import org.joda.time.DateTime;
 import org.joda.time.Interval;
 import org.junit.Test;
 
@@ -11,55 +10,55 @@ import reservation.objects.Reservation;
 
 public class ReservationTest {
 
+	@Test
+	public void testHashCode() {
+		fail();
+
+	}
 
 	@Test
 	public void testEqualsObject() throws Exception {
-		DateTime now = new DateTime();
+		Long now = System.currentTimeMillis();
 
-		Interval cetteSemaine = new Interval(now, now.plusDays(7));
-		Interval memeSemaine =  new Interval(now, now.plusDays(7));
-		Interval semainePasse = new Interval(now.minusDays(7), now.plusDays(14));
-		Interval semaineProchaine = new Interval(now.plusDays(3), now.plusDays(14));
-		Interval semainesAvant = new Interval(now.minusDays(7), now.minusDays(1));
-		Interval semainesApres = new Interval(now.plusDays(8), now.plusDays(15));
+		Interval refInterval1 = new Interval(now-10000, now+10000);
+		Interval interval2 = new Interval(now-10000, now+10000);
+		Interval interval3 = new Interval(now-5000, now+4999);
+		Interval interval4 = new Interval(now-9999, now+10000);
+		Interval interval5 = new Interval(now-20000, now-11000);
+		Interval interval6 = new Interval(now+11000, now+20000);
+		Reservation res1 = new Reservation();
+		int idChambre1= 1;
+		res1.setChambre(new Chambre());
+		Reservation res2 = new Reservation();
+		int idChambre2= 2;
 		
-		Reservation resReference = new Reservation();
-		Chambre chambre1= new Chambre(1);
-		Chambre chambre2= new Chambre(2);
+		res2.setChambre(new Chambre());
+				
+		assertFalse(res1.equals(res2));
 		
-		resReference.setChambre(chambre1);
+		res1.setInterval(refInterval1);
+		res2.setInterval(refInterval1);
+		assertTrue(res1.equals(res2));
 		
-		Reservation resaTest = new Reservation();
-		resaTest.setChambre(chambre1);
+		res2.setChambre(new Chambre());
+		assertFalse(res1.equals(res2));
 		
-		resReference.setCreation(now.minusDays(30));
-		resaTest.setCreation(now.minusDays(30));
+		res2.setChambre(new Chambre());
 		
-//		assertFalse(resReference.equals(resaTest));
+		res2.setInterval(interval2);
+		assertTrue(res1.equals(res2));
 		
-		resReference.setInterval(cetteSemaine);
-		resaTest.setInterval(cetteSemaine);
-		assertTrue(resReference.equals(resaTest));
+		res2.setInterval(interval3);
+		assertTrue(res1.equals(res2));
 		
-		resaTest.setChambre(chambre2);
-		assertFalse(resReference.equals(resaTest));
+		res2.setInterval(interval4);
+		assertTrue(res1.equals(res2));
 		
-		resaTest.setChambre(chambre1);
+		res2.setInterval(interval5);
+		assertFalse(res1.equals(res2));
 		
-		resaTest.setInterval(memeSemaine);
-		assertTrue(resReference.equals(resaTest));
-	
-		resaTest.setInterval(semainePasse);
-		assertTrue(resReference.equals(resaTest));
-		
-		resaTest.setInterval(semaineProchaine);
-		assertTrue(resReference.equals(resaTest));
-		
-		resaTest.setInterval(semainesAvant);
-		assertFalse(resReference.equals(resaTest));
-		
-		resaTest.setInterval(semainesApres);
-		assertFalse(resReference.equals(resaTest));
+		res2.setInterval(interval6);
+		assertFalse(res1.equals(res2));
 	}
 
 }

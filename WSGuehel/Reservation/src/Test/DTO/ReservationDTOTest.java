@@ -7,7 +7,6 @@ import org.joda.time.Interval;
 import org.junit.Test;
 
 import reservation.dto.ReservationDTO;
-import reservation.entites.EntiteReservation;
 import reservation.objects.Chambre;
 import reservation.objects.Client;
 import reservation.objects.Reservation;
@@ -34,16 +33,15 @@ public class ReservationDTOTest {
 		
 		res1.setClient(client);
 		res1.setCreation(new DateTime());
-		EntiteReservation eResa = new EntiteReservation(res1);
-		ReservationDTO dto = eResa.getReservationDTO();
+		ReservationDTO dto = new ReservationDTO(res1);
 		
 		System.out.println(dto.getArrivee());
 		System.out.println(dto.getDepart());
 		System.out.println(dto.getCreation());
 		System.out.println(dto.getChambreDTO().getNumeroChambre());
 		System.out.println(dto.getClientDTO().getId());
-		System.out.println("nom "+dto.getClientDTO().getNom());
-		System.out.println("Pnom "+dto.getClientDTO().getPrenom());
+		System.out.println(dto.getClientDTO().getNom());
+		System.out.println(dto.getClientDTO().getPrenom());
 //		assertTrue(dto.getClientDTO()==99);
 	}
 

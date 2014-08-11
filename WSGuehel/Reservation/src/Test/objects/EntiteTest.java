@@ -5,9 +5,9 @@ import static org.junit.Assert.*;
 import org.joda.time.Interval;
 import org.junit.Test;
 
-import reservation.entites.Entite;
 import reservation.objects.Chambre;
 import reservation.objects.Client;
+import reservation.objects.Entite;
 import reservation.objects.Reservation;
 
 public class EntiteTest {

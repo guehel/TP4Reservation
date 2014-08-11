@@ -1,10 +1,8 @@
 package reservation.objects;
 
-import reservation.entites.Entite;
 
 
-
-public class Client extends Entite  {
+public class Client  {
 	private int idClient;
 
     private String nom;
@@ -39,15 +37,5 @@ public class Client extends Entite  {
 	public void setIdClient(int idClient) {
 		this.idClient = idClient;
 	}
-
-	@Override
-	public boolean equals(Object arg0) {
-		if(arg0!=null){
-		Client client = (Client) arg0;
-		return idClient == client.getIdClient();
-		}else return false;
-	}
-	
-	
 
 }

@@ -9,7 +9,6 @@ import com.mysql.jdbc.Connection;
 
 
 
-
 import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -29,9 +28,7 @@ import com.mysql.jdbc.PreparedStatement;
 
 
 
-
 import reservation.dto.ReservationDTO;
-import reservation.entites.EntiteReservation;
 import reservation.objects.Chambre;
 import reservation.objects.Client;
 import reservation.objects.ComparateurReservation;
@@ -41,7 +38,7 @@ public class ReservationDAO extends DAO<Reservation>{
 	
 	private ClientDAO daoClient;
 	private ChambreDAO daoChambre;
-	
+	private PreparedStatement rechercherTous;
 
 	public ReservationDAO(Connection connection) {
 		super(connection);
@@ -49,8 +46,8 @@ public class ReservationDAO extends DAO<Reservation>{
 		try {
 			this.ajout = (PreparedStatement) connection.prepareStatement(
 					"INSERT INTO `reservation`"
-					+ "( `arrivee`, `sejour`, `numero`, `dateCreation`, `id`) "
-					+ "VALUES (?,?,?,?,?)"
+					+ "(`idReservation`, `arrivee`, `sejour`, `numero`, `dateCreation`, `id`) "
+					+ "VALUES (?,?,?,?,?,?)"
 					);
 			this.miseAJour =  (PreparedStatement) connection.prepareStatement(
 					"UPDATE `reservation` "
@@ -69,9 +66,10 @@ public class ReservationDAO extends DAO<Reservation>{
 				
 					);
 			this.suppression =  (PreparedStatement) connection.prepareStatement(
-					"DELETE FROM `reservation` WHERE `idReservation` =? AND `numero` =?"
+					"DELETE FROM `reservation` "
+					+ "WHERE `idReservation` =?  AND `numero` =?"
 					);
-		
+			//daoClient = new ClientDAO(connection);
 		} catch (SQLException e) {
 			
 			e.printStackTrace();
@@ -81,20 +79,19 @@ public class ReservationDAO extends DAO<Reservation>{
 	@Override
 	public boolean create(Reservation reservation) {
 		boolean reussite= false;
-		ReservationDTO reservationDTO  = new EntiteReservation(reservation).getReservationDTO();
+		ReservationDTO reservationDTO  = new ReservationDTO(reservation);
 		this.saveFromDTO(reservationDTO);
+		//TODO : gerer les erreur
 		reussite= true;
 		return reussite;
 	}
 
 	@Override
-	public boolean delete(Reservation reservation) {
+	public boolean delete(Reservation object) {
 	try {
-			int idReservation  = reservation.getIdReservation();
-			int numeroChambre  = reservation.getChambre().getNumeroChambre();
-			this.suppression.setInt(1,idReservation);
-			this.suppression.setInt(2,numeroChambre);
-			
+		
+			this.suppression.setInt(1,object.getIdReservation());
+			this.suppression.setInt(2,object.getClient().getIdClient());
 			int resultat = this.suppression.executeUpdate();
 			return resultat == 1;
 			
@@ -106,9 +103,9 @@ public class ReservationDAO extends DAO<Reservation>{
 	}
 
 	@Override
-	public Reservation find(Reservation reservation) {
+	public Reservation find(Reservation object) {
 		
-		return findByIds(reservation.getIdReservation(),  reservation.getChambre().getNumeroChambre());
+		return findByIds(object.getIdReservation(),  object.getChambre().getNumeroChambre());
 	}
 
 	public Reservation findByIds(int idReservation, int numeroChambre) {
@@ -131,27 +128,6 @@ public class ReservationDAO extends DAO<Reservation>{
 		return reservation;
 	}
 
-	public TreeSet<Reservation> getAllReservations() {
-		TreeSet<Reservation> toutesReservation = 
-				new TreeSet<Reservation>(new ComparateurReservation());
-		Reservation reservation = null;
-		try {
-		
-			 ResultSet resultat = this.rechercherTous.executeQuery();
-			while(resultat.next()){
-				
-				reservation = resultSetToReservation(resultat);
-				toutesReservation.add(reservation);
-
-			}
-
-		} catch (SQLException e) {
-
-			e.printStackTrace();
-		}
-		return toutesReservation;
-	}
-
 	private Reservation resultSetToReservation(java.sql.ResultSet resultat) {
 		Reservation reservation = null;
 		try {
@@ -160,9 +136,7 @@ public class ReservationDAO extends DAO<Reservation>{
 			Client client =daoClient.findById( resultat.getInt(6));
 			Chambre chambre = daoChambre.findByNumeroChambre(resultat.getInt(4));
 			DateTime creation = new DateTime(resultat.getDate(5));
-			DateTime arrivee = new DateTime(resultat.getDate(2));
-			DateTime depart = arrivee.plusDays(resultat.getInt(3));
-			Interval interval = new Interval(arrivee, depart);
+			Interval interval = OutilsDates.toJodaInterval(resultat.getDate(2), resultat.getInt(3));
 			
 			reservation = new Reservation();
 			reservation.setIdReservation(resultat.getInt(1));
@@ -189,24 +163,30 @@ public class ReservationDAO extends DAO<Reservation>{
 		return reservation;
 	}
 
+	@Override
+	public boolean update(Reservation object) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 
 	public void saveFromDTO(ReservationDTO reservationDTO) {
 		try {
-//			this.ajout.setInt(1, reservationDTO.getIdReservation());
+			this.ajout.setInt(1, reservationDTO.getIdReservation());
 			Date arriveeSQL = OutilsDates.stringToSqlDate(reservationDTO.getArrivee());
 			DateTime arriveDateTime = OutilsDates.stringToJodaDate(reservationDTO.getArrivee());
 			DateTime depart = OutilsDates.stringToJodaDate(reservationDTO.getDepart());
-			this.ajout.setDate(2 - 1, arriveeSQL);
+			this.ajout.setDate(2, arriveeSQL);
 			int duree = Days.daysBetween(
 					arriveDateTime, 
 					depart)
 					.getDays();
 			
-			this.ajout.setInt(3 - 1, duree);
-			this.ajout.setInt(4- 1, reservationDTO.getChambreDTO().getNumeroChambre());
+			this.ajout.setInt(3, duree);
+			this.ajout.setInt(4, reservationDTO.getChambreDTO().getNumeroChambre());
 			Date dateCreation = OutilsDates.stringToSqlDate(reservationDTO.getCreation());
-			this.ajout.setDate(5- 1, dateCreation);
-			this.ajout.setInt(6 - 1, reservationDTO.getClientDTO().getId());
+			this.ajout.setDate(5, dateCreation);
+			this.ajout.setInt(6, reservationDTO.getClientDTO().getId());
 			int resultat = this.ajout.executeUpdate();
 			
 		} catch (SQLException e) {
@@ -217,10 +197,25 @@ public class ReservationDAO extends DAO<Reservation>{
 		
 	}
 
-	@Override
-	public boolean update(Reservation reservation) {
-		// TODO Auto-generated method stub
-		return false;
+	public TreeSet<Reservation> getAllReservations() {
+		TreeSet<Reservation> toutesReservation = 
+				new TreeSet<Reservation>(new ComparateurReservation());
+		Reservation reservation = null;
+		try {
+		
+			 ResultSet resultat = this.rechercherTous.executeQuery();
+			if(resultat.next()){
+				
+				reservation = resultSetToReservation(resultat);
+				toutesReservation.add(reservation);
+
+			}
+
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		}
+		return toutesReservation;
 	}
 
 }

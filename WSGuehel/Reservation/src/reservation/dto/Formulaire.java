@@ -1,8 +1,4 @@
 package reservation.dto;
-
-import reservation.objects.Client;
-import reservation.objects.Reservation;
-
 /*
 **
 *Formulaire charger de receuiller les reservation et les annulations
@@ -10,28 +6,21 @@ import reservation.objects.Reservation;
 */
 public class Formulaire {
     private String dateModification="";
-    private int userQuiAchange=0;
+    private int idUser=0;
     private ReservationDTO reservation = new ReservationDTO();
-    private int type;
     
     /* 1=consultation
-	0 = annulation
-     */
-    
-    public  Formulaire(){
-    
-    }
-    
-    
-   
+0 = annulation
+*/
+    private int type;
 
     public String getDateModification() {
         return dateModification;
     }
 
     public int getIdUser() {
-        return userQuiAchange;
-    }	
+        return idUser;
+    }
 
     public ReservationDTO getReservation() {
         return reservation;
@@ -41,11 +30,8 @@ public class Formulaire {
         this.dateModification = dateModification;
     }
 
-    /**indique qui a modifie la reservation
-     * @param idUser
-     */
     public void setIdUser(int idUser) {
-        this.userQuiAchange = idUser;
+        this.idUser = idUser;
     }
 
     public void setReservation(ReservationDTO reservation) {
@@ -59,7 +45,6 @@ public class Formulaire {
     public void setType(int type) {
         this.type = type;
     }
-
- 
+    
     
 }

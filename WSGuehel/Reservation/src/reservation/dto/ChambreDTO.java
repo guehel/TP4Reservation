@@ -7,10 +7,10 @@ public class ChambreDTO extends EntiteDTO {
 	    private int numeroChambre;
 	    private Formulaire formulaire;
 	 
-	    public ChambreDTO(Chambre chambre) {
+	    public ChambreDTO(Chambre object) {
 	    	formulaire = new Formulaire();
-	    	numeroChambre = chambre.getNumeroChambre();
-	    	reservations = new ReservationDTO[chambre.getReservations().size()];
+	    	numeroChambre = object.getNumeroChambre();
+	    	reservations = new ReservationDTO[object.getReservations().size()];
 		}
 	    
 	    public ChambreDTO() {
@@ -34,6 +34,4 @@ public class ChambreDTO extends EntiteDTO {
 	    public void setFormulaire(Formulaire formulaire) {
 	        this.formulaire = formulaire;
 	    }
-
-	
 }

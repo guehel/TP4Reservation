@@ -103,16 +103,6 @@ public class ClientDTO extends EntiteDTO {
         this.prenom = prenom;
     }
 
-	public  Client getClient() {
-		Client client = new Client();
-		client.setIdClient(this.id);
-		client.setNom(this.nom);
-		client.setPrenom(this.prenom);
-		return client;
-	}
-
-	
-
 
    
 
