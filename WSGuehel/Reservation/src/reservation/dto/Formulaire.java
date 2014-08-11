@@ -1,8 +1,5 @@
 package reservation.dto;
 
-import org.joda.time.DateTime;
-
-import reservation.dao.OutilsDates;
 import reservation.objects.Client;
 import reservation.objects.Reservation;
 
@@ -13,7 +10,7 @@ import reservation.objects.Reservation;
 */
 public class Formulaire {
     private String dateModification="";
-    private int typeModification=0;
+    private int userQuiAchange=0;
     private ReservationDTO reservation = new ReservationDTO();
     private int type;
     
@@ -22,7 +19,7 @@ public class Formulaire {
      */
     
     public  Formulaire(){
-    	dateModification = OutilsDates.stringFromDateTime(new DateTime());
+    
     }
     
     
@@ -33,8 +30,8 @@ public class Formulaire {
     }
 
     public int getIdUser() {
-        return typeModification;
-    }
+        return userQuiAchange;
+    }	
 
     public ReservationDTO getReservation() {
         return reservation;
@@ -44,8 +41,11 @@ public class Formulaire {
         this.dateModification = dateModification;
     }
 
+    /**indique qui a modifie la reservation
+     * @param idUser
+     */
     public void setIdUser(int idUser) {
-        this.typeModification = idUser;
+        this.userQuiAchange = idUser;
     }
 
     public void setReservation(ReservationDTO reservation) {
@@ -60,15 +60,6 @@ public class Formulaire {
         this.type = type;
     }
 
-	public Client getModificateur() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public Reservation getReservationFromDTO() throws Exception {
-		Reservation reservat = new Reservation(reservation);
-		return reservat;
-	}
-    
+ 
     
 }

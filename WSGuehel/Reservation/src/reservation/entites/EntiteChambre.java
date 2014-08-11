@@ -43,8 +43,10 @@ public void setChambre(Chambre chambre) {
 public ChambreDTO getChambreDTO() {
 	ChambreDTO chambreDTO  = new ChambreDTO();
 	formulaire = new Formulaire();
+	formulaire.getReservation().setChambreDTO(chambreDTO);
 	chambreDTO.setNumeroChambre(this.chambre.getNumeroChambre()); 
 	chambreDTO.setReservations(this.getReservationsArray()); 
+	
 	chambreDTO.setFormulaire(formulaire);
 	return chambreDTO;
 }
