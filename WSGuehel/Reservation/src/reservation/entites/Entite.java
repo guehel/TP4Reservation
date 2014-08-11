@@ -4,7 +4,7 @@ import java.util.Iterator;
 import java.util.TreeSet;
 
 import reservation.dto.ReservationDTO;
-
+import reservation.objects.ComparateurReservation;
 import reservation.objects.Reservation;
 
 /**Classe absctraite pour factorise le code de traitement des set de reservation
@@ -14,7 +14,7 @@ import reservation.objects.Reservation;
 public abstract class Entite {
 	 protected TreeSet<Reservation> reservations;
 	 public Entite(){
-			reservations = new TreeSet<Reservation>(	
+			reservations = new TreeSet<Reservation>(new ComparateurReservation()	
 					);
 	 }
 	public TreeSet<Reservation> getReservations() {

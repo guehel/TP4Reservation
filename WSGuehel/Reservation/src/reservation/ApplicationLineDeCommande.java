@@ -124,7 +124,7 @@ public class ApplicationLineDeCommande {
 		
 				ReservationDTO reservationDtO = null;
 				for (ReservationDTO reserVT :lreservationDTO) {
-					if (reservationDtO == reserVT) {
+					if (reserVT.getIdReservation() == numeroReservation) {
 						reservationDtO = reserVT;break;
 					}
 				}
