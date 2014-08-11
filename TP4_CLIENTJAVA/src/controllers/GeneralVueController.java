@@ -38,49 +38,84 @@ import entities.Room;
 import entities.RoomForm;
 import eu.schudt.javafx.controls.calendar.DatePicker;
 
+/**
+ * Controlleur de la vue principale de l'application
+ * 
+ * @author Steve Boisvert
+ * 
+ */
 public class GeneralVueController implements Observer
 {
-	private RoomService roomService;
-	private ClientService clientService;
-	private Main main;
-	private Stage primaryStage;
+	private RoomService				roomService;
+	private ClientService			clientService;
 
-	private long userId;
-	List<Room> roomIndex;
-	private Room selectedRoom;
-	private Reservation selectedReservation;
+	private Main					main;
+	private Stage					primaryStage;
+
+	private long					userId;
+	private List<Room>				roomIndex;
+	private Room					selectedRoom;
+	private Reservation				selectedReservation;
 
 	@FXML
-	private ListView<String> roomList;
+	private ListView<String>		roomList;
 	@FXML
-	private Label roomNumberLabel, roomNumberField;
+	private Label					roomNumberLabel, roomNumberField;
 	@FXML
-	private TableView<Reservation> reservationTable;
+	private TableView<Reservation>	reservationTable;
 	@FXML
-	private TableColumn<Reservation, String> dateColumn, clientNameColumn;
+	private TableColumn<Reservation, String>	dateColumn, clientNameColumn;
 	@FXML
-	private Button deleteReservationBtn, addReservationBtn;
+	private Button								deleteReservationBtn,
+			addReservationBtn;
 
+	/**
+	 * Mutateur de la scène principale.
+	 * 
+	 * @param primaryStage
+	 *            , la scène principale.
+	 */
 	public void setPrimaryStage(Stage primaryStage)
 	{
 		this.primaryStage = primaryStage;
 	}
 
+	/**
+	 * Mutateur de la classe principale de l'application.
+	 * 
+	 * @param main
+	 *            , la classe principal de l'application.
+	 */
 	public void setMain(Main main)
 	{
 		this.main = main;
 	}
 
+	/**
+	 * Mutateur du service de chambres.
+	 * 
+	 * @param roomService
+	 *            , le service de chambres.
+	 */
 	public void setRoomService(RoomService roomService)
 	{
 		this.roomService = roomService;
 	}
 
+	/**
+	 * Mutateur du service de clients.
+	 * 
+	 * @param clientService
+	 *            , le service de clients.
+	 */
 	public void setClientService(ClientService clientService)
 	{
 		this.clientService = clientService;
 	}
 
+	/**
+	 * Initialisation de la vue principale.
+	 */
 	private void initGeneralVue()
 	{
 		System.out.println("appel list chambres");
@@ -103,6 +138,9 @@ public class GeneralVueController implements Observer
 		main.showGeneralVue();
 	}
 
+	/**
+	 * Initialisation de la table des réservations.
+	 */
 	private void setReservationTable()
 	{
 		dateColumn
@@ -116,6 +154,8 @@ public class GeneralVueController implements Observer
 					}
 				});
 
+		// S'assure que la colomne des dates prend la moitié de la largeur de la
+		// table.
 		dateColumn.prefWidthProperty().bind(
 				reservationTable.widthProperty().divide(2));
 
@@ -129,11 +169,13 @@ public class GeneralVueController implements Observer
 						return data.getValue().getClient().getNomProperty();
 					}
 				});
-
 	}
 
+	/**
+	 * Gère la sélection d'une chambre dans la liste
+	 */
 	@FXML
-	public void handleRoomSelection()
+	private void handleRoomSelection()
 	{
 
 		if (roomList.getSelectionModel().getSelectedIndex() != -1)
@@ -155,8 +197,11 @@ public class GeneralVueController implements Observer
 
 	}
 
+	/**
+	 * Gère la sélection d'une réservation.
+	 */
 	@FXML
-	public void handleReservationSelection()
+	private void handleReservationSelection()
 	{
 
 		Reservation selectedReservation = reservationTable.getSelectionModel()
@@ -171,14 +216,20 @@ public class GeneralVueController implements Observer
 
 	}
 
+	/**
+	 * Gère la supression d'une réservation.
+	 */
 	@FXML
-	public void handleDeleteReservation()
+	private void handleDeleteReservation()
 	{
 		RoomForm form = getRoomFrom(selectedRoom);
 		form.setType(0);
 		updateRoom(selectedRoom);
 	}
 
+	/**
+	 * Gère l'ajout d'une réservation.
+	 */
 	@FXML
 	public void handleAddReservation()
 	{
@@ -233,22 +284,26 @@ public class GeneralVueController implements Observer
 		DialogResponse resp = Dialogs.showCustomDialog(primaryStage, grid,
 				"Please log in", "Login", DialogOptions.OK_CANCEL, myCallback);
 
-		// / Besoin de valider si resp est bien rempli voir
+		// TODO: Besoin de valider si resp est bien rempli voir
 		// http://code.makery.ch/blog/javafx-2-dialogs/
-		
-		
 
-		/// SEULEMENT SI LA RÉSERVATION EST VALIDÉ PAR LE SERVEUR....
-		selectedRoom.addReservations(newReservation);
-		
-		
-		
-		
 		RoomForm form = getRoomFrom(selectedRoom);
 		form.setType(1);
-		updateRoom(selectedRoom);
+
+		// TODO: gestion si la réservation n'est pas validée par le serveur.
+		if (updateRoom(selectedRoom))
+		{
+			selectedRoom.addReservations(newReservation);
+		}
 	}
 
+	/**
+	 * Retourne le formulaire de la chambre envoyé en paramètre.
+	 * 
+	 * @param room
+	 *            , la chambre.
+	 * @return RoomForm, le formulaire de la chambre.
+	 */
 	private RoomForm getRoomFrom(Room room)
 	{
 		RoomForm form = room.getFormulaire();
@@ -256,11 +311,23 @@ public class GeneralVueController implements Observer
 		return form;
 	}
 
-	private void updateRoom(Room room)
+	/**
+	 * Envois la chambre au service de chambre pour la mise-à-jour.
+	 * 
+	 * @param room
+	 *            , la chambre à mettre-à-jour.
+	 */
+	private boolean updateRoom(Room room)
 	{
-		roomService.update(selectedRoom);
+		return roomService.submitForm(selectedRoom);
 	}
 
+	/**
+	 * Montre les détails de la chambre.
+	 * 
+	 * @param room
+	 *            , la chambre à afficher.
+	 */
 	private void showRoomDetail(Room room)
 	{
 		if (room != null)
@@ -276,12 +343,18 @@ public class GeneralVueController implements Observer
 		}
 	}
 
+	/**
+	 * Méthode appellé lors de la connection d'un utilisateur.
+	 * 
+	 * @param arg0
+	 *            , le service d'authentification du client.
+	 * @param arg1
+	 *            , le id de l'utilisateur.
+	 */
 	@Override
 	public void update(Observable arg0, Object arg1)
 	{
 		this.userId = (long) arg1;
 		initGeneralVue();
-
 	}
-
 }
