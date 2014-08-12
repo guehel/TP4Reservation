@@ -29,6 +29,9 @@ public class Chambre extends Entite {
 		System.out.println(numeroChambre +(b?" egale ":" diff ") + chambre.getNumeroChambre());
 		return b;
 	}
+	public int getNombreReservation() {
+		return this.reservations.size();
+	}
 	
 	
 

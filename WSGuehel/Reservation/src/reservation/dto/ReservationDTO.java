@@ -13,11 +13,11 @@ public class ReservationDTO  {
 
     private ClientDTO ClientDTO;
 
-    private String creation;
+    private String creation="";
 
-    private String depart;
+    private String depart="";
 
-    private ChambreDTO chambreDTO;
+    private ChambreDTO chambreDTO=new ChambreDTO();
 
     //Evite que ca passe a 0
     private int idReservation = 0;

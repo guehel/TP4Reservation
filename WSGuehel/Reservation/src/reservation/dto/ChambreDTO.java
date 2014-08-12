@@ -4,13 +4,13 @@ import reservation.objects.Chambre;
 
 public class ChambreDTO extends EntiteDTO {
 	
-	    private int numeroChambre;
+	    private int numeroChambre=0;
 	    private Formulaire formulaire;
 	 
 	    public ChambreDTO(Chambre chambre) {
 	    	formulaire = new Formulaire();
 	    	numeroChambre = chambre.getNumeroChambre();
-	    	reservations = new ReservationDTO[chambre.getReservations().size()];
+	    	reservations = new ReservationDTO[chambre.getNombreReservation()];
 		}
 	    
 	    public ChambreDTO() {

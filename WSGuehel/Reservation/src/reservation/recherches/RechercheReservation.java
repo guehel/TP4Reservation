@@ -9,6 +9,8 @@ import reservation.dto.ReservationDTO;
 
 public abstract class RechercheReservation extends AbsctractRecherche {
 
+	protected ReservationDTO[] resultats = null ;
+			
 	public RechercheReservation(GrandLivreHotel grandLivre) {
 		super(grandLivre);
 		
@@ -21,7 +23,8 @@ public abstract class RechercheReservation extends AbsctractRecherche {
 	public ReservationDTO[] rechercherReservations() {
 		
 		effectuerRecherche();
-		return super.getReservationsArray();
+		if(resultats==null)  resultats = new ReservationDTO[0];
+		return resultats;
 	}
 
 
