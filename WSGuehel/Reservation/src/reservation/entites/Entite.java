@@ -1,9 +1,8 @@
 package reservation.entites;
 
-import java.util.TreeSet;
-
+import reservation.arbre.ArbreBinaireReservations;
 import reservation.dto.ReservationDTO;
-import reservation.objects.ComparateurReservation;
+import reservation.entites.EntiteReservation;
 import reservation.objects.Reservation;
 
 /**
@@ -13,19 +12,18 @@ import reservation.objects.Reservation;
  *
  */
 public class Entite {
-	protected TreeSet<Reservation> reservations;
-	protected static final ComparateurReservation COMPARATEUR = new ComparateurReservation();
+	protected ArbreBinaireReservations reservations;
 
 	public Entite() {
-		reservations = new TreeSet<Reservation>(COMPARATEUR);
+		reservations = new ArbreBinaireReservations();
 
 	}
 
-	public TreeSet<Reservation> getReservations() {
+	public ArbreBinaireReservations getReservations() {
 		return reservations;
 	}
 
-	public void setReservations(TreeSet<Reservation> reservations) {
+	public void setReservations(ArbreBinaireReservations reservations) {
 		this.reservations = reservations;
 	}
 
@@ -59,7 +57,7 @@ public class Entite {
 		ReservationDTO[] array = new ReservationDTO[n];
 
 		int i = 0;
-		for (Reservation res : reservations) {
+		for (Reservation res : reservations.toArray()) {
 
 			dto = new EntiteReservation(res).getReservationDTO();
 
@@ -83,7 +81,8 @@ public class Entite {
 	}
 
 	public Reservation getReservation(Reservation parametreRecheche) {
-		Reservation foundReservation = reservations.floor(parametreRecheche);
+		Reservation foundReservation = reservations
+				.rechercher(parametreRecheche);
 		// if (parametreRecheche != null) {
 		// foundReservation = null;
 		// Iterator<Reservation> iterator = reservations.iterator();

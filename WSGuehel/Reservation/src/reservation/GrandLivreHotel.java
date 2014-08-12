@@ -3,12 +3,14 @@ package reservation;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import reservation.arbre.DAOFactory;
 import reservation.dao.ChambreDAO;
 import reservation.dao.ClientDAO;
 import reservation.dao.DAO;
-import reservation.dao.DAOFactory;
-import reservation.dao.DAOFactory.Table;
 import reservation.dao.ReservationDAO;
+//import reservation.dao.DAOFactory;
+//import reservation.dao.DAOFactory.Table;
+//import reservation.dao.ReservationDAO;
 import reservation.dto.ChambreDTO;
 import reservation.dto.ReservationDTO;
 import reservation.entites.Entite;
@@ -31,11 +33,11 @@ public class GrandLivreHotel extends Entite {
 
 		try {
 			factory = new DAOFactory();
-			dao = factory.getDAO(Table.RESERVATION);
+			dao = factory.getDAO(DAOFactory.Table.RESERVATION);
 			reservations = ((ReservationDAO) dao).getAllReservations();
-			dao = factory.getDAO(Table.CLIENT);
+			dao = factory.getDAO(DAOFactory.Table.CLIENT);
 			listeClients = ((ClientDAO) dao).getAllClients();
-			dao = factory.getDAO(Table.CHAMBRE);
+			dao = factory.getDAO(DAOFactory.Table.CHAMBRE);
 			listeChambre = ((ChambreDAO) dao).getAllChambres();
 		} catch (ClassNotFoundException | SQLException e) {
 
@@ -75,9 +77,16 @@ public class GrandLivreHotel extends Entite {
 
 	public ReservationDTO[] rechercheReservations(int client) {
 		this.contenantResultat = new Entite();
-		for (Reservation reservation : this.getReservations()) {
-			if (reservation.getClient().getIdClient() == (client)) {
-				this.contenantResultat.ajouterReservation(reservation);
+		for (ReservationDTO reservation : this.getReservationsArray()) {
+			if (reservation.getClientDTO().getId() == (client)) {
+				EntiteReservation entite;
+				try {
+					entite = new EntiteReservation(reservation);
+					this.contenantResultat.ajouterReservation(entite
+							.getReservation());
+				} catch (Exception e) {
+
+				}
 
 			}
 		}
@@ -86,11 +95,19 @@ public class GrandLivreHotel extends Entite {
 
 	public ReservationDTO[] rechercheReservations(Chambre chambre) {
 		this.contenantResultat = new Entite();
-		for (Reservation reservation : this.getReservations()) {
-			if (reservation.getChambre().equals(chambre)
+		for (ReservationDTO reservation : this.getReservationsArray()) {
+			if (reservation.getChambreDTO().getNumeroChambre() == chambre
+					.getNumeroChambre()
 			// && reservation.getInterval().contains(now)
 			) {
-				this.contenantResultat.ajouterReservation(reservation);
+				EntiteReservation entite;
+				try {
+					entite = new EntiteReservation(reservation);
+					this.contenantResultat.ajouterReservation(entite
+							.getReservation());
+				} catch (Exception e) {
+
+				}
 			}
 		}
 		return this.contenantResultat.getReservationsArray();
@@ -127,7 +144,7 @@ public class GrandLivreHotel extends Entite {
 
 			Reservation reservation = entiteReservation.getReservation();
 			if (!this.contains(reservation)) {
-				dao = factory.getDAO(Table.RESERVATION);
+				dao = factory.getDAO(DAOFactory.Table.RESERVATION);
 				retour = ((ReservationDAO) dao).create(reservation);
 			}
 			if (retour)
@@ -150,7 +167,7 @@ public class GrandLivreHotel extends Entite {
 				Reservation reservation = entite.getReservation();
 
 				if (valider(reservation)) {
-					dao = factory.getDAO(Table.RESERVATION);
+					dao = factory.getDAO(DAOFactory.Table.RESERVATION);
 					valide = ((ReservationDAO) dao).delete(reservation);
 					if (valide)
 						this.supprimerReservation(reservation);

@@ -4,6 +4,10 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Scanner;
 
+import reservation.dao.ChambreDAO;
+import reservation.dao.ClientDAO;
+import reservation.dao.DAO;
+
 import com.mysql.jdbc.Connection;
 
 public class DAOFactory {
