@@ -25,11 +25,10 @@ public class GrandLivreHotel extends Entite {
 	private DAOFactory factory = null;
 	private Entite contenantResultat;
 	private ChambreDTO[] listeChambreDTOs;
-	protected ReservationDAO daoReservation;
+	protected DAO<?> dao;
 
 	public GrandLivreHotel() {
 
-		DAO<?> dao = null;
 		try {
 			factory = new DAOFactory();
 			dao = factory.getDAO(Table.RESERVATION);
@@ -119,6 +118,7 @@ public class GrandLivreHotel extends Entite {
 	}
 
 	public boolean effectuerAJout(ReservationDTO reservationDTO) {
+
 		boolean retour = false;
 		EntiteReservation entiteReservation = null;
 
@@ -126,8 +126,10 @@ public class GrandLivreHotel extends Entite {
 			entiteReservation = new EntiteReservation(reservationDTO);
 
 			Reservation reservation = entiteReservation.getReservation();
-			if (!this.contains(reservation))
-				retour = this.daoReservation.create(reservation);
+			if (!this.contains(reservation)) {
+				dao = factory.getDAO(Table.RESERVATION);
+				retour = ((ReservationDAO) dao).create(reservation);
+			}
 			if (retour)
 				this.ajouterReservation(reservation);
 			;
@@ -148,7 +150,8 @@ public class GrandLivreHotel extends Entite {
 				Reservation reservation = entite.getReservation();
 
 				if (valider(reservation)) {
-					valide = this.daoReservation.delete(reservation);
+					dao = factory.getDAO(Table.RESERVATION);
+					valide = ((ReservationDAO) dao).delete(reservation);
 					if (valide)
 						this.supprimerReservation(reservation);
 

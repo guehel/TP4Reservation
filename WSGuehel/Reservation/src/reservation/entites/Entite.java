@@ -18,6 +18,7 @@ public class Entite {
 
 	public Entite() {
 		reservations = new TreeSet<Reservation>(COMPARATEUR);
+
 	}
 
 	public TreeSet<Reservation> getReservations() {
