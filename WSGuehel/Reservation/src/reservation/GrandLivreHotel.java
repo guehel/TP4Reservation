@@ -13,6 +13,7 @@ import reservation.dto.ChambreDTO;
 import reservation.dto.ReservationDTO;
 import reservation.entites.Entite;
 import reservation.entites.EntiteChambre;
+import reservation.entites.EntiteReservation;
 import reservation.objects.Chambre;
 import reservation.objects.Client;
 import reservation.objects.Reservation;
@@ -24,6 +25,7 @@ public class GrandLivreHotel extends Entite {
 	private DAOFactory factory = null;
 	private Entite contenantResultat;
 	private ChambreDTO[] listeChambreDTOs;
+	protected ReservationDAO daoReservation;
 
 	public GrandLivreHotel() {
 
@@ -65,11 +67,6 @@ public class GrandLivreHotel extends Entite {
 
 	public ArrayList<Chambre> getListeChambre() {
 		return listeChambre;
-	}
-
-	public boolean contains(Reservation reservation) {
-
-		return this.reservations.contains(reservation);
 	}
 
 	public boolean isValide() {
@@ -121,4 +118,57 @@ public class GrandLivreHotel extends Entite {
 
 	}
 
+	public boolean effectuerAJout(ReservationDTO reservationDTO) {
+		boolean retour = false;
+		EntiteReservation entiteReservation = null;
+
+		try {
+			entiteReservation = new EntiteReservation(reservationDTO);
+
+			Reservation reservation = entiteReservation.getReservation();
+			if (!this.contains(reservation))
+				retour = this.daoReservation.create(reservation);
+			if (retour)
+				this.ajouterReservation(reservation);
+			;
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return retour;
+	}
+
+	public boolean effectuerSuppression(ReservationDTO reservationDTO) {
+		boolean valide = reservationDTO != null;
+		if (valide) {
+			EntiteReservation entite = null;
+			try {
+				entite = new EntiteReservation(reservationDTO);
+				Reservation reservation = entite.getReservation();
+
+				if (valider(reservation)) {
+					valide = this.daoReservation.delete(reservation);
+					if (valide)
+						this.supprimerReservation(reservation);
+
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return valide;
+	}
+
+	@Override
+	protected boolean valider(Reservation preservation) {
+		boolean valide = super.valider(preservation);
+		if (valide) {
+			Client reservant = preservation.getClient();
+			Reservation reservation = this.getReservation(preservation);
+			valide = reservation.getClient().equals(reservant);
+
+		}
+		return valide;
+	}
 }

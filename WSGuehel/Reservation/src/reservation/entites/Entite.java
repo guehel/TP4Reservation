@@ -101,11 +101,22 @@ public class Entite {
 
 	}
 
+	public boolean contains(Reservation reservation) {
+
+		return this.reservations.contains(reservation);
+	}
+
 	public Reservation getReservation(ReservationDTO reservationDTO)
 			throws Exception {
-		EntiteReservation entiteReservation = new EntiteReservation();
+		EntiteReservation entiteReservation = new EntiteReservation(
+				reservationDTO);
 
 		return getReservation(entiteReservation.getReservation());
+	}
+
+	protected boolean valider(Reservation reservation) {
+
+		return reservation != null && reservation.isValide();
 	}
 
 }
