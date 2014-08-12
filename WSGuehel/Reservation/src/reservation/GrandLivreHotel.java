@@ -3,14 +3,14 @@ package reservation;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import reservation.arbre.DAOFactory;
+
 import reservation.dao.ChambreDAO;
 import reservation.dao.ClientDAO;
 import reservation.dao.DAO;
 import reservation.dao.ReservationDAO;
-//import reservation.dao.DAOFactory;
-//import reservation.dao.DAOFactory.Table;
-//import reservation.dao.ReservationDAO;
+import reservation.dao.DAOFactory;
+import reservation.dao.DAOFactory.Table;
+import reservation.dao.ReservationDAO;
 import reservation.dto.ChambreDTO;
 import reservation.dto.ReservationDTO;
 import reservation.entites.Entite;
