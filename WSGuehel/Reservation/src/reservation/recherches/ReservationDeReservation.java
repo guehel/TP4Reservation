@@ -1,38 +1,26 @@
 package reservation.recherches;
 
-
-
-import reservation.GrandLivreHotel;
+import reservation.SingleGrandLivre;
 import reservation.objects.Reservation;
-
 
 public class ReservationDeReservation extends RechercheReservation {
 
-	private Reservation pReservation;	
+	private Reservation pReservation;
 
-	public ReservationDeReservation(GrandLivreHotel grandLivre, Reservation reservation) {
-		super(grandLivre);
-		this.pReservation = (Reservation) reservation;
-	}
-	
-	public ReservationDeReservation(GrandLivreHotel grandLivre) {
-		super(grandLivre);	
-	
+	public ReservationDeReservation(Reservation reservation) {
+
+		this.pReservation = reservation;
 	}
 
-	
 	@Override
-	protected void effectuerRecherche(){
-	
-		for(Reservation reservation: grandLivre.getReservations()){
-			if(reservation.equals(this.pReservation)				
-					){
-			this.reservations.add(reservation);
+	protected void effectuerRecherche() {
+
+		for (Reservation reservation : SingleGrandLivre.getInstance()
+				.getReservations()) {
+			if (reservation.equals(this.pReservation)) {
+				this.reservations.add(reservation);
 			}
 		}
 	}
-
-	
-	
 
 }

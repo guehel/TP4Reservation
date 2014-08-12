@@ -7,11 +7,12 @@ import reservation.dto.ReservationDTO;
 import reservation.entites.EntiteReservation;
 import reservation.objects.Reservation;
 
-public class AjoutReservation extends ModificationReservation  {
+public class AjoutReservation extends ModificationReservation {
 
-	public AjoutReservation(GrandLivreHotel grandLivre) throws ClassNotFoundException, SQLException {
+	public AjoutReservation(GrandLivreHotel grandLivre)
+			throws ClassNotFoundException, SQLException {
 		super(grandLivre);
-	
+
 	}
 
 	@Override
@@ -21,20 +22,18 @@ public class AjoutReservation extends ModificationReservation  {
 		try {
 			entite.setReservationFromDTO(reservationDTO);
 			Reservation reservation = entite.getReservation();
-			if(valider(reservation )){
-				if(!this.grandLivre.contains(reservation))
+			if (valider(reservation)) {
+				if (!this.grandLivre.contains(reservation))
 					retour = this.daoReservation.create(reservation);
-				if(retour)
-					this.grandLivre.addReservation(reservation);
+				if (retour)
+					this.grandLivre.ajouterReservation(reservation);
+				;
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
-
 		return retour;
 	}
-
-
 
 }
