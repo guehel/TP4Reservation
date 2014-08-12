@@ -136,6 +136,8 @@ public class ArbreBinaireReservations {
 
 		recherche = rechercherNoeud(racine, reservation);
 		if (recherche != null) {
+			// TODO: java null pointeur apres modif reusse
+			// voire pourquoi et modifier
 			recherche.getPrecedent().setSuivant(recherche.getSuivant());
 			System.gc();
 		}

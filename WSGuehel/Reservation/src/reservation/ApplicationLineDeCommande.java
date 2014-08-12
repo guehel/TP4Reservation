@@ -118,7 +118,7 @@ public class ApplicationLineDeCommande {
 						int numeroReservation = choisirEntier(message, sc);
 						ReservationDTO reservationChosi = obtenirReservation(
 								numeroReservation, lreservationDTO);
-						reservationChosi.setClientDTO(clientDTO);
+						// reservationChosi.setClientDTO(clientDTO);
 
 						Formulaire formulaire = new Formulaire();
 						formulaire.setReservation(reservationChosi);
