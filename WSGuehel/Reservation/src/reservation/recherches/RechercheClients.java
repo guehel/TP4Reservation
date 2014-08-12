@@ -2,7 +2,7 @@ package reservation.recherches;
 
 import reservation.dto.ClientDTO;
 
-public abstract class RechercheClients extends AbsctractRecherche {
+public abstract class RechercheClients extends AbstractRecherche {
 	protected ClientDTO[] listeClientDTOs;
 
 	@Override

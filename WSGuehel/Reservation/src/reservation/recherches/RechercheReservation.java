@@ -2,7 +2,7 @@ package reservation.recherches;
 
 import reservation.dto.ReservationDTO;
 
-public abstract class RechercheReservation extends AbsctractRecherche {
+public abstract class RechercheReservation extends AbstractRecherche {
 
 	protected ReservationDTO[] resultats = null;
 

@@ -1,6 +1,5 @@
 package reservation.recherches;
 
-import reservation.SingleGrandLivre;
 import reservation.objects.Reservation;
 
 public class ReservationDeReservation extends RechercheReservation {
@@ -12,15 +11,22 @@ public class ReservationDeReservation extends RechercheReservation {
 		this.pReservation = reservation;
 	}
 
+	// @Override
+	// protected void effectuerRecherche() {
+	//
+	// for (Reservation reservation : SingleGrandLivre.getInstance()
+	// .getReservations()) {
+	// if (reservation.equals(this.pReservation)) {
+	// this.reservations.add(reservation);
+	// }
+	// }
+	// }
+
 	@Override
 	protected void effectuerRecherche() {
 
-		for (Reservation reservation : SingleGrandLivre.getInstance()
-				.getReservations()) {
-			if (reservation.equals(this.pReservation)) {
-				this.reservations.add(reservation);
-			}
-		}
-	}
+		// this.reservations = SingleGrandLivre.getInstance()
+		// .rechercheReservations(pReservation);
 
+	}
 }

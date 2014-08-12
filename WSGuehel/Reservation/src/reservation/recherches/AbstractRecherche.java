@@ -5,9 +5,9 @@ import reservation.dto.ClientDTO;
 import reservation.dto.ReservationDTO;
 import reservation.entites.Entite;
 
-public abstract class AbsctractRecherche extends Entite implements Recherche {
+public abstract class AbstractRecherche extends Entite implements Recherche {
 
-	public AbsctractRecherche() {
+	public AbstractRecherche() {
 
 	}
 
