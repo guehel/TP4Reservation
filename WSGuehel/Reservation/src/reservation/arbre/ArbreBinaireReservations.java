@@ -131,15 +131,38 @@ public class ArbreBinaireReservations {
 
 	}
 
+	/**
+	 * @param reservation
+	 */
 	public void remove(Reservation reservation) {
-		NoeudReservations recherche = null;
+		if (contains(reservation)) {
+			NoeudReservations nResa = rechercherNoeud(racine, reservation);
+			remove(nResa, reservation);
+		}
 
-		recherche = rechercherNoeud(racine, reservation);
-		if (recherche != null) {
-			// TODO: java null pointeur apres modif reusse
-			// voire pourquoi et modifier
-			recherche.getPrecedent().setSuivant(recherche.getSuivant());
-			System.gc();
+	}
+
+	/**
+	 * fonction recursive de suppression de noeud
+	 * 
+	 * @param noeud
+	 *            contenant la reservation
+	 * @param reservation
+	 *            resrvation a supprimer
+	 */
+	private void remove(NoeudReservations noeud, Reservation reservation) {
+
+		if (noeud != null) {
+			if (noeud.getPrecedent() != null) {
+				noeud.getPrecedent().setSuivant(noeud.getSuivant());
+				if (noeud.getSuivant() != null) {
+					noeud.getSuivant().setPrecedent(noeud.getPrecedent());
+
+				}
+			} else {
+				noeud = noeud.getSuivant();
+				noeud.setPrecedent(null);
+			}
 		}
 
 	}
