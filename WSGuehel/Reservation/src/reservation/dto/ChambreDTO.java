@@ -14,6 +14,7 @@ public abstract class ChambreDTO {
     
     public ChambreDTO() {
 		super();
+		
 	}
 
 	public int getNumeroChambre() {

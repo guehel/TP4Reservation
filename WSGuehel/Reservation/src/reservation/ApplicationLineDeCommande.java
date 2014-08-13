@@ -3,8 +3,6 @@ package reservation;
 import java.util.Scanner;
 
 import reservation.dto.ChambreDTO;
-import reservation.dto.ChambreDTODB;
-import reservation.dto.ChambreDTOWeb;
 import reservation.dto.ClientDTO;
 import reservation.dto.Formulaire;
 import reservation.dto.ReservationDTO;
@@ -125,7 +123,8 @@ public class ApplicationLineDeCommande {
 						Formulaire formulaire = new Formulaire();
 						formulaire.setReservation(reservationChosi);
 						formulaire.setType(type);
-						ChambreDTODB chambreSelectionne = new ChambreDTODB();
+						ChambreDTO chambreSelectionne = reservationChosi
+								.getChambreDTO();
 						chambreSelectionne.setFormulaire(formulaire);
 						System.out
 								.println(serviceWeb.update(chambreSelectionne) ? "la sauvegarde a reussi"
@@ -217,7 +216,8 @@ public class ApplicationLineDeCommande {
 	}
 
 	public static void affichicherChambre(ChambreDTO chambreDTODB) {
-		System.out.println("chambre numero: " + chambreDTODB.getNumeroChambre());
+		System.out
+				.println("chambre numero: " + chambreDTODB.getNumeroChambre());
 		ReservationDTO[] reservations = chambreDTODB.getReservations();
 		System.out.println("nombre de reservations: "
 				+ chambreDTODB.getReservations().length);
@@ -243,7 +243,8 @@ public class ApplicationLineDeCommande {
 
 	public static void afficherChambre(ChambreDTO chambreSelectionne) {
 		System.out.println("CHAMBRE : ");
-		System.out.println("\tid Chambre : " + chambreSelectionne.getNumeroChambre());
+		System.out.println("\tid Chambre : "
+				+ chambreSelectionne.getNumeroChambre());
 
 	}
 

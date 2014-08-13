@@ -160,8 +160,9 @@ public class ArbreBinaireReservations {
 
 				}
 			} else {
+				// noeud.setPrecedent(null);
 				noeud = noeud.getSuivant();
-				noeud.setPrecedent(null);
+
 			}
 		}
 

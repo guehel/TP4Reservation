@@ -1,6 +1,7 @@
 package reservation.entites;
 
-import reservation.dto.ChambreDTODB;
+import reservation.dto.ChambreDTO;
+import reservation.dto.ChambreDTOWeb;
 import reservation.dto.Formulaire;
 import reservation.dto.ReservationDTO;
 import reservation.objects.Chambre;
@@ -22,7 +23,7 @@ public class EntiteChambre extends Entite {
 		this.chambre = chambre;
 	}
 
-	public EntiteChambre(ChambreDTODB chambreDTODB) throws Exception {
+	public EntiteChambre(ChambreDTO chambreDTODB) throws Exception {
 		super();
 		this.setFromChambreDTO(chambreDTODB);
 	}
@@ -40,18 +41,18 @@ public class EntiteChambre extends Entite {
 		this.chambre = chambre;
 	}
 
-	public ChambreDTODB getChambreDTO() {
-		ChambreDTODB chambreDTODB = new ChambreDTODB();
+	public ChambreDTO getChambreDTO() {
+		ChambreDTO ChambreDTOWeb = new ChambreDTOWeb();
 		formulaire = new Formulaire();
-		formulaire.getReservation().setChambreDTO(chambreDTODB);
-		chambreDTODB.setNumeroChambre(this.chambre.getNumeroChambre());
-		chambreDTODB.setReservations(this.getReservationsArray());
+		formulaire.getReservation().setChambreDTO(ChambreDTOWeb);
+		ChambreDTOWeb.setNumeroChambre(this.chambre.getNumeroChambre());
+		ChambreDTOWeb.setReservations(this.getReservationsArray());
 
-		chambreDTODB.setFormulaire(formulaire);
-		return chambreDTODB;
+		ChambreDTOWeb.setFormulaire(formulaire);
+		return ChambreDTOWeb;
 	}
 
-	public void setFromChambreDTO(ChambreDTODB chambreDTODB) {
+	public void setFromChambreDTO(ChambreDTO chambreDTODB) {
 		formulaire = chambreDTODB.getFormulaire();
 		ReservationDTO[] reservationsDTO = chambreDTODB.getReservations();
 		super.setReservationsFromDTO(reservationsDTO);
