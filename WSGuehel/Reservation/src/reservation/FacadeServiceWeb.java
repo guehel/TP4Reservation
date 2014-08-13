@@ -1,6 +1,7 @@
 package reservation;
 
 import reservation.dto.ChambreDTO;
+import reservation.dto.ChambreDTODB;
 import reservation.dto.ClientDTO;
 import reservation.dto.ReservationDTO;
 
@@ -41,12 +42,12 @@ public class FacadeServiceWeb implements Services {
 	}
 
 	@Override
-	public boolean update(ChambreDTO chambreDTO) {
+	public boolean update(ChambreDTO chambreDTODB) {
 		Services service = SingleServiceWeb.getInstance();
 		if(service==null)
 		return false;
 		else{
-			return service.update(chambreDTO);
+			return service.update(chambreDTODB);
 		}
 	}
 

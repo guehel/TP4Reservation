@@ -13,7 +13,7 @@ import reservation.dao.ClientDAO;
 import reservation.dao.ReservationDAO;
 import reservation.dao.DAOFactory;
 import reservation.dao.DAOFactory.Table;
-import reservation.dto.ChambreDTO;
+import reservation.dto.ChambreDTODB;
 import reservation.dto.ClientDTO;
 import reservation.dto.ReservationDTO;
 import reservation.objects.Chambre;
@@ -55,7 +55,7 @@ public class ReservationDAOTest {
 		
 		res1.setClientDTO(clientDTO);
 		
-		ChambreDTO chambre =new ChambreDTO();
+		ChambreDTODB chambre =new ChambreDTODB();
 		chambre.setNumeroChambre(5);
 		res1.setChambreDTO(chambre);
 		

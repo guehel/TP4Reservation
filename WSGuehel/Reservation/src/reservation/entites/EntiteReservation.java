@@ -7,7 +7,7 @@ import org.joda.time.Interval;
 
 import reservation.objects.Reservation;
 import reservation.dao.OutilsDates;
-import reservation.dto.ChambreDTO;
+import reservation.dto.ChambreDTODB;
 import reservation.dto.ClientDTO;
 import reservation.dto.ReservationDTO;
 
@@ -65,14 +65,14 @@ public ReservationDTO getReservationDTO(){
 	ClientDTO clientDTO = entiteClient.getClientDTO();
 	
 	EntiteChambre entiteChambre = new EntiteChambre(reservation.getChambre());
-	ChambreDTO chambreDTO = entiteChambre.getChambreDTO();
+	ChambreDTODB chambreDTODB = entiteChambre.getChambreDTO();
 	
 	reservationDto.setIdReservation(idReservation);
 	reservationDto.setCreation(creation);
 	reservationDto.setArrivee(arrivee); 
 	reservationDto.setDepart(depart);
 	reservationDto.setClientDTO(clientDTO);
-	reservationDto.setChambreDTO(chambreDTO);
+	reservationDto.setChambreDTO(chambreDTODB);
 	
     return reservationDto;
 }

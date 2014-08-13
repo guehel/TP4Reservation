@@ -17,7 +17,7 @@ public class ReservationDTO  {
 
     private String depart="";
 
-    private ChambreDTO chambreDTO=new ChambreDTO();
+    private ChambreDTODB chambreDTODB=new ChambreDTODB();
 
     //Evite que ca passe a 0
     private int idReservation = 0;
@@ -30,13 +30,13 @@ public class ReservationDTO  {
            ClientDTO clientDTO,
            String creation,
            String depart,
-           ChambreDTO idChambre,
+           ChambreDTODB idChambre,
            int idReservation) {
            this.arrivee = arrivee;
            this.ClientDTO = clientDTO;
            this.creation = creation;
            this.depart = depart;
-           this.chambreDTO = idChambre;
+           this.chambreDTODB = idChambre;
            this.idReservation = idReservation;
     }
 
@@ -119,13 +119,13 @@ public class ReservationDTO  {
 
 
    
-    public ChambreDTO getChambreDTO() {
-        return chambreDTO;
+    public ChambreDTODB getChambreDTO() {
+        return chambreDTODB;
     }
 
 
-    public void setChambreDTO(ChambreDTO idChambre) {
-        this.chambreDTO = idChambre;
+    public void setChambreDTO(ChambreDTODB idChambre) {
+        this.chambreDTODB = idChambre;
     }
 
 

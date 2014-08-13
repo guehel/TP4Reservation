@@ -1,5 +1,6 @@
 package reservation;
 import reservation.dto.ChambreDTO;
+import reservation.dto.ChambreDTODB;
 import reservation.dto.ClientDTO;
 import reservation.dto.ReservationDTO;
 /**
@@ -28,7 +29,7 @@ public ClientDTO[] obtenirListeClients();
 
 /**Permet de modifier la reservation de la chambre a travers 
  * le formulaire de modification compris dans la chambre dto
- * @param chambreDTO informations sur la chambre et les details sur les reservations
+ * @param chambreDTODB informations sur la chambre et les details sur les reservations
  * @return
  */
 public boolean update(ChambreDTO chambreDTO);

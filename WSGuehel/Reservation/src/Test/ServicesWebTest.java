@@ -2,14 +2,13 @@ package Test;
 
 import static org.junit.Assert.*;
 
-
-
 import org.junit.Test;
 
 import reservation.ApplicationLineDeCommande;
 import reservation.Services;
 import reservation.ServicesWeb;
 import reservation.dto.ChambreDTO;
+import reservation.dto.ChambreDTODB;
 import reservation.dto.ReservationDTO;
 
 public class ServicesWebTest {
@@ -25,8 +24,8 @@ public class ServicesWebTest {
 		
 		Services services = new ServicesWeb();
 		ChambreDTO[] liste = services.obtenirListeChambre();
-		for(ChambreDTO chambreDTO : liste){
-			ApplicationLineDeCommande.affichicherChambre(chambreDTO);
+		for(ChambreDTO chambreDTODB : liste){
+			ApplicationLineDeCommande.affichicherChambre(chambreDTODB);
 		}
 	
 	}

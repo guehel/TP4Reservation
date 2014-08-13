@@ -1,13 +1,14 @@
 package reservation.recherches;
 
-import reservation.dto.ChambreDTO;
+import reservation.dto.ChambreDTODB;
+import reservation.dto.ChambreDTOWeb;
 
 public abstract class RechercheChambres extends AbstractRecherche {
 
-	protected ChambreDTO[] listeChambreDTOs;
+	protected ChambreDTOWeb[] listeChambreDTOs;
 
 	@Override
-	public ChambreDTO[] rechercherChambres() {
+	public ChambreDTOWeb[] rechercherChambres() {
 		effectuerRecherche();
 		return listeChambreDTOs;
 	}

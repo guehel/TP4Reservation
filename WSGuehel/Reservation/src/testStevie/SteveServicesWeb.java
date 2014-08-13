@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import reservation.Services;
 import reservation.ServicesWeb;
 import reservation.dto.ChambreDTO;
+import reservation.dto.ChambreDTOWeb;
 import reservation.dto.ClientDTO;
 import reservation.dto.Formulaire;
 import reservation.dto.ReservationDTO;
@@ -21,21 +22,21 @@ public class SteveServicesWeb implements Services
 	@Override
 	public ChambreDTO[] obtenirListeChambre() 
 	{
-		ChambreDTO[] chambreList = new ChambreDTO[3];
+		ChambreDTO[] chambreList = new ChambreDTOWeb[3];
 		
-		ChambreDTO chambre1 = new ChambreDTO();
+		ChambreDTOWeb chambre1 = new ChambreDTOWeb();
 		chambre1.setNumeroChambre(1);
 		Formulaire form1 = new Formulaire();
 		chambre1.setFormulaire(form1);
 		chambreList[0] = chambre1;
 		
-		ChambreDTO chambre2 = new ChambreDTO();
+		ChambreDTOWeb chambre2 = new ChambreDTOWeb();
 		chambre2.setNumeroChambre(2);
 		Formulaire form2 = new Formulaire();
 		chambre2.setFormulaire(form2);
 		chambreList[1] = chambre2;
 		
-		ChambreDTO chambre3 = new ChambreDTO();
+		ChambreDTOWeb chambre3 = new ChambreDTOWeb();
 		chambre3.setNumeroChambre(2);
 		Formulaire form3 = new Formulaire();
 		chambre3.setFormulaire(form3);

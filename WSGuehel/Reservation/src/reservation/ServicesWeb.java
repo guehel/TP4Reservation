@@ -2,6 +2,7 @@ package reservation;
 
 import reservation.dao.OutilsDates;
 import reservation.dto.ChambreDTO;
+import reservation.dto.ChambreDTODB;
 import reservation.dto.ClientDTO;
 import reservation.dto.Formulaire;
 import reservation.dto.ReservationDTO;
@@ -33,10 +34,10 @@ public class ServicesWeb implements Services {
 	}
 
 	@Override
-	public boolean update(ChambreDTO chambreDTO) {
+	public boolean update(ChambreDTO chambreSelectionne) {
 		boolean reussie = false;
 
-		Formulaire formulaireModif = chambreDTO.getFormulaire();
+		Formulaire formulaireModif = chambreSelectionne.getFormulaire();
 		reussie = validerFormulaireDTO(formulaireModif);
 		if (reussie) {
 			int type = formulaireModif.getType();

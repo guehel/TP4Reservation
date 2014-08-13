@@ -3,6 +3,8 @@ package reservation;
 import java.util.Scanner;
 
 import reservation.dto.ChambreDTO;
+import reservation.dto.ChambreDTODB;
+import reservation.dto.ChambreDTOWeb;
 import reservation.dto.ClientDTO;
 import reservation.dto.Formulaire;
 import reservation.dto.ReservationDTO;
@@ -28,8 +30,8 @@ public class ApplicationLineDeCommande {
 					ChambreDTO[] lChambreDTO;
 					if (type == 1) {
 						lChambreDTO = serviceWeb.obtenirListeChambre();
-						for (ChambreDTO chambreDTO : lChambreDTO) {
-							affichicherChambre(chambreDTO);
+						for (ChambreDTO chambreDTODB : lChambreDTO) {
+							affichicherChambre(chambreDTODB);
 						}
 						do {
 							System.out.println("Voulez vous reserver: O / N :");
@@ -123,7 +125,7 @@ public class ApplicationLineDeCommande {
 						Formulaire formulaire = new Formulaire();
 						formulaire.setReservation(reservationChosi);
 						formulaire.setType(type);
-						ChambreDTO chambreSelectionne = new ChambreDTO();
+						ChambreDTODB chambreSelectionne = new ChambreDTODB();
 						chambreSelectionne.setFormulaire(formulaire);
 						System.out
 								.println(serviceWeb.update(chambreSelectionne) ? "la sauvegarde a reussi"
@@ -214,13 +216,13 @@ public class ApplicationLineDeCommande {
 
 	}
 
-	public static void affichicherChambre(ChambreDTO chambreDTO) {
-		System.out.println("chambre numero: " + chambreDTO.getNumeroChambre());
-		ReservationDTO[] reservations = chambreDTO.getReservations();
+	public static void affichicherChambre(ChambreDTO chambreDTODB) {
+		System.out.println("chambre numero: " + chambreDTODB.getNumeroChambre());
+		ReservationDTO[] reservations = chambreDTODB.getReservations();
 		System.out.println("nombre de reservations: "
-				+ chambreDTO.getReservations().length);
+				+ chambreDTODB.getReservations().length);
 		System.out.println("Date de modification formulaire"
-				+ chambreDTO.getFormulaire().getDateModification());
+				+ chambreDTODB.getFormulaire().getDateModification());
 		for (ReservationDTO resDTO : reservations) {
 			afficherReservation(resDTO);
 		}
@@ -239,9 +241,9 @@ public class ApplicationLineDeCommande {
 
 	}
 
-	public static void afficherChambre(ChambreDTO chambreDTO) {
+	public static void afficherChambre(ChambreDTO chambreSelectionne) {
 		System.out.println("CHAMBRE : ");
-		System.out.println("\tid Chambre : " + chambreDTO.getNumeroChambre());
+		System.out.println("\tid Chambre : " + chambreSelectionne.getNumeroChambre());
 
 	}
 

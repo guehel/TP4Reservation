@@ -9,6 +9,8 @@ import reservation.dao.DAO;
 import reservation.dao.DAOFactory;
 import reservation.dao.ReservationDAO;
 import reservation.dto.ChambreDTO;
+import reservation.dto.ChambreDTODB;
+import reservation.dto.ChambreDTOWeb;
 import reservation.dto.ReservationDTO;
 import reservation.entites.Entite;
 import reservation.entites.EntiteChambre;
@@ -110,9 +112,9 @@ public class GrandLivreHotel extends Entite {
 		return this.contenantResultat.getReservationsArray();
 	}
 
-	public ChambreDTO[] rechercherChambres() {
+	public ChambreDTOWeb[] rechercherChambres() {
 
-		this.listeChambreDTOs = new ChambreDTO[this.listeChambre.size()];
+		this.listeChambreDTOs = new ChambreDTOWeb[this.listeChambre.size()];
 		int i = 0;
 
 		for (Chambre chambre : this.listeChambre) {
@@ -127,7 +129,7 @@ public class GrandLivreHotel extends Entite {
 
 			i++;
 		}
-		return listeChambreDTOs;
+		return (ChambreDTOWeb[]) listeChambreDTOs;
 
 	}
 

@@ -1,6 +1,6 @@
 package reservation.recherches;
 
-import reservation.dto.ChambreDTO;
+import reservation.dto.ChambreDTOWeb;
 import reservation.dto.ClientDTO;
 import reservation.dto.ReservationDTO;
 import reservation.entites.Entite;
@@ -23,7 +23,7 @@ public abstract class AbstractRecherche extends Entite implements Recherche {
 	}
 
 	@Override
-	public ChambreDTO[] rechercherChambres() {
+	public ChambreDTOWeb[] rechercherChambres() {
 		return null;
 	}
 

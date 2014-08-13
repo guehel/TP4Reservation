@@ -4,7 +4,7 @@
 package reservation.recherches;
 
 
-import reservation.dto.ChambreDTO;
+import reservation.dto.ChambreDTOWeb;
 import reservation.dto.ClientDTO;
 import reservation.dto.ReservationDTO;
 
@@ -15,6 +15,6 @@ import reservation.dto.ReservationDTO;
 public interface  Recherche  {
 	 ReservationDTO[] rechercherReservations();
 	 ClientDTO[] rechercherClients();
-	 ChambreDTO[] rechercherChambres();
+	 ChambreDTOWeb[] rechercherChambres();
 	
 }

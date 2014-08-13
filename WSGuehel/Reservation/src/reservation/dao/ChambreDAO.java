@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 import com.mysql.jdbc.PreparedStatement;
 
-import reservation.dto.ChambreDTO;
+import reservation.dto.ChambreDTODB;
 import reservation.dto.ReservationDTO;
 import reservation.objects.Chambre;
 
@@ -45,7 +45,7 @@ public class ChambreDAO extends DAO<Chambre>{
 
 	@Override
 	public boolean create(Chambre chambre) {	
-		ChambreDTO chamdreDto = new ChambreDTO(chambre);
+		ChambreDTODB chamdreDto = new ChambreDTODB(chambre);
 		
 		return createFromDTO(chamdreDto);
 		
@@ -71,7 +71,7 @@ public class ChambreDAO extends DAO<Chambre>{
 	
 	
 	
-	public boolean createFromDTO(ChambreDTO chambre){
+	public boolean createFromDTO(ChambreDTODB chambre){
 		 try {
 				this.ajout.setInt(1, chambre.getNumeroChambre());
 				for(ReservationDTO reservationDTO: chambre.getReservations() ){
