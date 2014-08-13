@@ -3,13 +3,10 @@ package reservation;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-
 import reservation.dao.ChambreDAO;
 import reservation.dao.ClientDAO;
 import reservation.dao.DAO;
-import reservation.dao.ReservationDAO;
 import reservation.dao.DAOFactory;
-import reservation.dao.DAOFactory.Table;
 import reservation.dao.ReservationDAO;
 import reservation.dto.ChambreDTO;
 import reservation.dto.ReservationDTO;
@@ -147,8 +144,11 @@ public class GrandLivreHotel extends Entite {
 				dao = factory.getDAO(DAOFactory.Table.RESERVATION);
 				retour = ((ReservationDAO) dao).create(reservation);
 			}
-			if (retour)
+			if (retour) {
+
 				this.ajouterReservation(reservation);
+
+			}
 			;
 
 		} catch (Exception e) {

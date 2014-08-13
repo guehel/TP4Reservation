@@ -1,6 +1,7 @@
 package reservation.dao;
 
 import java.sql.Date;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -8,16 +9,12 @@ import org.joda.time.DateTime;
 import org.joda.time.Days;
 import org.joda.time.Interval;
 
-import reservation.dao.ChambreDAO;
-import reservation.dao.ClientDAO;
-import reservation.dao.DAO;
-import reservation.dao.OutilsDates;
+import reservation.arbre.ArbreBinaireReservations;
 import reservation.dto.ReservationDTO;
 import reservation.entites.EntiteReservation;
 import reservation.objects.Chambre;
 import reservation.objects.Client;
 import reservation.objects.Reservation;
-import reservation.arbre.ArbreBinaireReservations;
 
 import com.mysql.jdbc.Connection;
 
@@ -27,6 +24,7 @@ public class ReservationDAO extends DAO<Reservation> {
 
 	private ClientDAO daoClient;
 	private ChambreDAO daoChambre;
+	private PreparedStatement rechercherDate;
 
 	public ReservationDAO(Connection connection) {
 		super(connection);
@@ -44,12 +42,17 @@ public class ReservationDAO extends DAO<Reservation> {
 					.prepareStatement("SELECT `idReservation`, `arrivee`, `sejour`, `numero`, `dateCreation`, `id` "
 							+ "FROM `reservation` "
 							+ "WHERE `idReservation` =?  AND `numero` =?");
+			this.rechercherDate = connection
+					.prepareStatement("SELECT `idReservation`, `arrivee`, `sejour`, `numero`, `dateCreation`, `id` "
+							+ "FROM `reservation` "
+							+ "WHERE `arrivee` =?  AND `numero` =?");
 
 			this.rechercherTous = connection
 					.prepareStatement("SELECT `idReservation`, `arrivee`, `sejour`, `numero`, `dateCreation`, `id` "
 							+ "FROM `reservation` "
 
 					);
+
 			this.suppression = connection
 					.prepareStatement("DELETE FROM `reservation` WHERE `idReservation` =? AND `numero` =?");
 
@@ -89,9 +92,36 @@ public class ReservationDAO extends DAO<Reservation> {
 
 	@Override
 	public Reservation find(Reservation reservation) {
+		ReservationDTO dto = new EntiteReservation(reservation)
+				.getReservationDTO();
+		if (dto.getIdReservation() <= 0) {
+			reservation = findByDateAndRoom(dto.getArrivee(), dto
+					.getChambreDTO().getNumeroChambre());
+		} else {
+			reservation = findByIds(reservation.getIdReservation(), reservation
+					.getChambre().getNumeroChambre());
+		}
+		return reservation;
+	}
 
-		return findByIds(reservation.getIdReservation(), reservation
-				.getChambre().getNumeroChambre());
+	private Reservation findByDateAndRoom(String arrive, int numero) {
+
+		Reservation reservation = null;
+		try {
+			this.rechercher.setString(1, arrive);
+			this.rechercher.setInt(2, numero);
+			ResultSet resultat = this.rechercher.executeQuery();
+			if (resultat.next()) {
+
+				reservation = resultSetToReservation(resultat);
+
+			}
+
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		}
+		return reservation;
 	}
 
 	public Reservation findByIds(int idReservation, int numeroChambre) {
@@ -186,7 +216,7 @@ public class ReservationDAO extends DAO<Reservation> {
 					.getCreation());
 			this.ajout.setDate(5 - 1, dateCreation);
 			this.ajout.setInt(6 - 1, reservationDTO.getClientDTO().getId());
-			/* int resultat = */this.ajout.executeUpdate();
+			this.ajout.executeUpdate();
 
 		} catch (SQLException e) {
 			e.printStackTrace();
