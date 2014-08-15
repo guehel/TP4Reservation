@@ -1,0 +1,107 @@
+<!-- Use this file to deploy some handlers/chains and services      -->
+<!-- Two ways to do this:                                           -->
+<!--   java org.apache.axis.client.AdminClient deploy.wsdd          -->
+<!--      after the axis server is running                          -->
+<!-- or                                                             -->
+<!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   -->
+<!--      from the same directory that the Axis engine runs         -->
+
+<deployment
+    xmlns="http://xml.apache.org/axis/wsdd/"
+    xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from FacadeServiceWebService WSDL service -->
+
+  <service name="FacadeServiceWeb" provider="java:RPC" style="wrapped" use="literal">
+      <parameter name="wsdlTargetNamespace" value="http://reservation"/>
+      <parameter name="wsdlServiceElement" value="FacadeServiceWebService"/>
+      <parameter name="schemaQualified" value="http://dto.reservation,http://arbre.reservation,http://reservation,http://entites.reservation,http://objects.reservation"/>
+      <parameter name="wsdlServicePort" value="FacadeServiceWeb"/>
+      <parameter name="className" value="reservation.FacadeServiceWebSoapBindingImpl"/>
+      <parameter name="wsdlPortType" value="FacadeServiceWeb"/>
+      <parameter name="typeMappingVersion" value="1.2"/>
+      <operation name="update" qname="operNS:update" xmlns:operNS="http://reservation" returnQName="retNS:updateReturn" xmlns:retNS="http://reservation" returnType="rtns:boolean" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:chambreDTO" xmlns:pns="http://reservation" type="tns:Formulaire" xmlns:tns="http://dto.reservation"/>
+      </operation>
+      <operation name="obtenirListeClients" qname="operNS:obtenirListeClients" xmlns:operNS="http://reservation" returnQName="retNS:obtenirListeClientsReturn" xmlns:retNS="http://reservation" returnType="rtns:ClientDTO" xmlns:rtns="http://dto.reservation" soapAction="" >
+      </operation>
+      <operation name="obtenirReservations" qname="operNS:obtenirReservations" xmlns:operNS="http://reservation" returnQName="retNS:obtenirReservationsReturn" xmlns:retNS="http://reservation" returnType="rtns:ReservationDTO" xmlns:rtns="http://dto.reservation" soapAction="" >
+        <parameter qname="pns:idClient" xmlns:pns="http://reservation" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="obtenirListeChambre" qname="operNS:obtenirListeChambre" xmlns:operNS="http://reservation" returnQName="retNS:obtenirListeChambreReturn" xmlns:retNS="http://reservation" returnType="rtns:ChambreDTO" xmlns:rtns="http://dto.reservation" soapAction="" >
+      </operation>
+      <parameter name="allowedMethods" value="update obtenirListeChambre obtenirReservations obtenirListeClients"/>
+
+      <typeMapping
+        xmlns:ns="http://dto.reservation"
+        qname="ns:ChambreDTO"
+        type="java:reservation.dto.ChambreDTO"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://entites.reservation"
+        qname="ns:Entite"
+        type="java:reservation.entites.Entite"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://arbre.reservation"
+        qname="ns:ArbreBinaireReservations"
+        type="java:reservation.arbre.ArbreBinaireReservations"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://dto.reservation"
+        qname="ns:ClientDTO"
+        type="java:reservation.dto.ClientDTO"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://objects.reservation"
+        qname="ns:Client"
+        type="java:reservation.objects.Client"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://dto.reservation"
+        qname="ns:Formulaire"
+        type="java:reservation.dto.Formulaire"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://dto.reservation"
+        qname="ns:EntiteDTO"
+        type="java:reservation.dto.EntiteDTO"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <arrayMapping
+        xmlns:ns="http://reservation"
+        qname="ns:ArrayOf_tns1_ReservationDTO"
+        type="java:reservation.dto.ReservationDTO[]"
+        innerType="cmp-ns:ReservationDTO" xmlns:cmp-ns="http://dto.reservation"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://dto.reservation"
+        qname="ns:ReservationDTO"
+        type="java:reservation.dto.ReservationDTO"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+  </service>
+</deployment>

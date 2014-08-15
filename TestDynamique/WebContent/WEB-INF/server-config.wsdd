@@ -1,0 +1,79 @@
+<ns1:deployment xmlns="http://xml.apache.org/axis/wsdd/" xmlns:java="http://xml.apache.org/axis/wsdd/providers/java" xmlns:ns1="http://xml.apache.org/axis/wsdd/">
+ <ns1:globalConfiguration>
+  <ns1:parameter name="sendMultiRefs" value="true"/>
+  <ns1:parameter name="disablePrettyXML" value="true"/>
+  <ns1:parameter name="adminPassword" value="admin"/>
+  <ns1:parameter name="attachments.Directory" value="K:\luna\Eclipse2\workspace\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\TestDynamique\WEB-INF\attachments"/>
+  <ns1:parameter name="dotNetSoapEncFix" value="true"/>
+  <ns1:parameter name="enableNamespacePrefixOptimization" value="false"/>
+  <ns1:parameter name="sendXMLDeclaration" value="true"/>
+  <ns1:parameter name="sendXsiTypes" value="true"/>
+  <ns1:parameter name="attachments.implementation" value="org.apache.axis.attachments.AttachmentsImpl"/>
+  <ns1:requestFlow>
+   <ns1:handler type="java:org.apache.axis.handlers.JWSHandler">
+    <ns1:parameter name="scope" value="session"/>
+   </ns1:handler>
+   <ns1:handler type="java:org.apache.axis.handlers.JWSHandler">
+    <ns1:parameter name="scope" value="request"/>
+    <ns1:parameter name="extension" value=".jwr"/>
+   </ns1:handler>
+  </ns1:requestFlow>
+ </ns1:globalConfiguration>
+ <ns1:handler name="URLMapper" type="java:org.apache.axis.handlers.http.URLMapper"/>
+ <ns1:handler name="LocalResponder" type="java:org.apache.axis.transport.local.LocalResponder"/>
+ <ns1:handler name="Authenticate" type="java:org.apache.axis.handlers.SimpleAuthenticationHandler"/>
+ <ns1:service name="FacadeServiceWeb" provider="java:RPC" style="wrapped" use="literal">
+  <ns2:operation name="update" qname="ns1:update" returnQName="ns1:updateReturn" returnType="xsd:boolean" soapAction="" xmlns:ns1="http://reservation" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns2="http://xml.apache.org/axis/wsdd/">
+   <ns3:parameter qname="ns1:chambreDTO" type="ns2:Formulaire" xmlns:ns2="http://dto.reservation" xmlns:ns3="http://xml.apache.org/axis/wsdd/"/>
+  </ns2:operation>
+  <ns1:operation name="obtenirListeClients" qname="ns3:obtenirListeClients" returnQName="ns3:obtenirListeClientsReturn" returnType="ns4:ClientDTO" soapAction="" xmlns:ns3="http://reservation" xmlns:ns4="http://dto.reservation"/>
+  <ns1:operation name="obtenirReservations" qname="ns5:obtenirReservations" returnQName="ns5:obtenirReservationsReturn" returnType="ns6:ReservationDTO" soapAction="" xmlns:ns5="http://reservation" xmlns:ns6="http://dto.reservation">
+   <ns1:parameter qname="ns5:idClient" type="xsd:int" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+  </ns1:operation>
+  <ns1:operation name="obtenirListeChambre" qname="ns7:obtenirListeChambre" returnQName="ns7:obtenirListeChambreReturn" returnType="ns8:ChambreDTO" soapAction="" xmlns:ns7="http://reservation" xmlns:ns8="http://dto.reservation"/>
+  <ns1:parameter name="allowedMethods" value="update obtenirListeChambre obtenirReservations obtenirListeClients"/>
+  <ns1:parameter name="typeMappingVersion" value="1.2"/>
+  <ns1:parameter name="wsdlPortType" value="FacadeServiceWeb"/>
+  <ns1:parameter name="className" value="reservation.FacadeServiceWeb"/>
+  <ns1:parameter name="wsdlServicePort" value="FacadeServiceWeb"/>
+  <ns1:parameter name="schemaQualified" value="http://dto.reservation,http://arbre.reservation,http://reservation,http://entites.reservation,http://objects.reservation"/>
+  <ns1:parameter name="wsdlTargetNamespace" value="http://reservation"/>
+  <ns1:parameter name="wsdlServiceElement" value="FacadeServiceWebService"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns9:ChambreDTO" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:reservation.dto.ChambreDTO" xmlns:ns9="http://dto.reservation"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns10:Entite" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:reservation.entites.Entite" xmlns:ns10="http://entites.reservation"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns11:ArbreBinaireReservations" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:reservation.arbre.ArbreBinaireReservations" xmlns:ns11="http://arbre.reservation"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns12:ClientDTO" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:reservation.dto.ClientDTO" xmlns:ns12="http://dto.reservation"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns13:Client" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:reservation.objects.Client" xmlns:ns13="http://objects.reservation"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns14:Formulaire" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:reservation.dto.Formulaire" xmlns:ns14="http://dto.reservation"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns15:EntiteDTO" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:reservation.dto.EntiteDTO" xmlns:ns15="http://dto.reservation"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns16:ReservationDTO" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:reservation.dto.ReservationDTO" xmlns:ns16="http://dto.reservation"/>
+  <ns1:arrayMapping innerType="ns18:ReservationDTO" languageSpecificType="java:reservation.dto.ReservationDTO[]" qname="ns17:ArrayOf_tns1_ReservationDTO" xmlns:ns17="http://reservation" xmlns:ns18="http://dto.reservation"/>
+ </ns1:service>
+ <ns1:service name="AdminService" provider="java:MSG">
+  <ns1:parameter name="allowedMethods" value="AdminService"/>
+  <ns1:parameter name="enableRemoteAdmin" value="false"/>
+  <ns1:parameter name="className" value="org.apache.axis.utils.Admin"/>
+  <ns1:namespace>http://xml.apache.org/axis/wsdd/</ns1:namespace>
+ </ns1:service>
+ <ns1:service name="Version" provider="java:RPC">
+  <ns1:parameter name="allowedMethods" value="getVersion"/>
+  <ns1:parameter name="className" value="org.apache.axis.Version"/>
+ </ns1:service>
+ <ns1:transport name="http">
+  <ns1:requestFlow>
+   <ns1:handler type="URLMapper"/>
+   <ns1:handler type="java:org.apache.axis.handlers.http.HTTPAuthHandler"/>
+  </ns1:requestFlow>
+  <ns1:parameter name="qs:list" value="org.apache.axis.transport.http.QSListHandler"/>
+  <ns1:parameter name="qs:wsdl" value="org.apache.axis.transport.http.QSWSDLHandler"/>
+  <ns1:parameter name="qs.list" value="org.apache.axis.transport.http.QSListHandler"/>
+  <ns1:parameter name="qs.method" value="org.apache.axis.transport.http.QSMethodHandler"/>
+  <ns1:parameter name="qs:method" value="org.apache.axis.transport.http.QSMethodHandler"/>
+  <ns1:parameter name="qs.wsdl" value="org.apache.axis.transport.http.QSWSDLHandler"/>
+ </ns1:transport>
+ <ns1:transport name="local">
+  <ns1:responseFlow>
+   <ns1:handler type="LocalResponder"/>
+  </ns1:responseFlow>
+ </ns1:transport>
+</ns1:deployment>
