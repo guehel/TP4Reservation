@@ -1,0 +1,233 @@
+html, body{
+    height:100%;
+    position: relative;
+    z-index:-1;
+    /*     background-color: rgb(177,74,65);*/
+    /*background-color: rgb(169,45,36);*/
+    background-color: rgb(134,34,27);
+    /*background-image: url('images/tuile.png');*/
+}
+
+
+h1{
+    color: rgb(223,122,47);
+    text-align: center;
+}
+
+h2{
+    color: rgb(223,122,47);
+}
+
+a{
+    font-size: 1.5em;
+}
+a:link{
+    color:white;
+}
+
+a:visited{
+    color:rgb(223,122,47);
+}
+
+a:hover{
+    color:blue;
+}
+
+
+#container{
+    position: fixed;
+    top:0;
+    height: 50%;
+    width: 998px;
+    margin: 0;
+    height:263px;
+    left: 50%;
+    margin-left: -499px;  
+}
+
+#entete{
+    position: relative;
+    top: 0;
+    width: 998px;
+    margin: 0;
+    z-index:-1;
+    background: url('/tp4_php/vues/images/HotelCalifornia_Entete.jpg') no-repeat;
+    height:263px;
+    left: 50%;
+    margin-left: -499px;   
+}
+
+#corps{
+    position: relative;
+    top: 0;
+    width: 998px;
+    height:263px;
+    left: 50%;
+    margin-left: -499px;   
+}
+
+
+
+#pied_page{
+    position: fixed;
+    bottom: 0;
+    width: 998px;
+    margin: 0;
+    z-index:-1;
+    background: url('/tp4_php/vues/images/HotelCalifornia_Entete.jpg') no-repeat;
+    height:263px;
+    left: 50%;
+    margin-left: -499px;   
+}
+
+
+
+
+/* Menu */
+#menu{
+    position: relative;
+    width: 100%;        
+    left: 50%;
+    margin-left: -499px;  
+    padding:20px; 
+
+}
+
+.espacement_menu{
+    margin-left: 144px;
+}
+
+
+#msg_acceuil{
+    position: relative;
+    top:50px;
+    /*left:-0px;*/
+}
+
+/* Formulaire */
+#div_consulter{
+    position: relative;
+    top:-30px;
+    left:105px;
+    margin-left: 120px;
+}
+
+
+#img_consulter{
+    position: relative;
+    top:30px;
+    margin: 30px;
+}
+
+#btn_consulter{
+    font-size: 1em;
+    position: relative;
+    top:35px;
+    left: 0px;
+}
+
+#btn_consulter input{
+    width: 158px;
+    padding: 3px;
+    font-size: 1.1em;
+
+}
+
+#div_reservation{
+    position: relative;
+    left:150px;
+}
+
+#div_reservation select{
+    width: 700px;
+    /*color:rgb(223,122,47);*/
+    font-size: 1.10em;
+    text-align: center;
+}
+
+
+#div_reservation table{
+    width: 700px;
+    color:rgb(223,122,47);
+    font-size: 1.10em;
+    text-align: center;
+}
+
+#div_reservation thead{
+    font-size: 1.20em;
+}
+
+#btn_reservation input{
+    width: 150px;
+    position: relative;
+    left: 535px;
+    /*padding: 1px;*/
+    margin:10px;
+    font-size: 1.10em;
+}
+
+#liste_reservation{
+    width: 350px;
+    /*padding: 1px;*/
+    margin:10px;
+    font-size: 1.10em;
+}
+
+
+/* Annulation */
+#txt_recherche_chambre{
+    position: relative;
+    left:210px;
+}
+
+
+#div_rechercher_chambre{
+    position: relative;
+    top:30px;
+    left:260px;
+}
+
+#div_rechercher_chambre input{
+    position: relative;
+    left:80px;
+    font-size: 1.1em;
+}
+
+#liste_client{
+    width: 120px;
+    padding: 19px;
+    font-size: 1.1em;
+    position: relative;
+    top:10px;
+    left: 233px;
+}
+
+#liste_client input{
+    position: relative;
+    width: 320px;
+    padding: 5px;
+    font-size: 1.1em;
+    top:30px;
+    left: 180px;
+}
+
+#liste_client select{
+    width: 500px;
+    /*padding: 19px;*/
+    font-size: 1.10em;
+    position: relative;
+    /*top:10px;*/
+    /*left: 233px;*/
+}
+
+
+/* Pied de page */
+#msg_pied_page{
+    text-align: center;
+    position: relative;
+    bottom: 100px;
+    /*left: 50%;*/
+    /*margin-left: -499px;*/
+}
+
+

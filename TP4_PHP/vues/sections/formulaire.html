@@ -1,0 +1,22 @@
+<form action="/tp4_php/index.php/consulter-chambres" method="post">
+	<div id="div_consulter">
+		<table>
+			<tr>
+				<td>
+					<img id="img_consulter" src="/tp4_php/vues/images/reservation.jpg"/>
+				</td>
+				<td>
+					<h2>Date arrivée: </h2><input type="text" name="consulterChambres[dateArrivee]">
+					<!-- <h2>Date arrivée: </h2>
+					<?php
+					 /*include("vues/sections/selecteur-date.html"); */
+					 ?> -->
+					 <h2>Date départ: </h2><input type="text" name="consulterChambres[dateDepart]">
+					 <div id="btn_consulter">
+					 	<input type="submit" name="form_reservation" value="Consulter">
+					 </div>
+					</td>					
+				</tr>
+			</table>	
+		</div>
+	</form>
