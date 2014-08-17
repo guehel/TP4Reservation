@@ -12,10 +12,10 @@
 		$chambreSrv = Modeles_Services_ChambreService::getInstance();
 		$clientSrv = Modeles_Services_ClientService::getInstance();
 		$this->clients = $clientSrv->query();
-		$this->dateArrivee =$params['dateArrivee']; 
-		$this->dateDepart = $params['dateDepart'];
-		$this->chambres = $chambreSrv->getByUserId($params['idUser']);
-		$chambreSrv->enregistrerReservation($idClient, $idChambre, $dateArrivee, $dateDepart);
+		$this->dateArrivee =$this->params['dateArrivee']; 
+		$this->dateDepart = $this->params['dateDepart'];
+		$this->chambres = $chambreSrv->getByUserId($this->params['idUser']);
+		$chambreSrv->enregistrerReservation($this->clients, $this->chambres, $this->dateArrivee, $this->dateDepart);
 	
 	include("vues/confirmation.html");
 	}

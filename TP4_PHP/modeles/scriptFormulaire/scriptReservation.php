@@ -13,32 +13,31 @@ if(!is_null($_POST['chambreId'])){
 	$clientId = $_POST['clientId'];
 }
 
-/*
+// appel d'un service pour modele de chambre
 $chambreSrv = Modeles_Services_ChambreService::getInstance();
 $chambre = $chambreSrv->get($chambreId);
 
+// obtenir un formulaire de réservation pour la chambre
 $formulaire = $chambre->getFormulaire();
 $formulaire->setType(1);
 $chambre->setFormulaire($formulaire);
 
-$reservation = new Formulaire(); // ATTENTION CHANGER NOM !!!
+// ajouter une réservation
+$reservation = new Modeles_ReservationDTO();
 $reservation->setArrivee($dateArrive);
 $reservation->setDepart($dateDepart);
 
-//ajout clientDTo
+//ajouter clientDTo
 $formulaire->setReservation($reservation);
+// définir la réservation
 
-//$refChambreDTO = new ChambreDTO() /// CHANGER CICI!!!!
-$refChambreDTO->setNumeroChambre($chambreId);
-$reservation->setChambreDTO($refChambreDTO);
-
+$reservation->setNumeroChambre($chambreId);
+$reservation->setChambreDTO($chambre);
+	
+// soumettre le nouveau formulaire
 $chambreSrv->submitForm($chambre)
-*/
 
 
-// print'<pre> Script Reservation ';
-// print_r($_POST);
-// print'</pre>';
 
 
 ?>

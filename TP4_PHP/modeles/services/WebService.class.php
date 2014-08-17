@@ -13,7 +13,7 @@ class Modeles_Services_WebService{
 		return $this->client->obtenirListeChambre();
 	}
 
-	public function getReservationByRoom($chambreId) {
+	public function getReservationParChambre($chambreId) {
 		$args = new stdClass();
 		$args->obtenirReservationsRequest = $chambreId;
 		return $this->client->obtenirListeChambre(900 + $chambreId);
@@ -35,12 +35,5 @@ class Modeles_Services_WebService{
 		return $this->client->obtenirListeChambre($args);
 	}
 }
-
-// function __autoload($class_name)
-// {
-// 	$nom_fichier = str_replace('_', DIRECTORY_SEPARATOR, strtolower($class_name)).'.class.php';
-// 	include_once $nom_fichier;
-// }
-
 
 ?>

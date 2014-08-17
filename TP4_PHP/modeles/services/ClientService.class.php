@@ -1,18 +1,19 @@
 <?php
-
+/**
+ * 	Classe qui assurent l'accès au modèle de client.
+ */
 class Modeles_Services_ClientService{
 
 	private $webService;
 	private $adaptor;
 	private $clients = array();
-	private static $instance;
-
-	// singleton	
+	private static $instance;	// singleton	
+	
 	private function __construct() {
-		// $this->adaptor = new Modeles_Services_EntityAdapter();
-		// $this->webService = new Modeles_Services_WebService();
+		$this->adaptor = new Modeles_Services_EntityAdapter();
+		$this->webService = new Modeles_Services_WebService();
 	}
-
+	// methode d'instanciation d'un singleton
 	public static function getInstance(){
 		if(is_null(self::$instance)){
 			self::$instance = new Modeles_Services_ClientService();
@@ -21,24 +22,8 @@ class Modeles_Services_ClientService{
 	}
 
 	public function query(){
-	// fait demande au webservice
+ 	// fait demande au webservice
 	// emmagasine la liste de clients.
-	// retourner une liste de clients
-
-		$client1 = new Modeles_ClientDTO(1,"Antonio","Jackson");
-		$client2 = new Modeles_ClientDTO(2,"Bouanga","Guehel");
-		$client3 = new Modeles_ClientDTO(3,"Elkassir","Nawar");
-		$client4 = new Modeles_ClientDTO(4,"Escobar","Pablo");
-
-		array_push($this->clients,$client1);
-		array_push($this->clients,$client2);
-		array_push($this->clients,$client3);
-		array_push($this->clients,$client4);
-
-		return $this->clients;
-	}
-
-/*	public function query(){
 		$listeClientServer = $this->webService->getListeClients();
 
 		foreach ($listeClientServer as $clientServer) {
@@ -48,14 +33,12 @@ class Modeles_Services_ClientService{
 			foreach ($reservationsServer as $reservationServer) {
 				$client->addReservation($this->adaptor->convertReservationServer($reservationServer));
 			}
-			$clients[$client->getId()] = $client;
+			$this->clients[$client->getId()] = $client;
 		}
-
+		// retourner une liste de clients
 		return $this->clients;
 	
-	}*/
-
-
+	}
 
 	public function get($id){
 		$this->query();

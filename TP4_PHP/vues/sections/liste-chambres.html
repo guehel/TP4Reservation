@@ -1,56 +1,62 @@
 <div id="div_reservation">
-	<form name="reservations" action="<?php print $this->getScriptValidation() ?>" method="post">
-	<?php
+	<form name="reservations"
+		action=".<?php print $this->getScriptValidation() ?>." method="post">
+		<?php
 			// print "<pre> LISTE CLIENT ds liste-chambre.html";
 			// print_r($this->getListeClients());
 			// print "</pre>";
 	?>
 		<?php if(!is_null($this->getListeClients())): ?>
 
-		<h2>Veuillez vous identifier.<br/>Note: vous devez déjà être enregistré comme membre!</h2>
+		<h2>
+			Veuillez vous identifier.<br />Note: vous devez déjà être
+			enregistré comme membre!
+		</h2>
 		<select name="clientId">
 			<?php foreach($this->getListeClients() as $client): ?>
 			<option value="<?php print $client->getId() ?>"><?php print $client ?></option>
-		<?php endforeach ?>
-	</select>
-	<h2>Liste des chambres disponibles selon les dates choisies</h2>
-<?php else :?>
-	<input type="hidden" name ="clientId" value="<?php print $this->getClientId() ?>" />
-	<h2>Liste des chambres réservées à votre nom</h2>
-<?php endif ?>
-<table>
-	<thead><th>  No chambre  </th><th>   Date arrivée  </th> <th>  Date départ  </th> <th>  Sélectionner  </th></thead>
-	<?php foreach($this->getListeChambres() as $chambre): ?>
-	<tr>
-		<td>
-			<!-- No de chambre -->
-			<?php print $chambre->getId() ?>
-		<?php
-			print "<pre> LISTE CHAMBRES ds liste-chambres.html";
-			print_r($this->getListeChambres());
-			print "</pre>";
-		?>
-		</td>
-		<td>
-			<!-- Arrivee -->
-			<?php print $this->getDateArrivee() ?>
-		</td>
-		<td>
-			<!-- Départ -->
-			<?php print $this->getDateDepart() ?>
-		</td>
-		<td>
-			<!-- cocher chambre -->
-			<input type="radio" name="chambreId"  value="<?php print $chambre->getId() ?>"/>
-		</td>
-	</tr>
-<?php endforeach ?>
-</table>
-<input type="hidden" name ="dateArrive" value="<?php print $this->getDateArrivee() ?>" />
-<input type="hidden" name ="dateDepart" value="<?php print $this->getDateDepart() ?>" />
-<!-- <input type="hidden" name ="idClient" value="<?php print $this->getClientId() ?>" /> -->
-<div id="btn_reservation">
-	<input type="submit" value="<?php print $this->getTexteButton() ?>"/>
-</div>
-</form>
+			<?php endforeach ?>
+		</select>
+		<h2>Liste des chambres disponibles selon les dates choisies</h2>
+		<?php else :?>
+		<input type="hidden" name="clientId"
+			value="<?php print $this->getClientId() ?>" />
+		<h2>Liste des chambres réservées à votre nom</h2>
+		<?php endif ?>
+		<table>
+			<thead>
+				<tr>
+					<th>No chambre</th>
+					<th>Date arrivée</th>
+					<th>Date départ</th>
+					<th>Sélectionner</th>
+				</tr>
+			</thead>
+			<?php foreach($this->getListeChambres() as $chambre): ?>
+			<tr>
+				<td>
+					<!-- No de chambre --> <?php print $chambre->getId() ?>
+				</td>
+				<td>
+					<!-- Arrivee --> <?php print $this->getDateArrivee() ?>
+				</td>
+				<td>
+					<!-- Départ --> <?php print $this->getDateDepart() ?>
+				</td>
+				<td>
+					<!-- cocher chambre --> <input type="radio" name="chambreId"
+					value="<?php print $chambre->getId() ?>" />
+				</td>
+			</tr>
+			<?php endforeach ?>
+		</table>
+		<input type="hidden" name="dateArrive"
+			value="<?php print $this->getDateArrivee() ?>" /> <input
+			type="hidden" name="dateDepart"
+			value="<?php print $this->getDateDepart() ?>" />
+		<!-- <input type="hidden" name ="idClient" value="<?php print $this->getClientId() ?>" /> -->
+		<div id="btn_reservation">
+			<input type="submit" value="<?php print $this->getTexteButton() ?>" />
+		</div>
+	</form>
 </div>

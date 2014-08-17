@@ -1,5 +1,5 @@
 <?php
-class FormulaireDTO {
+class Modeles_FormulaireDTO {
 	private $dateModification;
 	private $idUser;
 	private $reservation; // ReservationDTO

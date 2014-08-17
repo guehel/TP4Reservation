@@ -1,15 +1,16 @@
 <?php $clientList = $this->getListClient() ?>
 
-<form name='annulation' action="<?php print $this->getRouter() ?>" method="post">
-<div id="div_rechercher_chambre">
-	<select name="clientId" id="liste_reservation">
-				<?php foreach($clientList as $client): ?>
-					<option value="<?php print $client->getId() ?>"><?php print $client ?></option>
-				<?php endforeach ?>
-			</select>
-<div id="btn_rechercher_chambre">
-	<input type="submit" value="Rechercher mes chambres"/>
-</div>			
-</div>
+<form name='annulation' action="<?php print $this->getRouter() ?>"
+	method="post">
+	<div id="div_rechercher_chambre">
+		<select name="clientId" id="liste_reservation">
+			<?php foreach($clientList as $client): ?>
+			<option value="<?php print $client->getId() ?>"><?php print $client ?></option>
+			<?php endforeach ?>
+		</select>
+		<div id="btn_rechercher_chambre">
+			<input type="submit" value="Rechercher mes chambres" />
+		</div>
+	</div>
 
 </form>
